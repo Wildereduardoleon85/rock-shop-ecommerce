@@ -1,56 +1,17 @@
-:root {
-  --black: #181818;
-  --red: #ef473e;
-  --brown: #743f37;
-  --dark-gray: #403a39;
-  --light-gray: #748295;
-  --light-green: #829481;
-  --dark-green: #2e413e;
-  --medium-blue: #446a80;
-  --dark-blue: #23446d;
-  --dark-blue: #23446d;
-}
+$black: #181818;
+$red: #ef473e;
+$brown: #743f37;
+$dark-gray: #403a39;
+$light-gray: #748295;
+$light-green: #829481;
+$dark-green: #2e413e;
+$medium-blue: #446a80;
+$dark-blue: #23446d;
+$dark-blue: #23446d;
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.navbar {
-  height: 80px;
-  width: 100vw;
-  background-image: linear-gradient(90deg,
-      rgba(24, 24, 24, 1) 0%,
-      rgba(68, 68, 68, 0.9920343137254902) 50%,
-      rgba(24, 24, 24, 1) 100%);
-  display: flex;
-  align-items: center;
-
-  .icon-container {
-    position: relative;
-    max-width: fit-content;
-    margin-left: 5rem;
-
-    .round-decorator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: white;
-      position: absolute;
-      left: 44px;
-      top: 24px;
-      box-shadow: 0px 0px 8px 18px rgb(116, 63, 55, 0.7);
-      z-index: 4;
-    }
-
-    >p {
-      font-family: 'Righteous', cursive;
-      color: var(--red);
-      font-size: 48px;
-      position: relative;
-      z-index: 5;
-    }
-  }
-
+  font-family: 'Roboto Condensed', sans-serif;
 }
