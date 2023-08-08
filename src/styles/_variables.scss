@@ -1,17 +1,15 @@
+// palette
 $black: #181818;
 $red: #ef473e;
+$dark-red: #bf3831;
 $brown: #743f37;
 $dark-gray: #403a39;
-$light-gray: #748295;
+$light-gray: #868885;
 $light-green: #829481;
 $dark-green: #2e413e;
 $medium-blue: #446a80;
 $dark-blue: #23446d;
 $dark-blue: #23446d;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto Condensed', sans-serif;
-}
+// other
+$border-radius: 0.3rem;

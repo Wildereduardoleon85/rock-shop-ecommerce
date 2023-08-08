@@ -1,0 +1,45 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  margin-right: 2rem;
+  height: 40px;
+  border-radius: $border-radius;
+  border: none;
+  background-color: $black;
+  box-shadow: inset 6px 6px 12px 0px black;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+
+  input {
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .searchButton {
+    display: flex;
+    align-items: center;
+    background-color: $red;
+    border: none;
+    border-radius: $border-radius;
+    height: 100%;
+    color: white;
+    padding: 0 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: $dark-red;
+    }
+  }
+
+  .searchIcon {
+    margin-right: 0.5rem;
+  }
+}

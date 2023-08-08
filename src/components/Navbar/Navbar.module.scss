@@ -1,16 +1,79 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
 .navbar {
   height: 80px;
-  width: 100vw;
-  background-image: linear-gradient(90deg,
-      rgba(24, 24, 24, 1) 0%,
-      rgba(68, 68, 68, 0.9920343137254902) 50%,
-      rgba(24, 24, 24, 1) 100%);
+  width: 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgba(24, 24, 24, 1) 0%,
+    rgba(68, 68, 68, 0.9920343137254902) 50%,
+    rgba(24, 24, 24, 1) 100%
+  );
   display: flex;
   align-items: center;
 
-  .iconContainer {
-    position: relative;
-    max-width: fit-content;
-    margin-left: 5rem;
+  .container {
+    width: 1400px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .iconContainer {
+      position: relative;
+      max-width: fit-content;
+    }
+
+    > div:nth-child(2) {
+      display: flex;
+      align-items: center;
+
+      .iconButton {
+        border-left: 2px solid $black;
+        display: flex;
+        align-items: center;
+        margin-right: 3rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover > svg {
+          fill: $red;
+        }
+
+        .cartIcon {
+          margin-left: 1rem;
+          fill: $light-gray;
+          font-size: 1.8rem;
+          @include transition(fill);
+        }
+      }
+
+      .sigInButton {
+        height: 35px;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: $light-gray;
+        cursor: pointer;
+        @include transition(color);
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .navbar {
+    .container {
+      .iconContainer {
+        margin-left: 1rem;
+      }
+    }
   }
 }

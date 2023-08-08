@@ -1,0 +1,5 @@
+@mixin transition($tproperty) {
+  transition-duration: 0.18s;
+  transition-timing-function: ease-in-out;
+  transition-property: ($tproperty);
+}
