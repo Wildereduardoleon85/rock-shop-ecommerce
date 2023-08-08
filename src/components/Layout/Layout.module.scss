@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+main {
+    max-width: $xl-break-point;
+    margin: 0 auto;
+}
+
+@media (max-width: $xl-break-point) {
+    main {
+        padding: 0 1rem;
+    }
+}

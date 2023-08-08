@@ -37,9 +37,12 @@
     &:hover {
       background-color: $dark-red;
     }
+
+    .searchIcon {
+      margin-right: 0.5rem;
+      fill: white;
+    }
   }
 
-  .searchIcon {
-    margin-right: 0.5rem;
-  }
+
 }
