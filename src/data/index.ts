@@ -1,7 +1,7 @@
 export default [
   {
     _id: '1',
-    name: 'ESP LTD Deluxe electric Guitar',
+    name: 'ESP 6 String LTD Deluxe EC-1000T CTM Electric Guitar',
     image: '/img/esp-guitar.png',
     description:
       'Guitars in the LTD Deluxe EC-1000 Series are designed to offer the tone, feel, looks, and quality that working professional musicians require in an instrument, while remaining affordable enough for serious players. With the EC-1000T CTM, the T stands for traditional, referring to this model’s full-thickness body that’s chambered for weight relief, with no waist-cut like the typical EC-1000 model. It also features multi-ply body/headstock binding on body top and back. This guitar offers a mahogany body with an outstanding flamed maple top, and set-thru construction at 24.75 scale, with a satin-finished mahogany neck. The sound of the EC-1000T CTM is powered by a set of Fishman Fluence Open Core Classic Humbucker pickups with push-pull controls to select between three different voicings, offering the tone and response of both active and passive pickup varieties voice 1 2 as well as single-coil varieties Voice 3. Other features include gold hardware, a TonePros locking bridge and tailpiece, and a Macassar ebony fingerboard with 22 extra-jumbo stainless steel frets.',
@@ -14,7 +14,7 @@ export default [
   },
   {
     _id: '2',
-    name: 'Pearl Roadshow Drum Set 4-Piece Complete Kit with Cymbals and Stands',
+    name: 'Pearl Roadshow Drum Set 4-Piece Complete Kit with Cymbals',
     image: '/img/pearl-drums.png',
     description:
       'Complete Drum Set -The Pearl Roadshow drum kit comes complete with everything you need to start drumming right out of the box. This set comes with drums, hardware, cymbals, and drum throne. We even throw in sticks and a stick bag to complete the set.',

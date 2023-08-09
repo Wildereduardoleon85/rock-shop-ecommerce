@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.scss'
+import { Rating } from '../Rating'
 
 type ProductCardProps = {
   product: {
@@ -26,6 +27,7 @@ function ProductCard({ product }: ProductCardProps) {
       <Link to={product._id}>
         <h3 className={styles.productName}>{product.name}</h3>
       </Link>
+      <Rating value={product.rating} text={`${product.numReviews} reviews`} />
       <p className={styles.price}>${product.price}</p>
     </div>
   )
