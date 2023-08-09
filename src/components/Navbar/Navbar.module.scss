@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 1rem;
 
     .iconContainer {
       position: relative;
@@ -59,22 +60,6 @@
 
         &:hover {
           color: $red;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: $xl-break-point) {
-  .navbar {
-    .container {
-      .iconContainer {
-        margin-left: 1rem;
-      }
-
-      >div:nth-child(2) {
-        .sigInButton {
-          margin-right: 1rem;
         }
       }
     }

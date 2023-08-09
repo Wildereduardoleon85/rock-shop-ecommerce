@@ -7,7 +7,7 @@ export default [
       'Guitars in the LTD Deluxe EC-1000 Series are designed to offer the tone, feel, looks, and quality that working professional musicians require in an instrument, while remaining affordable enough for serious players. With the EC-1000T CTM, the T stands for traditional, referring to this model’s full-thickness body that’s chambered for weight relief, with no waist-cut like the typical EC-1000 model. It also features multi-ply body/headstock binding on body top and back. This guitar offers a mahogany body with an outstanding flamed maple top, and set-thru construction at 24.75 scale, with a satin-finished mahogany neck. The sound of the EC-1000T CTM is powered by a set of Fishman Fluence Open Core Classic Humbucker pickups with push-pull controls to select between three different voicings, offering the tone and response of both active and passive pickup varieties voice 1 2 as well as single-coil varieties Voice 3. Other features include gold hardware, a TonePros locking bridge and tailpiece, and a Macassar ebony fingerboard with 22 extra-jumbo stainless steel frets.',
     brand: 'ESP',
     category: 'guitars',
-    price: '119.99',
+    price: 119.99,
     countInStock: 10,
     rating: 4.5,
     numReviews: 12,
@@ -43,7 +43,7 @@ export default [
     name: 'Jackson JS Series Concert Bass JS2',
     image: '/img/jackson-bass-guitar.jpg',
     description:
-      'The Jackson’s JS Series Concert 4-String Bass Guitar rocks seismic sound, style, and affordability. Poplar Body and Amaranth Fingerboard. The 34-inch scale, four-string Concert Bass JS2 features a lightweight and resonant poplar body, bolt-on maple neck with graphite reinforcement and scarf joint, and a 12–16-inch compound radius amaranth fingerboard with 24 jumbo frets and pearloid sharkfin inlays.',
+      "The Jackson's JS Series Concert 4-String Bass Guitar rocks seismic sound, style, and affordability. Poplar Body and Amaranth Fingerboard. The 34-inch scale, four-string Concert Bass JS2 features a lightweight and resonant poplar body, bolt-on maple neck with graphite reinforcement and scarf joint, and a 12–16-inch compound radius amaranth fingerboard with 24 jumbo frets and pearloid sharkfin inlays.",
     brand: 'Jackson',
     category: 'Bass Guitars',
     price: 299.99,
@@ -69,7 +69,7 @@ export default [
     name: 'Marshall Amps Guitar Combo Amplifier',
     image: '/img/marshall-amplifier.jpg',
     description:
-      'Don’t be fooled by their simplicity…this series of amps delivers a range of classic and modern tones, with all the essential features that players need, and so much more. All the amps in this range are fitted with an emulated headphone output to make silent practice easier than ever. No matter what stage you’re playing on, these amps will look as great as they sound, thanks to their gold piping and gold metal finish.',
+      "Don't be fooled by their simplicity…this series of amps delivers a range of classic and modern tones, with all the essential features that players need, and so much more. All the amps in this range are fitted with an emulated headphone output to make silent practice easier than ever. No matter what stage you’re playing on, these amps will look as great as they sound, thanks to their gold piping and gold metal finish.",
     brand: 'Marshall',
     category: 'Amplifiers and Effects',
     price: 109.99,
