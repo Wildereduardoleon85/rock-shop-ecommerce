@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.scss'
 
 type ProductCardProps = {
@@ -18,8 +20,12 @@ type ProductCardProps = {
 function ProductCard({ product }: ProductCardProps) {
   return (
     <div className={styles.root}>
-      <img width={265} height={211} src={product.image} alt={product.name} />
-      <h3 className={styles.productName}>{product.name}</h3>
+      <Link to={product._id}>
+        <img width={265} height={211} src={product.image} alt={product.name} />
+      </Link>
+      <Link to={product._id}>
+        <h3 className={styles.productName}>{product.name}</h3>
+      </Link>
       <p className={styles.price}>${product.price}</p>
     </div>
   )

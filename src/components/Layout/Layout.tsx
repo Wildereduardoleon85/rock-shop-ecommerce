@@ -1,5 +1,5 @@
+import { Outlet } from 'react-router-dom'
 import { Navbar, Footer } from '..'
-import { HomePage } from '../../pages'
 import './Layout.module.scss'
 
 function Layout() {
@@ -9,7 +9,7 @@ function Layout() {
         <Navbar />
       </header>
       <main>
-        <HomePage />
+        <Outlet />
       </main>
       <Footer />
     </>
