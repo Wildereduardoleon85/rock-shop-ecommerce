@@ -2,51 +2,81 @@
 @import '../../styles/mixins';
 
 .root {
-    margin-top: 3rem;
+  margin-top: 3rem;
 
-    >a:first-of-type {
-        text-decoration: none;
-        display: block;
-        max-width: fit-content;
-        @include buttonStyles();
+  > a:first-of-type {
+    text-decoration: none;
+    display: block;
+    max-width: fit-content;
+    @include buttonStyles('black');
+  }
 
+  .container {
+    margin-top: 2rem;
+    display: flex;
+
+    > img:first-of-type {
+      display: block;
+      flex-shrink: 0;
     }
 
-    .container {
+    .details {
+      $button-width: 150px;
+      width: 100%;
+      padding-left: 2rem;
+
+      > h1 {
+        color: $black;
+      }
+
+      .price {
+        color: $light-gray;
+        font-size: 2.5rem;
+        font-weight: 600;
         margin-top: 2rem;
-        display: flex;
+      }
 
-        >img:first-of-type {
-            display: block;
-            flex-shrink: 0;
+      > h3 {
+        margin-top: 2rem;
+      }
+
+      .description {
+        margin-top: 1rem;
+        text-align: justify;
+        line-height: 1.5rem;
+      }
+
+      .addToCartButton {
+        @include buttonStyles();
+        margin-top: 2rem;
+        display: block;
+        width: $button-width;
+      }
+
+      .buyNowButton {
+        @include buttonStyles('black');
+        display: block;
+        margin-top: 0.5rem;
+        width: $button-width;
+      }
+
+      .addToCartButton:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+
+        &:hover {
+          background-color: $red;
         }
+      }
 
-        .details {
-            width: 100%;
-            padding-left: 2rem;
+      .buyNowButton:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
 
-            >h1 {
-                color: $black;
-            }
-
-            .price {
-                color: $light-gray;
-                font-size: 2.5rem;
-                font-weight: 600;
-                margin-top: 2rem;
-            }
-
-            >h3 {
-                margin-top: 2rem;
-            }
-
-            .description {
-                margin-top: 1rem;
-                text-align: justify;
-                line-height: 1.5rem;
-            }
-
-
+        &:hover {
+          background-color: $black;
         }
+      }
     }
+  }
 }

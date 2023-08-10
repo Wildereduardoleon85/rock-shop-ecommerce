@@ -121,9 +121,6 @@ function QtyButton({ countInStock }: QtyButtonProps) {
       ) : (
         <h3 className={styles.outOfStock}>Out of Stock</h3>
       )}
-      <button type='button' className={styles.addToCartButton}>
-        add to cart
-      </button>
     </div>
   )
 }

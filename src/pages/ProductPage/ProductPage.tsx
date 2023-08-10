@@ -25,6 +25,20 @@ function ProductPage() {
           <h1>{product?.name}</h1>
           <p className={styles.price}>${product?.price}</p>
           <QtyButton countInStock={product?.countInStock as number} />
+          <button
+            disabled={product?.countInStock === 0}
+            type='button'
+            className={styles.addToCartButton}
+          >
+            add to cart
+          </button>
+          <button
+            disabled={product?.countInStock === 0}
+            type='button'
+            className={styles.buyNowButton}
+          >
+            buy now
+          </button>
           <Rating
             value={product?.rating as number}
             text={`${product?.numReviews} reviews`}

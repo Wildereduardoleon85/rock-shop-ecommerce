@@ -4,8 +4,16 @@
   transition-property: ($tproperty);
 }
 
-@mixin buttonStyles() {
-  background-color: $red;
+@mixin buttonStyles($variant-color: '') {
+  $background-color: $red;
+  $hover-color: $dark-red;
+
+  @if $variant-color == 'black' {
+    $background-color: $black;
+    $hover-color: $dark-gray;
+  }
+
+  background-color: $background-color;
   color: white;
   border-radius: $border-radius;
   text-transform: uppercase;
@@ -16,6 +24,6 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $dark-red;
+    background-color: $hover-color;
   }
 }

@@ -117,12 +117,7 @@
 
   .outOfStock {
     margin-top: 3rem;
-    color: $very-light-gray;
     text-transform: uppercase;
-  }
-
-  .addToCartButton {
-    @include buttonStyles();
-    margin-top: 2rem;
+    color: $dark-gray;
   }
 }
