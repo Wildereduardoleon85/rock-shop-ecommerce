@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+    margin-top: 3rem;
+
+    >a:first-of-type {
+        text-decoration: none;
+        display: block;
+        max-width: fit-content;
+        @include buttonStyles();
+
+    }
+
+    .container {
+        margin-top: 2rem;
+        display: flex;
+
+        >img:first-of-type {
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .details {
+            width: 100%;
+            padding-left: 2rem;
+
+            >h1 {
+                color: $black;
+            }
+
+            .price {
+                color: $light-gray;
+                font-size: 2.5rem;
+                font-weight: 600;
+                margin-top: 2rem;
+            }
+
+            >h3 {
+                margin-top: 2rem;
+            }
+
+            .description {
+                margin-top: 1rem;
+                text-align: justify;
+                line-height: 1.5rem;
+            }
+
+            .qty {
+                margin-top: 2rem;
+                border: none;
+                background: none;
+                cursor: pointer;
+                position: relative;
+
+                >span {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                }
+
+                >span:nth-child(3) {
+                    color: rgb(187, 187, 187);
+                    font-weight: 500;
+                }
+
+                .chevronIcon {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}

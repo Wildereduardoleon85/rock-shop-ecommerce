@@ -21,10 +21,10 @@ type ProductCardProps = {
 function ProductCard({ product }: ProductCardProps) {
   return (
     <div className={styles.root}>
-      <Link to={product._id}>
+      <Link to={`product/${product._id}`}>
         <img width={265} height={211} src={product.image} alt={product.name} />
       </Link>
-      <Link to={product._id}>
+      <Link to={`product/${product._id}`}>
         <h3 className={styles.productName}>{product.name}</h3>
       </Link>
       <Rating value={product.rating} text={`${product.numReviews} reviews`} />
