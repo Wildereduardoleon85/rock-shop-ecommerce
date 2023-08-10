@@ -17,7 +17,7 @@
     }
 
     > span:nth-child(3) {
-      color: rgb(187, 187, 187);
+      color: $very-light-gray;
       font-weight: 500;
     }
 
@@ -37,85 +37,92 @@
     }
   }
 
-  .drawerContainer {
-    overflow: hidden;
+  .drawer {
+    padding: 1rem 0;
+    background-color: white;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    min-width: 164px;
     position: absolute;
-    padding: 0.5rem;
+    top: 70px;
+  }
 
-    .drawer {
-      padding: 1rem 0;
-      background-color: white;
-      box-shadow: $box-shadow;
-      border-radius: $border-radius;
-      min-width: 164px;
-      @include transition(transform);
-    }
-    ul {
-      li {
-        list-style: none;
-        button {
-          width: 100%;
-          text-align: left;
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-size: 1.2rem;
-          padding: 0.5rem 1rem;
+  ul {
+    li {
+      list-style: none;
+      button {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
 
-          &:hover {
-            background: rgb(231, 231, 231);
-          }
-        }
-      }
-      .qtyInput {
-        .container {
-          display: flex;
-          align-items: center;
-          box-shadow: inset 3px 3px 6px 0px rgba(0, 0, 0, 0.2);
-          border-radius: $border-radius;
-          width: 120px;
-          margin-left: 1.5rem;
-          padding-left: 0.5rem;
-          margin-top: 0.5rem;
-        }
-
-        > p:first-of-type {
-          margin-left: 1.5rem;
-          font-weight: 600;
-        }
-
-        input {
-          width: 50px;
-          font-size: 1rem;
-          height: 1rem;
-          border: none;
-          outline: none;
-        }
-
-        button {
-          font-size: 0.8rem;
-          border-radius: $border-radius;
-          background-color: $red;
-          color: white;
-          @include transition(background-color);
-
-          &:hover {
-            background-color: $dark-red;
-          }
-        }
-
-        .errorText {
-          color: $dark-red;
-          max-width: 120px;
-          font-size: 0.75rem;
-          margin-left: 1.5rem;
-          margin-top: 0.5rem;
-          font-weight: 600;
+        &:hover {
+          background: rgb(230, 230, 230);
         }
       }
     }
-    .drawer.hide {
-      transform: translateY(-110%);
+    .qtyInput {
+      .container {
+        display: flex;
+        align-items: center;
+        box-shadow: inset 3px 3px 6px 0px rgba(0, 0, 0, 0.2);
+        border-radius: $border-radius;
+        width: 120px;
+        margin-left: 1.5rem;
+        padding-left: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      > p:first-of-type {
+        margin-left: 1.5rem;
+        font-weight: 600;
+      }
+
+      input {
+        width: 50px;
+        font-size: 1rem;
+        height: 1rem;
+        border: none;
+        outline: none;
+      }
+
+      button {
+        font-size: 0.8rem;
+        border-radius: $border-radius;
+        background-color: $red;
+        color: white;
+        @include transition(background-color);
+
+        &:hover {
+          background-color: $dark-red;
+        }
+      }
+
+      .errorText {
+        color: $dark-red;
+        max-width: 120px;
+        font-size: 0.75rem;
+        margin-left: 1.5rem;
+        margin-top: 0.5rem;
+        font-weight: 600;
+      }
     }
+  }
+  .drawer.hide {
+    transform: translateY(-110%);
+  }
+
+  .outOfStock {
+    margin-top: 3rem;
+    color: $very-light-gray;
+    text-transform: uppercase;
+  }
+
+  .addToCartButton {
+    @include buttonStyles();
+    margin-top: 2rem;
   }
 }

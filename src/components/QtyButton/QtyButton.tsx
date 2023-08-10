@@ -47,77 +47,83 @@ function QtyButton({ countInStock }: QtyButtonProps) {
 
   return (
     <div className={styles.root}>
-      <ClickAwayWrapper onClickAway={() => setIsActive(false)}>
-        <button
-          type='button'
-          className={styles.qty}
-          onClick={() => {
-            setIsActive(!isActive)
-          }}
-        >
-          <span>Qty:</span>
-          <span> {qty}</span>
-          <span> {`(${countInStock} in stock)`}</span>
-          <FaChevronDown
-            className={getClassNames([
-              styles.chevronIcon,
-              isActive && styles.rotate,
-            ])}
-          />
-        </button>
-        <div className={styles.drawerContainer}>
-          <div
-            className={getClassNames([styles.drawer, !isActive && styles.hide])}
+      {countInStock ? (
+        <ClickAwayWrapper onClickAway={() => setIsActive(false)}>
+          <button
+            type='button'
+            className={styles.qty}
+            onClick={() => {
+              setIsActive(!isActive)
+            }}
           >
-            <ul>
-              {[...Array(countInStock).keys()]
-                .slice(0, 5)
-                .map((item, index) => (
-                  <li key={item}>
-                    <button onClick={onQtyButtonClick} type='button'>
-                      {`${item + 1} ${index === 0 ? 'unit' : 'units'}`}
-                    </button>
-                  </li>
-                ))}
-              {countInStock > 5 && (
-                <>
-                  <li>
-                    <button
-                      onClick={() => {
-                        setIsQtyInputActive(!isQtyInputActive)
-                      }}
-                      type='button'
-                    >
-                      More than 5 units
-                    </button>
-                  </li>
-                  {isQtyInputActive && (
-                    <li className={styles.qtyInput}>
-                      <p>Qty:</p>
-                      <div className={styles.container}>
-                        <input
-                          type='text'
-                          value={qtyInputValue}
-                          onChange={onQtyInputChange}
-                        />
-                        <button type='button' onClick={onApplyButtonClick}>
-                          Apply
-                        </button>
-                      </div>
-                      {isErrorQty && (
-                        <p className={styles.errorText}>
-                          There&apos;s not enough stock, choose a value between
-                          1 and {countInStock}
-                        </p>
-                      )}
+            <span>Qty:</span>
+            <span> {qty}</span>
+            <span> {`(${countInStock} in stock)`}</span>
+            <FaChevronDown
+              className={getClassNames([
+                styles.chevronIcon,
+                isActive && styles.rotate,
+              ])}
+            />
+          </button>
+
+          {isActive && (
+            <div className={getClassNames([styles.drawer])}>
+              <ul>
+                {[...Array(countInStock).keys()]
+                  .slice(0, 5)
+                  .map((item, index) => (
+                    <li key={item}>
+                      <button onClick={onQtyButtonClick} type='button'>
+                        {`${item + 1} ${index === 0 ? 'unit' : 'units'}`}
+                      </button>
                     </li>
-                  )}
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-      </ClickAwayWrapper>
+                  ))}
+                {countInStock > 5 && (
+                  <>
+                    <li>
+                      <button
+                        onClick={() => {
+                          setIsQtyInputActive(!isQtyInputActive)
+                        }}
+                        type='button'
+                      >
+                        More than 5 units
+                      </button>
+                    </li>
+                    {isQtyInputActive && (
+                      <li className={styles.qtyInput}>
+                        <p>Qty:</p>
+                        <div className={styles.container}>
+                          <input
+                            type='text'
+                            value={qtyInputValue}
+                            onChange={onQtyInputChange}
+                          />
+                          <button type='button' onClick={onApplyButtonClick}>
+                            APPLY
+                          </button>
+                        </div>
+                        {isErrorQty && (
+                          <p className={styles.errorText}>
+                            There&apos;s not enough stock, choose a value
+                            between 1 and {countInStock}
+                          </p>
+                        )}
+                      </li>
+                    )}
+                  </>
+                )}
+              </ul>
+            </div>
+          )}
+        </ClickAwayWrapper>
+      ) : (
+        <h3 className={styles.outOfStock}>Out of Stock</h3>
+      )}
+      <button type='button' className={styles.addToCartButton}>
+        add to cart
+      </button>
     </div>
   )
 }

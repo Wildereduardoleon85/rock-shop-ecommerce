@@ -11,3 +11,7 @@ export function getClassNames(
 
   return cleanedValues.join(' ').trim()
 }
+
+export function subString(value: string, limit: number): string {
+  return `${value.slice(0, limit)}...`
+}
