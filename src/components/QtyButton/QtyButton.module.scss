@@ -1,0 +1,121 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  position: relative;
+  .qty {
+    margin-top: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+
+    > span {
+      font-size: 1.5rem;
+      font-weight: 600;
+      @include transition(color);
+    }
+
+    > span:nth-child(3) {
+      color: rgb(187, 187, 187);
+      font-weight: 500;
+    }
+
+    .chevronIcon {
+      margin-left: 0.5rem;
+      @include transition(transform);
+    }
+
+    .chevronIcon.rotate {
+      transform: rotate(-180deg);
+      fill: $dark-red;
+    }
+
+    &:hover > span:first-child,
+    &:hover > span:nth-child(2) {
+      color: $dark-red;
+    }
+  }
+
+  .drawerContainer {
+    overflow: hidden;
+    position: absolute;
+    padding: 0.5rem;
+
+    .drawer {
+      padding: 1rem 0;
+      background-color: white;
+      box-shadow: $box-shadow;
+      border-radius: $border-radius;
+      min-width: 164px;
+      @include transition(transform);
+    }
+    ul {
+      li {
+        list-style: none;
+        button {
+          width: 100%;
+          text-align: left;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.2rem;
+          padding: 0.5rem 1rem;
+
+          &:hover {
+            background: rgb(231, 231, 231);
+          }
+        }
+      }
+      .qtyInput {
+        .container {
+          display: flex;
+          align-items: center;
+          box-shadow: inset 3px 3px 6px 0px rgba(0, 0, 0, 0.2);
+          border-radius: $border-radius;
+          width: 120px;
+          margin-left: 1.5rem;
+          padding-left: 0.5rem;
+          margin-top: 0.5rem;
+        }
+
+        > p:first-of-type {
+          margin-left: 1.5rem;
+          font-weight: 600;
+        }
+
+        input {
+          width: 50px;
+          font-size: 1rem;
+          height: 1rem;
+          border: none;
+          outline: none;
+        }
+
+        button {
+          font-size: 0.8rem;
+          border-radius: $border-radius;
+          background-color: $red;
+          color: white;
+          @include transition(background-color);
+
+          &:hover {
+            background-color: $dark-red;
+          }
+        }
+
+        .errorText {
+          color: $dark-red;
+          max-width: 120px;
+          font-size: 0.75rem;
+          margin-left: 1.5rem;
+          margin-top: 0.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+    .drawer.hide {
+      transform: translateY(-110%);
+    }
+  }
+}

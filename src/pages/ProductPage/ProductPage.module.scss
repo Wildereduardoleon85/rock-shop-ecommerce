@@ -46,27 +46,7 @@
                 line-height: 1.5rem;
             }
 
-            .qty {
-                margin-top: 2rem;
-                border: none;
-                background: none;
-                cursor: pointer;
-                position: relative;
 
-                >span {
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                }
-
-                >span:nth-child(3) {
-                    color: rgb(187, 187, 187);
-                    font-weight: 500;
-                }
-
-                .chevronIcon {
-                    margin-left: 0.5rem;
-                }
-            }
         }
     }
 }
