@@ -3,17 +3,22 @@ import { useParams, Link } from 'react-router-dom'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
-import { useProduct } from '../../hooks'
+import { useGetProductDetailsQuery } from '../../slices'
 
 function ProductPage() {
   const { id: productId } = useParams()
-  const { product, error, isLoading } = useProduct(productId as string)
+
+  const {
+    data: product,
+    isError,
+    isLoading,
+  } = useGetProductDetailsQuery(productId as string)
 
   if (isLoading) {
     return <h2>Loading...</h2>
   }
 
-  if (error) {
+  if (isError) {
     return <h2>THIS SHOULD BE AN ERROR PAGE</h2>
   }
 
