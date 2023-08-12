@@ -4,6 +4,7 @@ import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
 import { useGetProductDetailsQuery } from '../../slices'
+import { Loader } from '../../components/UI'
 
 function ProductPage() {
   const { id: productId } = useParams()
@@ -15,7 +16,7 @@ function ProductPage() {
   } = useGetProductDetailsQuery(productId as string)
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Loader />
   }
 
   if (isError) {

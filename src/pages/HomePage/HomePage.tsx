@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { ProductCard } from '../../components'
+import { Loader } from '../../components/UI'
 import { useGetProductsQuery } from '../../slices'
 import styles from './HomePage.module.scss'
 
@@ -7,7 +8,7 @@ function HomePage() {
   const { data: products, isError, isLoading } = useGetProductsQuery()
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Loader />
   }
 
   if (isError) {

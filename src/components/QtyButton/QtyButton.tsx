@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { FaChevronDown } from 'react-icons/fa'
 import styles from './QtyButton.module.scss'
 import { getClassNames } from '../../utils'
-import { ClickAwayWrapper } from '..'
+import { ClickAwayWrapper } from '../UI'
 
 type QtyButtonProps = {
   countInStock: number
