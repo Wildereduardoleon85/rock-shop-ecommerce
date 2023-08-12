@@ -1,26 +1,32 @@
 /* eslint-disable no-underscore-dangle */
 import { useParams, Link } from 'react-router-dom'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
 import { useGetProductDetailsQuery } from '../../slices'
-import { Loader } from '../../components/UI'
+import { ErrorPage, Loader } from '../../components/UI'
 
 function ProductPage() {
   const { id: productId } = useParams()
 
   const {
     data: product,
-    isError,
+    error,
     isLoading,
   } = useGetProductDetailsQuery(productId as string)
+  const fetchBaseQueryError = error as FetchBaseQueryError
 
   if (isLoading) {
     return <Loader />
   }
 
-  if (isError) {
-    return <h2>THIS SHOULD BE AN ERROR PAGE</h2>
+  if (fetchBaseQueryError) {
+    return fetchBaseQueryError.status === 404 ? (
+      <ErrorPage variant='not-found' />
+    ) : (
+      <ErrorPage />
+    )
   }
 
   return (

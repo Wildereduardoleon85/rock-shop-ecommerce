@@ -1,0 +1,31 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.root {
+  margin-top: 5rem;
+  .code,
+  .title {
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .code {
+    font-size: 8rem;
+    color: $red;
+    text-align: center;
+  }
+
+  .message {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  a {
+    text-decoration: none;
+    display: block;
+    max-width: fit-content;
+    margin: 2rem auto 0 auto;
+    @include buttonStyles('black');
+  }
+}

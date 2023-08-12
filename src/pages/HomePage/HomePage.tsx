@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { ProductCard } from '../../components'
-import { Loader } from '../../components/UI'
+import { ErrorPage, Loader } from '../../components/UI'
 import { useGetProductsQuery } from '../../slices'
 import styles from './HomePage.module.scss'
 
@@ -12,7 +12,7 @@ function HomePage() {
   }
 
   if (isError) {
-    return <h2>An error occurs </h2>
+    return <ErrorPage />
   }
 
   return (
