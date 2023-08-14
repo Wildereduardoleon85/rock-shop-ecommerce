@@ -1,14 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import { useParams, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
-import { useGetProductDetailsQuery } from '../../slices'
+import { addToCart, useGetProductDetailsQuery } from '../../slices'
 import { ErrorPage, Loader } from '../../components/UI'
 
 function ProductPage() {
   const { id: productId } = useParams()
+  const dispatch = useDispatch()
 
   const {
     data: product,
@@ -16,6 +18,10 @@ function ProductPage() {
     isLoading,
   } = useGetProductDetailsQuery(productId as string)
   const fetchBaseQueryError = error as FetchBaseQueryError
+
+  function onAddToCart() {
+    dispatch(addToCart({ product, qty: 5 }))
+  }
 
   if (isLoading) {
     return <Loader />
@@ -50,6 +56,7 @@ function ProductPage() {
               disabled={product.countInStock === 0}
               type='button'
               className={styles.addToCartButton}
+              onClick={onAddToCart}
             >
               add to cart
             </button>

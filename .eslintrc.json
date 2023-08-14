@@ -16,6 +16,7 @@
     "operator-linebreak": "off",
     "implicit-arrow-linebreak": "off",
     "react/jsx-curly-newline": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off"
   }
 }

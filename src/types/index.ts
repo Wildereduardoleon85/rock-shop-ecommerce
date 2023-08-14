@@ -9,9 +9,12 @@ export type Product = {
   countInStock: number
   rating: number
   numReviews: number
-  createdAt: Date
-  updatedAt: Date
   reviews?: Review[]
+  user: string
+}
+
+export interface CartItem extends Product {
+  qty: number
 }
 
 export type Response<T> = {

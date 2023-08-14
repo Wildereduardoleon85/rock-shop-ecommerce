@@ -1,2 +1,3 @@
-export { apiSlice } from './apiSlice'
+export * from './apiSlice'
 export * from './productsApiSlice'
+export * from './cartSlice'
