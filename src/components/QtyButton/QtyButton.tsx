@@ -1,49 +1,26 @@
-import { useEffect, useState } from 'react'
 import { FaChevronDown } from 'react-icons/fa'
 import styles from './QtyButton.module.scss'
 import { getClassNames } from '../../utils'
 import { ClickAwayWrapper } from '../UI'
+import { useQty } from '../../hooks'
 
 type QtyButtonProps = {
   countInStock: number
 }
 
 function QtyButton({ countInStock }: QtyButtonProps) {
-  const [isActive, setIsActive] = useState<boolean>(false)
-  const [qty, setQty] = useState<number>(1)
-  const [qtyInputValue, setQtyInputValue] = useState<string>('')
-  const [isQtyInputActive, setIsQtyInputActive] = useState<boolean>(false)
-  const [isErrorQty, setIsisErrorQty] = useState<boolean>(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsisErrorQty(false)
-    }, 4000)
-    return () => clearTimeout(timer)
-  }, [isErrorQty])
-
-  function onQtyButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
-    const target = e.target as HTMLButtonElement
-    setQty(Number(target.innerText.charAt(0)))
-    setIsActive(false)
-  }
-
-  function onQtyInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    // The value is set only if it is number
-    if (!Number.isNaN(+e.target.value)) {
-      setQtyInputValue(e.target.value)
-    }
-  }
-
-  function onApplyButtonClick() {
-    if (Number(qtyInputValue) > countInStock) {
-      setIsisErrorQty(true)
-    } else {
-      setQty(Number(qtyInputValue))
-      setIsQtyInputActive(false)
-      setIsActive(false)
-    }
-  }
+  const {
+    isActive,
+    qty,
+    qtyInputValue,
+    isQtyInputActive,
+    isErrorQty,
+    onQtyButtonClick,
+    onQtyInputChange,
+    onApplyButtonClick,
+    setIsActive,
+    setIsQtyInputActive,
+  } = useQty(countInStock)
 
   return (
     <div className={styles.root}>

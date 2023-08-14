@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { createSlice } from '@reduxjs/toolkit'
-import { CartItem } from '../types'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { CartItem, Product } from '../types'
 
 type CartState = {
   cartItems: CartItem[]
@@ -12,7 +12,7 @@ type CartState = {
   totalPrice: number
 }
 
-const initiaState: CartState = {
+const initialState: CartState = {
   cartItems: [
     {
       _id: '',
@@ -43,22 +43,41 @@ function getInitialState() {
     return JSON.parse(localStorage.getItem('cart') as string)
   }
 
-  return initiaState
+  return initialState
+}
+
+function buildCartItemObject(product: Product, qty: number) {
+  return {
+    _id: product._id,
+    user: product.user,
+    name: product.name,
+    image: product.image,
+    description: product.description,
+    brand: product.brand,
+    category: product.category,
+    price: product.price,
+    countInStock: product.countInStock,
+    rating: product.rating,
+    numReviews: product.numReviews,
+    reviews: product.reviews,
+    qty,
+  }
 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: getInitialState(),
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (
+      state,
+      action: PayloadAction<{ product: Product; qty: number }>
+    ) => {
       const { product, qty } = action.payload
-      const isItemsOnTheCart = state.cartItems[0]._id
-      const currentItems = state.cartItems
 
-      if (isItemsOnTheCart) {
+      if (state.cartItems[0]._id) {
         let foundItemIndex: number | null = null
 
-        currentItems.forEach((item: any, index: number) => {
+        state.cartItems.forEach((item: any, index: number) => {
           if (product._id === item._id) {
             foundItemIndex = index
           }
@@ -67,22 +86,44 @@ export const cartSlice = createSlice({
         if (foundItemIndex !== null) {
           state.cartItems[foundItemIndex].qty = qty
         } else {
-          state.cartItems = [...state.cartItems, { ...product, qty }]
+          state.cartItems = [
+            ...state.cartItems,
+            buildCartItemObject(product, qty),
+          ]
         }
       } else {
-        state.cartItems = [{ ...product, qty }]
+        state.cartItems = [buildCartItemObject(product, qty)]
       }
 
-      state.itemsPrice = 119.99
+      const itemsPrice = state.cartItems.reduce(
+        (acc: number, curr: CartItem) => acc + curr.price * curr.qty,
+        0
+      )
+
+      state.itemsPrice = Number(itemsPrice.toFixed(2))
       state.paymentMethod = 'PayPal'
       state.shippingAddress = {}
-      state.shippingPrice = 0
-      state.taxPrice = 17.99
-      state.totalPrice = 137.98
-
+      // Shipping price would be 0 if the order amount is greater than 100
+      state.shippingPrice = Number((state.itemsPrice > 100 ? 0 : 10).toFixed(2))
+      state.taxPrice = Number((state.itemsPrice * 0.15).toFixed(2))
+      state.totalPrice = Number(
+        (state.itemsPrice + state.shippingPrice + state.taxPrice).toFixed(2)
+      )
       localStorage.setItem('cart', JSON.stringify(state))
+    },
+
+    removeFromCart: (state) => {
+      state.cartItems = initialState.cartItems
+      state.itemsPrice = initialState.itemsPrice
+      state.paymentMethod = initialState.paymentMethod
+      state.shippingAddress = initialState.shippingAddress
+      state.shippingPrice = initialState.shippingPrice
+      state.taxPrice = initialState.taxPrice
+      state.totalPrice = initialState.totalPrice
+
+      localStorage.removeItem('cart')
     },
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
