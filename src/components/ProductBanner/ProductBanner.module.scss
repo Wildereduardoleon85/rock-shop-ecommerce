@@ -19,13 +19,13 @@
 
     > div:nth-child(3) {
       > a:first-child {
-        @include buttonStyles();
+        @include buttonStyles('dark-gray');
         margin-left: 1rem;
         text-decoration: none;
         font-size: 0.7rem;
       }
       > a:nth-child(2) {
-        @include buttonStyles('black');
+        @include buttonStyles('dark-gray');
         margin-left: 1rem;
         text-decoration: none;
         font-size: 0.7rem;
