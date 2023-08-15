@@ -5,7 +5,7 @@
   height: 80px;
   width: 100%;
   background-color: $black;
-  background-image: url("../../assets/img/dark-circles.png");
+  background-image: url('../../assets/img/dark-circles.png');
   display: flex;
   align-items: center;
   box-shadow: $box-shadow;
@@ -24,7 +24,7 @@
       max-width: fit-content;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
       display: flex;
       align-items: center;
 
@@ -36,8 +36,9 @@
         background: none;
         border: none;
         cursor: pointer;
+        position: relative;
 
-        &:hover>svg {
+        &:hover > svg {
           fill: $red;
         }
 
@@ -46,6 +47,21 @@
           fill: $light-gray;
           font-size: 1.8rem;
           @include transition(fill);
+        }
+
+        .cartItems {
+          background-color: $dark-red;
+          border-radius: 50%;
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          top: -8px;
+          right: -10px;
+          font-size: 12px;
         }
       }
 

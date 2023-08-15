@@ -111,19 +111,7 @@ export const cartSlice = createSlice({
       )
       localStorage.setItem('cart', JSON.stringify(state))
     },
-
-    removeFromCart: (state) => {
-      state.cartItems = initialState.cartItems
-      state.itemsPrice = initialState.itemsPrice
-      state.paymentMethod = initialState.paymentMethod
-      state.shippingAddress = initialState.shippingAddress
-      state.shippingPrice = initialState.shippingPrice
-      state.taxPrice = initialState.taxPrice
-      state.totalPrice = initialState.totalPrice
-
-      localStorage.removeItem('cart')
-    },
   },
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart } = cartSlice.actions

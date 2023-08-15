@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import styles from './ProductPage.module.scss'
@@ -13,6 +13,7 @@ import { RootState } from '../../store'
 function ProductPage() {
   const { id: productId } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { qty } = useSelector((state: RootState) => state.qty)
 
   const {
@@ -24,6 +25,7 @@ function ProductPage() {
 
   function onAddToCart() {
     dispatch(addToCart({ product: product as Product, qty }))
+    // navigate('/cart')
   }
 
   if (isLoading) {
