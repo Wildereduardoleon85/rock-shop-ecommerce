@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { CartItem, Product } from '../types'
 

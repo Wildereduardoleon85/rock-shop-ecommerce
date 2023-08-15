@@ -1,0 +1,47 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.bannerContainer {
+  position: absolute;
+  top: -2rem;
+  right: 0;
+  transform: translateY(-150%);
+
+  @include transition(transform);
+
+  .banner {
+    display: flex;
+    align-items: center;
+
+    > div:first-of-type {
+      margin-left: 1rem;
+    }
+
+    > div:nth-child(3) {
+      > a:first-child {
+        @include buttonStyles();
+        margin-left: 1rem;
+        text-decoration: none;
+        font-size: 0.7rem;
+      }
+      > a:nth-child(2) {
+        @include buttonStyles('black');
+        margin-left: 1rem;
+        text-decoration: none;
+        font-size: 0.7rem;
+      }
+    }
+
+    > div p:first-child {
+      font-weight: 600;
+    }
+
+    > div p:nth-child(2) {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.bannerContainer.translate {
+  transform: translateY(0);
+}

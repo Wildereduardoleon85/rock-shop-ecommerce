@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { ProductCard } from '../../components'
 import { ErrorPage, Loader } from '../../components/UI'
 import { useGetProductsQuery } from '../../slices'
