@@ -15,3 +15,9 @@ export function getClassNames(
 export function subString(value: string, limit: number): string {
   return `${value.slice(0, limit)}...`
 }
+
+export function formatCurrency(num: number): string {
+  const roundedNumber = Number(num.toFixed(2))
+
+  return new Intl.NumberFormat('en-US').format(roundedNumber)
+}

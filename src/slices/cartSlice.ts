@@ -63,6 +63,18 @@ function buildCartItemObject(product: Product, qty: number) {
   }
 }
 
+function getItemIndex(cartItems: CartItem[], productId: string): number | null {
+  let foundItemIndex: number | null = null
+
+  cartItems.forEach((item: any, index: number) => {
+    if (productId === item._id) {
+      foundItemIndex = index
+    }
+  })
+
+  return foundItemIndex
+}
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: getInitialState(),
@@ -74,13 +86,7 @@ export const cartSlice = createSlice({
       const { product, qty } = action.payload
 
       if (state.cartItems[0]._id) {
-        let foundItemIndex: number | null = null
-
-        state.cartItems.forEach((item: any, index: number) => {
-          if (product._id === item._id) {
-            foundItemIndex = index
-          }
-        })
+        const foundItemIndex = getItemIndex(state.cartItems, product._id)
 
         if (foundItemIndex !== null) {
           state.cartItems[foundItemIndex].qty = qty
@@ -110,7 +116,19 @@ export const cartSlice = createSlice({
       )
       localStorage.setItem('cart', JSON.stringify(state))
     },
+
+    setCartItemQty: (
+      state,
+      action: PayloadAction<{ productId: string; qty: number }>
+    ) => {
+      const { productId, qty } = action.payload
+      const foundItemIndex = getItemIndex(state.cartItems, productId)
+
+      if (foundItemIndex !== null) {
+        state.cartItems[foundItemIndex].qty = qty
+      }
+    },
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, setCartItemQty } = cartSlice.actions

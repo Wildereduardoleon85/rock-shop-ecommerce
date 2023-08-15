@@ -35,6 +35,12 @@
     &:hover > span:nth-child(2) {
       color: $dark-red;
     }
+
+    .countInStock {
+      color: $light-gray;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
   }
 
   .drawer {
@@ -42,7 +48,7 @@
     background-color: white;
     box-shadow: $box-shadow;
     border-radius: $border-radius;
-    min-width: 164px;
+    min-width: 170px;
     position: absolute;
     top: 40px;
     z-index: 2;

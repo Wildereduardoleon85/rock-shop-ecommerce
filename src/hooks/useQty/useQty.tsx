@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import { setQty } from '../../slices'
+import { setCartItemQty, setQty } from '../../slices'
+import { CartItem, Product } from '../../types'
 
-function useQty(countInStock: number) {
+function useQty(product: Product | CartItem, isCartContext: boolean) {
   const { qty } = useSelector((state: RootState) => state.qty)
   const dispatch = useDispatch()
-
   const [isActive, setIsActive] = useState<boolean>(false)
   const [qtyInputValue, setQtyInputValue] = useState<string>('')
   const [isQtyInputActive, setIsQtyInputActive] = useState<boolean>(false)
@@ -21,7 +21,12 @@ function useQty(countInStock: number) {
 
   function onQtyButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     const target = e.target as HTMLButtonElement
-    dispatch(setQty(Number(target.innerText.charAt(0))))
+    const value = Number(target.innerText.charAt(0))
+    if (isCartContext) {
+      dispatch(setCartItemQty({ productId: product._id, qty: value }))
+    } else {
+      dispatch(setQty(value))
+    }
     setIsActive(false)
   }
 
@@ -33,10 +38,16 @@ function useQty(countInStock: number) {
   }
 
   function onApplyButtonClick() {
-    if (Number(qtyInputValue) > countInStock) {
+    if (Number(qtyInputValue) > product.countInStock) {
       setIsisErrorQty(true)
     } else {
-      dispatch(setQty(Number(qtyInputValue)))
+      if (isCartContext) {
+        dispatch(
+          setCartItemQty({ productId: product._id, qty: Number(qtyInputValue) })
+        )
+      } else {
+        dispatch(setQty(Number(qtyInputValue)))
+      }
       setIsQtyInputActive(false)
       setIsActive(false)
       setQtyInputValue('')

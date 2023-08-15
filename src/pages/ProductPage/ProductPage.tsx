@@ -61,10 +61,7 @@ function ProductPage() {
           <div className={styles.details}>
             <h1>{product.name}</h1>
             <p className={styles.price}>${product.price}</p>
-            <QtyButton
-              className={styles.qtyButton}
-              countInStock={product.countInStock}
-            />
+            <QtyButton className={styles.qtyButton} product={product} />
             <button
               disabled={product.countInStock === 0}
               type='button'

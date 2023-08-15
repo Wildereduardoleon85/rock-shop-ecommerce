@@ -48,12 +48,21 @@
         }
 
         .qtyButton {
-          // margin-left: 2rem;
+          > div:first-of-type {
+            > button:first-of-type {
+              > span:first-of-type {
+                font-size: 1.2rem;
+              }
+              > span:nth-child(2) {
+                font-size: 1.2rem;
+              }
+            }
+          }
         }
 
         .price {
           color: $light-gray;
-          font-size: 2rem;
+          font-size: 1.5rem;
           font-weight: 600;
         }
       }
