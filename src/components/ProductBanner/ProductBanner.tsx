@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom'
 import styles from './ProductBanner.module.scss'
 import { getClassNames, subString } from '../../utils'
 import { Product } from '../../types'
-import { getPath } from '../../helpers'
+import { PRODUCT_IMAGE_ASPECT_RATIO, ROUTES } from '../../constants'
 
 type ProductBannerProps = {
   product: Product
   showAlert: boolean
 }
+
+const IMAGE_WIDTH = 60
 
 function ProductBanner({ product, showAlert }: ProductBannerProps) {
   return (
@@ -19,8 +21,8 @@ function ProductBanner({ product, showAlert }: ProductBannerProps) {
     >
       <div className={styles.banner}>
         <img
-          width={60}
-          height={60 * 0.7955974842767296}
+          width={IMAGE_WIDTH}
+          height={IMAGE_WIDTH * PRODUCT_IMAGE_ASPECT_RATIO}
           src={product.image}
           alt={product.name}
         />
@@ -29,8 +31,8 @@ function ProductBanner({ product, showAlert }: ProductBannerProps) {
           <p>ADDED TO CART</p>
         </div>
         <div>
-          <Link to={getPath('home')}>KEEP BUYING</Link>
-          <Link to={getPath('cart')}>TO CART</Link>
+          <Link to={ROUTES.home}>KEEP BUYING</Link>
+          <Link to={ROUTES.cart}>TO CART</Link>
         </div>
       </div>
     </div>

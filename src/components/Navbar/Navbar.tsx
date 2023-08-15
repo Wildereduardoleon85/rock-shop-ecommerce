@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { RiShoppingCartFill } from 'react-icons/ri'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styles from './Navbar.module.scss'
 import logo from '../../assets/img/logo.png'
 import { Search } from '../Search'
 import { RootState } from '../../store'
 import { CartItem } from '../../types'
 import { getClassNames } from '../../utils'
+import { ROUTES } from '../../constants'
 
 function Navbar() {
   const { cartItems } = useSelector((state: RootState) => state.cart)
@@ -33,7 +35,7 @@ function Navbar() {
         </div>
         <div>
           <Search />
-          <button type='button' className={styles.iconButton}>
+          <Link to={ROUTES.cart} className={styles.iconButton}>
             {itemsInTheCart && (
               <div
                 className={getClassNames([
@@ -45,7 +47,7 @@ function Navbar() {
               </div>
             )}
             <RiShoppingCartFill className={styles.cartIcon} />
-          </button>
+          </Link>
           <button className={styles.sigInButton} type='button'>
             SIGN IN
           </button>

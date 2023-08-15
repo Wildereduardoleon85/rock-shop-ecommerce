@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.scss'
 import { Rating } from '../Rating'
 import { subString } from '../../utils'
-import { PRODUCT_CARD_STRING_LIMIT } from '../../constants'
-import { getPath } from '../../helpers'
+import { PRODUCT_CARD_STRING_LIMIT, ROUTES } from '../../constants'
 
 type ProductCardProps = {
   product: {
@@ -23,10 +22,10 @@ type ProductCardProps = {
 function ProductCard({ product }: ProductCardProps) {
   return (
     <div className={styles.root}>
-      <Link to={getPath('product', product._id)}>
+      <Link to={ROUTES.product.replace(':id', product._id)}>
         <img width={265} height={211} src={product.image} alt={product.name} />
       </Link>
-      <Link to={getPath('product', product._id)}>
+      <Link to={ROUTES.product.replace(':id', product._id)}>
         <h3 className={styles.productName}>
           {product.name.length > PRODUCT_CARD_STRING_LIMIT
             ? subString(product.name, PRODUCT_CARD_STRING_LIMIT)

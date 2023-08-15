@@ -6,25 +6,27 @@ import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { ProductBanner, QtyButton } from '../../components'
-import { addToCart, useGetProductDetailsQuery } from '../../slices'
+import { addToCart, setQty, useGetProductDetailsQuery } from '../../slices'
 import { ErrorPage, Loader } from '../../components/UI'
 import { Product } from '../../types'
+import { ROUTES } from '../../constants'
 import { RootState } from '../../store'
 
 function ProductPage() {
   const { id: productId } = useParams()
   const dispatch = useDispatch()
-  const { qty } = useSelector((state: RootState) => state.qty)
-  const [showAlert, setShowAlert] = useState<boolean>(false)
-
   const {
     data: product,
     error,
     isLoading,
   } = useGetProductDetailsQuery(productId as string)
   const fetchBaseQueryError = error as FetchBaseQueryError
+  const { qty } = useSelector((state: RootState) => state.qty)
+
+  const [showAlert, setShowAlert] = useState<boolean>(false)
 
   function onAddToCart() {
+    dispatch(setQty)
     dispatch(addToCart({ product: product as Product, qty }))
     setShowAlert(true)
   }
@@ -45,7 +47,7 @@ function ProductPage() {
     product && (
       <div className={styles.root}>
         <ProductBanner product={product} showAlert={showAlert} />
-        <Link to='/'>
+        <Link to={ROUTES.home}>
           <IoMdArrowRoundBack />
           Go Back
         </Link>
@@ -59,7 +61,10 @@ function ProductPage() {
           <div className={styles.details}>
             <h1>{product.name}</h1>
             <p className={styles.price}>${product.price}</p>
-            <QtyButton countInStock={product.countInStock} />
+            <QtyButton
+              className={styles.qtyButton}
+              countInStock={product.countInStock}
+            />
             <button
               disabled={product.countInStock === 0}
               type='button'

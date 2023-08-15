@@ -1,5 +1,4 @@
-import { CartPage, HomePage, ProductPage } from '../pages'
-import { ErrorPageConfig, Route } from '../types'
+import { ErrorPageConfig, Routes } from '../types'
 
 export const PRODUCT_CARD_STRING_LIMIT: number = 55
 export const ERROR_PAGE_CONFIG: ErrorPageConfig = {
@@ -16,20 +15,9 @@ export const ERROR_PAGE_CONFIG: ErrorPageConfig = {
   },
 }
 
-export const ROUTES: Route[] = [
-  {
-    name: 'home',
-    path: '/',
-    page: <HomePage />,
-  },
-  {
-    name: 'product',
-    path: '/product/:id',
-    page: <ProductPage />,
-  },
-  {
-    name: 'cart',
-    path: '/cart',
-    page: <CartPage />,
-  },
-]
+export const PRODUCT_IMAGE_ASPECT_RATIO: number = 0.7955974842767296
+export const ROUTES: Routes = {
+  home: '/',
+  product: '/product/:id',
+  cart: '/cart',
+}

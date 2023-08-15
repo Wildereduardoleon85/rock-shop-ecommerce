@@ -6,9 +6,15 @@ import { useQty } from '../../hooks'
 
 type QtyButtonProps = {
   countInStock: number
+  className?: string
+  action?: () => void
 }
 
-function QtyButton({ countInStock }: QtyButtonProps) {
+function QtyButton({
+  countInStock,
+  className = '',
+  action = () => null,
+}: QtyButtonProps) {
   const {
     isActive,
     qty,
@@ -22,8 +28,18 @@ function QtyButton({ countInStock }: QtyButtonProps) {
     setIsQtyInputActive,
   } = useQty(countInStock)
 
+  function handleQtyButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    onQtyButtonClick(e)
+    action()
+  }
+
+  function handleApplyButtonClick() {
+    onApplyButtonClick()
+    action()
+  }
+
   return (
-    <div className={styles.root}>
+    <div className={getClassNames([styles.root, className])}>
       {countInStock ? (
         <ClickAwayWrapper onClickAway={() => setIsActive(false)}>
           <button
@@ -51,7 +67,7 @@ function QtyButton({ countInStock }: QtyButtonProps) {
                   .slice(0, 5)
                   .map((item, index) => (
                     <li key={item}>
-                      <button onClick={onQtyButtonClick} type='button'>
+                      <button onClick={handleQtyButtonClick} type='button'>
                         {`${item + 1} ${index === 0 ? 'unit' : 'units'}`}
                       </button>
                     </li>
@@ -77,7 +93,10 @@ function QtyButton({ countInStock }: QtyButtonProps) {
                             value={qtyInputValue}
                             onChange={onQtyInputChange}
                           />
-                          <button type='button' onClick={onApplyButtonClick}>
+                          <button
+                            type='button'
+                            onClick={handleApplyButtonClick}
+                          >
                             APPLY
                           </button>
                         </div>

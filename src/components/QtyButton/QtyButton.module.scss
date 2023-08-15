@@ -3,8 +3,8 @@
 
 .root {
   position: relative;
+
   .qty {
-    margin-top: 2rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -44,7 +44,8 @@
     border-radius: $border-radius;
     min-width: 164px;
     position: absolute;
-    top: 70px;
+    top: 40px;
+    z-index: 2;
   }
 
   ul {

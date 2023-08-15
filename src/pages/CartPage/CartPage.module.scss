@@ -1,0 +1,71 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  margin-top: 5rem;
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .container {
+    display: flex;
+    margin-top: 2rem;
+
+    > div:first-of-type {
+      width: 70%;
+    }
+
+    .productCard {
+      display: flex;
+      align-items: center;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+
+      img {
+        display: block;
+      }
+
+      .descriptionContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > a {
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
+          font-weight: 600;
+          @include transition(all);
+
+          &:hover {
+            border-bottom-color: $dark-red;
+            color: $dark-red;
+          }
+        }
+
+        .qtyButton {
+          // margin-left: 2rem;
+        }
+
+        .price {
+          color: $light-gray;
+          font-size: 2rem;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .productCard:first-child {
+      margin-top: 0;
+    }
+
+    .totalCard {
+      width: 30%;
+      background-color: gray;
+    }
+  }
+}

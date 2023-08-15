@@ -16,12 +16,12 @@
     @include transition(all);
 
     &:hover {
-      color: $red;
-      border-bottom-color: $red;
+      color: $dark-red;
+      border-bottom-color: $dark-red;
     }
 
     &:hover > svg {
-      fill: $red;
+      fill: $dark-red;
     }
 
     > svg {
@@ -96,6 +96,10 @@
         &:hover {
           background-color: $black;
         }
+      }
+
+      .qtyButton {
+        margin-top: 2rem;
       }
     }
   }
