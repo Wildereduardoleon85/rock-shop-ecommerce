@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { ProductBanner, QtyButton } from '../../components'
@@ -44,7 +45,8 @@ function ProductPage() {
     product && (
       <div className={styles.root}>
         <ProductBanner product={product} showAlert={showAlert} />
-        <Link className={styles.goBackButton} to='/'>
+        <Link to='/'>
+          <IoMdArrowRoundBack />
           Go Back
         </Link>
         <div className={styles.container}>

@@ -36,3 +36,21 @@ export type User = {
   password: string
   isAdmin: boolean
 }
+
+export type RouteNames = 'home' | 'product' | 'cart'
+
+export type Route = {
+  name: RouteNames
+  path: string
+  page: React.JSX.Element
+}
+
+export type ErrorPageEnums = 'not-found' | 'internal-server-error'
+
+export type ErrorPageConfig = {
+  [key in ErrorPageEnums]: {
+    code: string
+    title: string
+    message: string
+  }
+}

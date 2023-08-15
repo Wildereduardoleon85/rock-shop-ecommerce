@@ -3,6 +3,7 @@ import styles from './ProductCard.module.scss'
 import { Rating } from '../Rating'
 import { subString } from '../../utils'
 import { PRODUCT_CARD_STRING_LIMIT } from '../../constants'
+import { getPath } from '../../helpers'
 
 type ProductCardProps = {
   product: {
@@ -22,10 +23,10 @@ type ProductCardProps = {
 function ProductCard({ product }: ProductCardProps) {
   return (
     <div className={styles.root}>
-      <Link to={`product/${product._id}`}>
+      <Link to={getPath('product', product._id)}>
         <img width={265} height={211} src={product.image} alt={product.name} />
       </Link>
-      <Link to={`product/${product._id}`}>
+      <Link to={getPath('product', product._id)}>
         <h3 className={styles.productName}>
           {product.name.length > PRODUCT_CARD_STRING_LIMIT
             ? subString(product.name, PRODUCT_CARD_STRING_LIMIT)

@@ -1,7 +1,7 @@
-import { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, useRef, JSX } from 'react'
 
 type ClickAwayWrapperProps = {
-  children: ReactNode
+  children: JSX.Element
   onClickAway: Function
 }
 

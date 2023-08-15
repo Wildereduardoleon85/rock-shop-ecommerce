@@ -6,10 +6,29 @@
   position: relative;
 
   > a:first-of-type {
+    text-transform: uppercase;
     text-decoration: none;
-    display: block;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
     max-width: fit-content;
-    @include buttonStyles('black');
+    @include transition(all);
+
+    &:hover {
+      color: $red;
+      border-bottom-color: $red;
+    }
+
+    &:hover > svg {
+      fill: $red;
+    }
+
+    > svg {
+      margin-right: 0.5rem;
+      transform: translateY(-0.05rem);
+      @include transition(fill);
+    }
   }
 
   .container {

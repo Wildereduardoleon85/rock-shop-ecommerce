@@ -6,13 +6,19 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { Layout } from './components'
-import { HomePage, ProductPage } from './pages'
+import { ROUTES } from './constants'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
-      <Route index path='/' element={<HomePage />} />
-      <Route path='/product/:id' element={<ProductPage />} />
+      {ROUTES.map((route) => (
+        <Route
+          key={route.name}
+          index={route.name === 'home'}
+          path={route.path}
+          element={route.page}
+        />
+      ))}
     </Route>
   )
 )

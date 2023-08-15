@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from './ProductBanner.module.scss'
 import { getClassNames, subString } from '../../utils'
 import { Product } from '../../types'
+import { getPath } from '../../helpers'
 
 type ProductBannerProps = {
   product: Product
@@ -28,8 +29,8 @@ function ProductBanner({ product, showAlert }: ProductBannerProps) {
           <p>ADDED TO CART</p>
         </div>
         <div>
-          <Link to='/'>KEEP BUYING</Link>
-          <Link to='/cart'>TO CART</Link>
+          <Link to={getPath('home')}>KEEP BUYING</Link>
+          <Link to={getPath('cart')}>TO CART</Link>
         </div>
       </div>
     </div>
