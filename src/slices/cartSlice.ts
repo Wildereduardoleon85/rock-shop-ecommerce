@@ -75,6 +75,23 @@ function getItemIndex(cartItems: CartItem[], productId: string): number | null {
   return foundItemIndex
 }
 
+function updateState(state: CartState): void {
+  const itemsPrice = state.cartItems.reduce(
+    (acc: number, curr: CartItem) => acc + curr.price * curr.qty,
+    0
+  )
+
+  state.itemsPrice = Number(itemsPrice.toFixed(2))
+  state.paymentMethod = 'PayPal'
+  state.shippingAddress = {}
+  // Shipping price would be 0 if the order amount is greater than 100
+  state.shippingPrice = Number((state.itemsPrice > 100 ? 0 : 10).toFixed(2))
+  state.taxPrice = Number((state.itemsPrice * 0.15).toFixed(2))
+  state.totalPrice = Number(
+    (state.itemsPrice + state.shippingPrice + state.taxPrice).toFixed(2)
+  )
+}
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: getInitialState(),
@@ -100,35 +117,21 @@ export const cartSlice = createSlice({
         state.cartItems = [buildCartItemObject(product, qty)]
       }
 
-      const itemsPrice = state.cartItems.reduce(
-        (acc: number, curr: CartItem) => acc + curr.price * curr.qty,
-        0
-      )
+      updateState(state)
 
-      state.itemsPrice = Number(itemsPrice.toFixed(2))
-      state.paymentMethod = 'PayPal'
-      state.shippingAddress = {}
-      // Shipping price would be 0 if the order amount is greater than 100
-      state.shippingPrice = Number((state.itemsPrice > 100 ? 0 : 10).toFixed(2))
-      state.taxPrice = Number((state.itemsPrice * 0.15).toFixed(2))
-      state.totalPrice = Number(
-        (state.itemsPrice + state.shippingPrice + state.taxPrice).toFixed(2)
-      )
       localStorage.setItem('cart', JSON.stringify(state))
     },
 
-    setCartItemQty: (
-      state,
-      action: PayloadAction<{ productId: string; qty: number }>
-    ) => {
-      const { productId, qty } = action.payload
-      const foundItemIndex = getItemIndex(state.cartItems, productId)
+    removeItem: (state, action: PayloadAction<string>) => {
+      state.cartItems = state.cartItems.filter(
+        (item: CartItem) => item._id !== action.payload
+      )
 
-      if (foundItemIndex !== null) {
-        state.cartItems[foundItemIndex].qty = qty
-      }
+      updateState(state)
+
+      localStorage.setItem('cart', JSON.stringify(state))
     },
   },
 })
 
-export const { addToCart, setCartItemQty } = cartSlice.actions
+export const { addToCart, removeItem } = cartSlice.actions

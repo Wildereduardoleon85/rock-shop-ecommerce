@@ -1,16 +1,21 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { FaTrashAlt } from 'react-icons/fa'
 import styles from './CartPage.module.scss'
 import { PRODUCT_IMAGE_ASPECT_RATIO, ROUTES } from '../../constants'
 import { formatCurrency, subString } from '../../utils'
 import { RootState } from '../../store'
 import { CartItem } from '../../types'
 import { QtyButton } from '../../components'
+import { removeItem } from '../../slices'
 
 const IMAGE_WIDTH = 150
 
 function CartPage() {
-  const { cartItems } = useSelector((state: RootState) => state.cart)
+  const { cartItems, itemsPrice } = useSelector(
+    (state: RootState) => state.cart
+  )
+  const dispatch = useDispatch()
 
   return (
     <div className={styles.root}>
@@ -37,12 +42,30 @@ function CartPage() {
                 <p className={styles.price}>
                   ${formatCurrency(product.price * product.qty)}
                 </p>
+                <button
+                  onClick={() => dispatch(removeItem(product._id))}
+                  className={styles.deleteButton}
+                  type='button'
+                >
+                  <FaTrashAlt />
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className={styles.totalCard}>total card</div>
+        <div className={styles.totalCard}>
+          <h2>
+            Subtotal (
+            {cartItems.reduce(
+              (acc: number, curr: CartItem) => acc + curr.qty,
+              0
+            )}
+            ) items
+          </h2>
+          <p className={styles.subtotalPrice}>${formatCurrency(itemsPrice)}</p>
+          <Link to='/checkout'>PROCEED TO CHECKOUT</Link>
+        </div>
       </div>
     </div>
   )

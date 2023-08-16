@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import { setCartItemQty, setQty } from '../../slices'
+import { addToCart, setQty } from '../../slices'
 import { CartItem, Product } from '../../types'
 
 function useQty(product: Product | CartItem, isCartContext: boolean) {
@@ -23,7 +23,7 @@ function useQty(product: Product | CartItem, isCartContext: boolean) {
     const target = e.target as HTMLButtonElement
     const value = Number(target.innerText.charAt(0))
     if (isCartContext) {
-      dispatch(setCartItemQty({ productId: product._id, qty: value }))
+      dispatch(addToCart({ product, qty: value }))
     } else {
       dispatch(setQty(value))
     }
@@ -42,9 +42,7 @@ function useQty(product: Product | CartItem, isCartContext: boolean) {
       setIsisErrorQty(true)
     } else {
       if (isCartContext) {
-        dispatch(
-          setCartItemQty({ productId: product._id, qty: Number(qtyInputValue) })
-        )
+        dispatch(addToCart({ product, qty: Number(qtyInputValue) }))
       } else {
         dispatch(setQty(Number(qtyInputValue)))
       }
