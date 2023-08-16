@@ -52,3 +52,13 @@ export type RouteEnums = 'home' | 'product' | 'cart'
 export type Routes = {
   [key in RouteEnums]: string
 }
+
+export type CartState = {
+  cartItems: CartItem[]
+  itemsPrice: number
+  paymentMethod: string
+  shippingAddress: {}
+  shippingPrice: number
+  taxPrice: number
+  totalPrice: number
+}

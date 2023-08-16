@@ -1,7 +1,8 @@
 @import '../../styles/variables';
 
 main {
-    max-width: $xl-break-point;
-    margin: 0 auto;
-    padding: 0 1rem;
+  max-width: $xl-break-point;
+  margin: 0 auto;
+  padding: 0 1rem;
+  min-height: 70vh;
 }

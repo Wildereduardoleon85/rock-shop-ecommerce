@@ -26,7 +26,7 @@ function ProductPage() {
   const [showAlert, setShowAlert] = useState<boolean>(false)
 
   function onAddToCart() {
-    dispatch(setQty)
+    dispatch(setQty(1))
     dispatch(addToCart({ product: product as Product, qty }))
     setShowAlert(true)
   }
