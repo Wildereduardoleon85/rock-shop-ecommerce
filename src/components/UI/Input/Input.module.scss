@@ -1,0 +1,52 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.root {
+  width: 30rem;
+
+  .labelGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: $black;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    span {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-left: auto;
+      color: $dark-red;
+    }
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    border: 1px solid $very-light-gray;
+    border-radius: $border-radius;
+    padding: 0.9rem;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  input:focus {
+    border-color: $black;
+  }
+
+  input.errorClassName {
+    border-color: $dark-red;
+  }
+
+  ::placeholder {
+    color: $dark-gray;
+  }
+}

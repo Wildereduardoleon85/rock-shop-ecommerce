@@ -1,0 +1,38 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.root {
+  max-width: fit-content;
+  margin: 5rem auto 0 auto;
+
+  > h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    margin-top: 3rem;
+
+    .submitButton {
+      margin-top: 0.5rem;
+      @include buttonStyles();
+    }
+
+    .toRegister {
+      margin-top: 1rem;
+
+      > span {
+        > a {
+          margin-left: 0.5rem;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
+          @include transition(all);
+
+          &:hover {
+            border-bottom-color: $dark-red;
+            color: $dark-red;
+          }
+        }
+      }
+    }
+  }
+}

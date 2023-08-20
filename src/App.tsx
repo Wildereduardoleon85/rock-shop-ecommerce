@@ -6,7 +6,13 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { Layout } from './components'
-import { CartPage, HomePage, ProductPage } from './pages'
+import {
+  CartPage,
+  HomePage,
+  ProductPage,
+  LoginPage,
+  RegisterPage,
+} from './pages'
 import { ROUTES } from './constants'
 
 const router = createBrowserRouter(
@@ -15,6 +21,8 @@ const router = createBrowserRouter(
       <Route index path={ROUTES.home} element={<HomePage />} />
       <Route path={ROUTES.product} element={<ProductPage />} />
       <Route path={ROUTES.cart} element={<CartPage />} />
+      <Route path={ROUTES.login} element={<LoginPage />} />
+      <Route path={ROUTES.cart} element={<RegisterPage />} />
     </Route>
   )
 )

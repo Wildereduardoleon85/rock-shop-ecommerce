@@ -1,4 +1,4 @@
-import { ErrorPageConfig, Routes } from '../types'
+import { ErrorPageConfig, Routes, FormInputDefaultAttrs } from '../types'
 
 export const PRODUCT_CARD_STRING_LIMIT: number = 55
 export const ERROR_PAGE_CONFIG: ErrorPageConfig = {
@@ -20,4 +20,21 @@ export const ROUTES: Routes = {
   home: '/',
   product: '/product/:id',
   cart: '/cart',
+  login: '/login',
+  register: '/register',
 }
+
+export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [
+  {
+    name: 'name',
+    type: 'text',
+    placeholder: 'e.g John Doe',
+    label: 'Name',
+  },
+  {
+    name: 'email',
+    type: 'email',
+    placeholder: 'jdoe@email.com',
+    label: 'Email Address',
+  },
+]

@@ -36,7 +36,7 @@ function Navbar() {
         <div>
           <Search />
           <Link to={ROUTES.cart} className={styles.iconButton}>
-            {itemsInTheCart && (
+            {itemsInTheCart > 0 && (
               <div
                 className={getClassNames([
                   styles.cartItems,
@@ -48,9 +48,9 @@ function Navbar() {
             )}
             <RiShoppingCartFill className={styles.cartIcon} />
           </Link>
-          <button className={styles.sigInButton} type='button'>
+          <Link className={styles.sigInButton} to={ROUTES.login}>
             SIGN IN
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

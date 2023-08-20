@@ -1,3 +1,5 @@
+import { Validation } from '../types'
+
 export function getClassNames(
   classList: (string | undefined | null | boolean)[]
 ): string {
@@ -20,4 +22,46 @@ export function formatCurrency(num: number): string {
   const roundedNumber = Number(num.toFixed(2))
 
   return new Intl.NumberFormat('en-US').format(roundedNumber)
+}
+
+export function validateName(value: string): Validation {
+  if (value.trim() === '') {
+    return {
+      isValid: false,
+      error: 'This field is required',
+    }
+  }
+
+  if (!/^[a-zA-Z ]+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'This field must contain only letters',
+    }
+  }
+
+  return {
+    isValid: true,
+    error: '',
+  }
+}
+
+export function validateEmail(value: string): Validation {
+  if (value.trim() === '') {
+    return {
+      isValid: false,
+      error: 'This field is required',
+    }
+  }
+
+  if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'You must enter a valid email',
+    }
+  }
+
+  return {
+    isValid: true,
+    error: '',
+  }
 }

@@ -95,6 +95,9 @@
         font-size: 1.2rem;
         color: $light-gray;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
         @include transition(color);
 
         &:hover {

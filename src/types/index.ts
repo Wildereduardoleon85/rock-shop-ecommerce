@@ -47,7 +47,7 @@ export type ErrorPageConfig = {
   }
 }
 
-export type RouteEnums = 'home' | 'product' | 'cart'
+export type RouteEnums = 'home' | 'product' | 'cart' | 'login' | 'register'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -61,4 +61,41 @@ export type CartState = {
   shippingPrice: number
   taxPrice: number
   totalPrice: number
+}
+
+export type Validation = {
+  isValid: boolean
+  error: string
+}
+
+export type UseInput = {
+  value: string
+  error: string
+  isValid: boolean
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur: () => void
+  reset: () => void
+}
+
+export type FormInputDefaultAttrs = {
+  name: string
+  type: string
+  placeholder: string
+  label: string
+}
+
+export interface FormInputDynamicAttrs extends FormInputDefaultAttrs {
+  error: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur: () => void
+  value: string
+}
+
+export type FormAttrsByName = {
+  [char: string]: {
+    error: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onBlur: () => void
+    value: string
+  }
 }
