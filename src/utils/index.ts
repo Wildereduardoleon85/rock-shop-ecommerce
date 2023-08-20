@@ -65,3 +65,49 @@ export function validateEmail(value: string): Validation {
     error: '',
   }
 }
+
+export const validatePassword = (password: any): Validation => {
+  if (!password) {
+    return {
+      isValid: false,
+      error: 'field password is required',
+    }
+  }
+
+  if (typeof password !== 'string') {
+    return {
+      isValid: false,
+      error: 'field password must be a string',
+    }
+  }
+
+  if (password.trim().length < 6) {
+    return {
+      isValid: false,
+      error: 'field password must be at least 6 characters',
+    }
+  }
+
+  if (password.trim().length > 16) {
+    return {
+      isValid: false,
+      error: 'field password must must not exceed 16 characters',
+    }
+  }
+
+  if (
+    /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>?~]/.test(password) &&
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(password)
+  ) {
+    return {
+      isValid: true,
+      error: '',
+    }
+  }
+
+  return {
+    isValid: false,
+    error:
+      'must contain: Uppercase letter, Lowercase letter, number and a special character',
+  }
+}

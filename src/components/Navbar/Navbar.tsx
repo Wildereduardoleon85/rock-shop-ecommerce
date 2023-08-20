@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { RiShoppingCartFill } from 'react-icons/ri'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styles from './Navbar.module.scss'
 import logo from '../../assets/img/logo.png'
 import { Search } from '../Search'
@@ -13,6 +13,7 @@ import { ROUTES } from '../../constants'
 function Navbar() {
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const [shouldAnimate, setShouldAnimate] = useState<boolean>(false)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     setShouldAnimate(true)
@@ -48,7 +49,10 @@ function Navbar() {
             )}
             <RiShoppingCartFill className={styles.cartIcon} />
           </Link>
-          <Link className={styles.sigInButton} to={ROUTES.login}>
+          <Link
+            className={styles.sigInButton}
+            to={`${ROUTES.login}?redirect=${pathname}`}
+          >
             SIGN IN
           </Link>
         </div>

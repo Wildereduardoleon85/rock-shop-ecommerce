@@ -1,10 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { AuthState } from '../types'
 
-function getStateFromLocalStorage() {
-  if (localStorage.getItem('user')) {
-    return JSON.parse(localStorage.getItem('user') as string)
+const initialSatate: AuthState = null
+
+function getStateFromLocalStorage(): AuthState {
+  if (localStorage.getItem('userInfo')) {
+    return JSON.parse(localStorage.getItem('userInfo') as string)
   }
-  return null
+  return initialSatate
 }
 
 const initialState = {

@@ -1,6 +1,28 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
 
+.toast {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1rem;
+  top: calc($navbar-height + 1rem);
+  font-size: 1.5rem;
+  color: $red;
+  transform: translateX(150%);
+  @include transition(transform);
+
+  > svg {
+    fill: $red;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+  }
+}
+
+.show {
+  transform: translateX(0);
+}
+
 .root {
   max-width: fit-content;
   margin: 5rem auto 0 auto;
@@ -14,7 +36,17 @@
 
     .submitButton {
       margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @include buttonStyles();
+      padding: 0;
+      height: 35px;
+      width: 98px;
+
+      &:disabled {
+        background-color: $super-very-light-gray;
+      }
     }
 
     .toRegister {
@@ -25,6 +57,7 @@
           margin-left: 0.5rem;
           text-decoration: none;
           border-bottom: 1px solid transparent;
+          font-weight: 600;
           @include transition(all);
 
           &:hover {

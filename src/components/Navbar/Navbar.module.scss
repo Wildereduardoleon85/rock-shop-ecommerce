@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .navbar {
-  height: 80px;
+  height: $navbar-height;
   width: 100%;
   background-color: $black;
   background-image: url('../../assets/img/dark-circles.png');

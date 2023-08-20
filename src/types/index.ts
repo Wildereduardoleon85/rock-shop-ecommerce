@@ -99,3 +99,17 @@ export type FormAttrsByName = {
     value: string
   }
 }
+
+export type UserInfo = {
+  _id: string
+  name: string
+  email: string
+  isAdmin: boolean
+}
+
+export type AuthState = UserInfo | null
+
+export type LoginCredentials = {
+  email: string
+  password: string
+}
