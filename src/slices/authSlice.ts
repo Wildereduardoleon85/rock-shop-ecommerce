@@ -25,7 +25,6 @@ export const authSlice = createSlice({
     clearUserInfo: (state) => {
       state.userInfo = null
       localStorage.removeItem('userInfo')
-      console.log('clear user info executed')
     },
   },
 })
