@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { AuthState } from '../types'
+import { AuthState, UserInfo } from '../types'
 
 const initialSatate: AuthState = null
 
@@ -18,11 +18,16 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<any>) => {
+    setCredentials: (state, action: PayloadAction<UserInfo>) => {
       state.userInfo = action.payload
       localStorage.setItem('userInfo', JSON.stringify(action.payload))
+    },
+    clearUserInfo: (state) => {
+      state.userInfo = null
+      localStorage.removeItem('userInfo')
+      console.log('clear user info executed')
     },
   },
 })
 
-export const { setCredentials } = authSlice.actions
+export const { setCredentials, clearUserInfo } = authSlice.actions

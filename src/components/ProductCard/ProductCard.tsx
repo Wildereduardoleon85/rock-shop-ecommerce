@@ -21,20 +21,21 @@ type ProductCardProps = {
 
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className={styles.root}>
-      <Link to={ROUTES.product.replace(':id', product._id)}>
-        <img width={265} height={211} src={product.image} alt={product.name} />
-      </Link>
-      <Link to={ROUTES.product.replace(':id', product._id)}>
-        <h3 className={styles.productName}>
-          {product.name.length > PRODUCT_CARD_STRING_LIMIT
-            ? subString(product.name, PRODUCT_CARD_STRING_LIMIT)
-            : product.name}
-        </h3>
-      </Link>
+    <Link
+      className={styles.root}
+      to={ROUTES.product.replace(':id', product._id)}
+    >
+      <img width={265} height={211} src={product.image} alt={product.name} />
+
+      <h3 className={styles.productName}>
+        {product.name.length > PRODUCT_CARD_STRING_LIMIT
+          ? subString(product.name, PRODUCT_CARD_STRING_LIMIT)
+          : product.name}
+      </h3>
+
       <Rating value={product.rating} text={`${product.numReviews} reviews`} />
       <p className={styles.price}>${product.price}</p>
-    </div>
+    </Link>
   )
 }
 

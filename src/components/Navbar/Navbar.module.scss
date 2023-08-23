@@ -103,6 +103,71 @@
         &:hover {
           color: $red;
         }
+
+        > span {
+          display: flex;
+          align-items: center;
+
+          .chevronIcon {
+            fill: $light-gray;
+            font-size: 0.8rem;
+            margin-left: 0.8rem;
+            transform: translateY(0.14rem);
+            @include transition(all);
+          }
+
+          .chevronIcon.rotate {
+            transform: rotate(-180deg);
+            fill: $dark-red;
+          }
+        }
+      }
+
+      .drawerContainer {
+        position: relative;
+        .drawer {
+          background-color: white;
+          border-radius: $border-radius;
+          padding: 0.5rem 0;
+          position: absolute;
+          box-shadow: $box-shadow;
+
+          li {
+            list-style: none;
+          }
+
+          a {
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $super-very-light-gray;
+            }
+          }
+
+          button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $super-very-light-gray;
+            }
+          }
+
+          .loader {
+            margin-left: 0.5rem;
+            &::after {
+              background: white;
+            }
+          }
+        }
       }
     }
   }

@@ -70,28 +70,28 @@ export const validatePassword = (password: any): Validation => {
   if (!password) {
     return {
       isValid: false,
-      error: 'field password is required',
+      error: 'Field password is required',
     }
   }
 
   if (typeof password !== 'string') {
     return {
       isValid: false,
-      error: 'field password must be a string',
+      error: 'Field password must be a string',
     }
   }
 
   if (password.trim().length < 6) {
     return {
       isValid: false,
-      error: 'field password must be at least 6 characters',
+      error: 'Field password must be at least 6 characters',
     }
   }
 
   if (password.trim().length > 16) {
     return {
       isValid: false,
-      error: 'field password must must not exceed 16 characters',
+      error: 'Field password must must not exceed 16 characters',
     }
   }
 
@@ -110,4 +110,28 @@ export const validatePassword = (password: any): Validation => {
     error:
       'must contain: Uppercase letter, Lowercase letter, number and a special character',
   }
+}
+
+export function validateConfirmPassword(
+  password: string,
+  confirmValue?: string
+): Validation {
+  if (password !== confirmValue) {
+    return {
+      isValid: false,
+      error: 'Passwords do not match',
+    }
+  }
+
+  return {
+    isValid: true,
+    error: '',
+  }
+}
+
+export function capitalize(value: string): string {
+  const firstLetter = value.charAt(0)
+  const rest = value.slice(1, value.length)
+
+  return `${firstLetter.toUpperCase()}${rest}`
 }

@@ -1,0 +1,76 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.toast {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 0.8rem;
+  top: calc($navbar-height + 1rem);
+  font-size: 1.2rem;
+  color: white;
+  background-color: $black;
+  transform: translateX(120%);
+  border-radius: $border-radius;
+  padding: 0.8rem;
+  max-width: 400px;
+  @include transition(transform);
+
+  > svg {
+    fill: $red;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+}
+
+.show {
+  transform: translateX(0);
+}
+
+.root {
+  max-width: fit-content;
+  margin: 5rem auto 0 auto;
+
+  > h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    margin-top: 3rem;
+
+    .submitButton {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include buttonStyles();
+      padding: 0;
+      height: 35px;
+      width: 98px;
+
+      &:disabled {
+        background-color: $super-very-light-gray;
+      }
+    }
+
+    .toRegister {
+      margin-top: 1rem;
+
+      > span {
+        > a {
+          margin-left: 0.5rem;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
+          font-weight: 600;
+          @include transition(all);
+
+          &:hover {
+            border-bottom-color: $dark-red;
+            color: $dark-red;
+          }
+        }
+      }
+    }
+  }
+}

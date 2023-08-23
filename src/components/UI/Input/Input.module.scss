@@ -27,27 +27,50 @@
     }
   }
 
-  input {
-    width: 100%;
-    border: none;
-    border: 1px solid $very-light-gray;
-    border-radius: $border-radius;
-    padding: 0.9rem;
-    outline: none;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 20px;
-  }
+  .inputContainer {
+    position: relative;
+    $input-height: 47px;
 
-  input:focus {
-    border-color: $black;
-  }
+    input {
+      width: 100%;
+      height: $input-height;
+      border: none;
+      border: 1px solid $very-light-gray;
+      border-radius: $border-radius;
+      padding: 0 0.9rem;
+      outline: none;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
 
-  input.errorClassName {
-    border-color: $dark-red;
-  }
+    input:focus {
+      border-color: $black;
+    }
 
-  ::placeholder {
-    color: $very-light-gray;
+    input.errorClassName {
+      border-color: $dark-red;
+    }
+
+    ::placeholder {
+      color: $very-light-gray;
+    }
+
+    .eye {
+      $size: 1.5rem;
+      position: absolute;
+      right: 0.5rem;
+      font-size: $size;
+      top: calc(($input-height / 2) - ($size / 2));
+      border: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      > svg {
+        fill: $light-gray;
+      }
+    }
   }
 }

@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { FaRegTimesCircle } from 'react-icons/fa'
-import styles from 'Auth.module.scss'
-import { getClassNames } from '../../utils'
+import styles from './Auth.module.scss'
+import { capitalize, getClassNames } from '../../utils'
 import { Input, SmallLoader } from '../UI'
 import { ROUTES } from '../../constants'
+import { UseInput } from '../../types'
 
 type FormInputs = {
   name: string
@@ -18,29 +19,57 @@ type FormInputs = {
 
 type AuthProps = {
   errorMessage: string
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  formValues: UseInput[]
   formInputs: FormInputs[]
   isLoading: boolean
   redirect: string
+  handleAuth: () => void
+  variant?: 'login' | 'register'
 }
 
 function Auth({
   errorMessage,
-  onSubmit,
+  formValues,
   formInputs,
   isLoading,
   redirect,
+  handleAuth,
+  variant = 'login',
 }: AuthProps) {
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!isFormValid) {
+      formValues.forEach((formValue: UseInput) => {
+        formValue.onBlur()
+      })
+      return
+    }
+
+    handleAuth()
+  }
+
+  const buttonLabel = variant === 'login' ? 'SIGN IN' : 'REGISTER'
+
   return (
     <>
       <div
         className={getClassNames([styles.toast, errorMessage && styles.show])}
       >
         <FaRegTimesCircle />
-        {errorMessage}
+        {`Error: ${capitalize(errorMessage)}`}
       </div>
       <div className={styles.root}>
-        <h1>Sign In</h1>
+        <h1>{variant === 'login' ? 'Sign In' : 'Register'}</h1>
         <form onSubmit={onSubmit}>
           {formInputs.map((formInputProps) => (
             <Input key={formInputProps.name} inputProps={formInputProps} />
@@ -50,13 +79,17 @@ function Auth({
             className={styles.submitButton}
             disabled={isLoading}
           >
-            {isLoading ? <SmallLoader /> : 'SIGN IN'}
+            {isLoading ? <SmallLoader /> : buttonLabel}
           </button>
           <p className={styles.toRegister}>
-            New Customer?{' '}
+            {variant === 'login' ? 'New Customer?' : 'Alredy have an account?'}{' '}
             <span>
-              <Link to={`${ROUTES.register}?redirect=${redirect}`}>
-                Register
+              <Link
+                to={`${
+                  variant === 'login' ? ROUTES.register : ROUTES.login
+                }?redirect=${redirect}`}
+              >
+                {variant === 'login' ? 'Register' : 'Login'}
               </Link>
             </span>
           </p>
