@@ -7,7 +7,7 @@ import { UseInput, UserInfo } from '../../types'
 import { useLoginMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
-import { Auth } from '../../components'
+import { Form } from '../../components'
 
 function LoginPage() {
   const emailInput = useInput('', validateEmail)
@@ -58,7 +58,7 @@ function LoginPage() {
     },
   ]
 
-  const handleAuth = async () => {
+  const handleSubmit = async () => {
     try {
       const credentials: UserInfo = await login({
         email: emailInput.value,
@@ -76,9 +76,9 @@ function LoginPage() {
   }
 
   return (
-    <Auth
+    <Form
       errorMessage={errorMessage}
-      handleAuth={handleAuth}
+      handleSubmit={handleSubmit}
       formInputs={formInputs}
       isLoading={isLoading}
       redirect={redirect}

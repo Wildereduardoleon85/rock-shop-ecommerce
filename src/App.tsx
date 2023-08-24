@@ -12,6 +12,7 @@ import {
   ProductPage,
   LoginPage,
   RegisterPage,
+  ShippingPage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path={ROUTES.cart} element={<CartPage />} />
       <Route path={ROUTES.login} element={<LoginPage />} />
       <Route path={ROUTES.register} element={<RegisterPage />} />
+      <Route path={ROUTES.shipping} element={<ShippingPage />} />
     </Route>
   )
 )

@@ -47,17 +47,30 @@ export type ErrorPageConfig = {
   }
 }
 
-export type RouteEnums = 'home' | 'product' | 'cart' | 'login' | 'register'
+export type RouteEnums =
+  | 'home'
+  | 'product'
+  | 'cart'
+  | 'login'
+  | 'register'
+  | 'shipping'
 
 export type Routes = {
   [key in RouteEnums]: string
+}
+
+export type ShippingAddress = {
+  address: string
+  city: string
+  country: string
+  postalCode: string
 }
 
 export type CartState = {
   cartItems: CartItem[]
   itemsPrice: number
   paymentMethod: string
-  shippingAddress: {}
+  shippingAddress: ShippingAddress
   shippingPrice: number
   taxPrice: number
   totalPrice: number

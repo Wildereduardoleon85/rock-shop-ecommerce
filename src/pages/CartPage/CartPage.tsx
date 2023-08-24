@@ -15,6 +15,8 @@ function CartPage() {
   const { cartItems, itemsPrice } = useSelector(
     (state: RootState) => state.cart
   )
+  const { userInfo } = useSelector((state: RootState) => state.auth)
+
   const dispatch = useDispatch()
 
   return (
@@ -64,7 +66,13 @@ function CartPage() {
             ) items
           </h2>
           <p className={styles.subtotalPrice}>${formatCurrency(itemsPrice)}</p>
-          <Link to='/checkout'>PROCEED TO CHECKOUT</Link>
+          <Link
+            to={
+              userInfo ? ROUTES.shipping : `${ROUTES.login}?redirect=/shipping`
+            }
+          >
+            PROCEED TO CHECKOUT
+          </Link>
         </div>
       </div>
     </div>

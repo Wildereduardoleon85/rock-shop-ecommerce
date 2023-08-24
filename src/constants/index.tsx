@@ -22,6 +22,7 @@ export const ROUTES: Routes = {
   cart: '/cart',
   login: '/login',
   register: '/register',
+  shipping: '/shipping',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

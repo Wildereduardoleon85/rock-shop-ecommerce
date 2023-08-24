@@ -32,7 +32,7 @@ export function getItemIndex(
 ): number | null {
   let foundItemIndex: number | null = null
 
-  cartItems.forEach((item: any, index: number) => {
+  cartItems.forEach((item: CartItem, index: number) => {
     if (productId === item._id) {
       foundItemIndex = index
     }
@@ -49,7 +49,6 @@ export function updateState(state: CartState): void {
 
   state.itemsPrice = Number(itemsPrice.toFixed(2))
   state.paymentMethod = 'PayPal'
-  state.shippingAddress = {}
   // Shipping price would be 0 if the order amount is greater than 100
   state.shippingPrice = Number((state.itemsPrice > 100 ? 0 : 10).toFixed(2))
   state.taxPrice = Number((state.itemsPrice * 0.15).toFixed(2))

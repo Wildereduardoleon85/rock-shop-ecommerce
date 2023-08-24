@@ -25,17 +25,31 @@ export function formatCurrency(num: number): string {
 }
 
 export function validateName(value: string): Validation {
-  if (value.trim() === '') {
+  if (!value) {
     return {
       isValid: false,
-      error: 'This field is required',
+      error: 'field name is required',
     }
   }
 
-  if (!/^[a-zA-Z ]+$/.test(value)) {
+  if (typeof value !== 'string') {
     return {
       isValid: false,
-      error: 'This field must contain only letters',
+      error: 'field name must be a string',
+    }
+  }
+
+  if (value.trim().length === 0) {
+    return {
+      isValid: false,
+      error: 'field name must not be empty',
+    }
+  }
+
+  if (value.trim().length < 2) {
+    return {
+      isValid: false,
+      error: 'field name is invalid',
     }
   }
 
@@ -134,4 +148,39 @@ export function capitalize(value: string): string {
   const rest = value.slice(1, value.length)
 
   return `${firstLetter.toUpperCase()}${rest}`
+}
+
+export function validateSingleString(value: string, min: number = 2) {
+  if (!value) {
+    return {
+      isValid: false,
+      error: 'this field is required',
+    }
+  }
+
+  if (typeof value !== 'string') {
+    return {
+      isValid: false,
+      error: 'this field must be a string',
+    }
+  }
+
+  if (value.trim().length === 0) {
+    return {
+      isValid: false,
+      error: 'this field must not be empty',
+    }
+  }
+
+  if (value.trim().length < min) {
+    return {
+      isValid: false,
+      error: `field must be at least ${min} characters length`,
+    }
+  }
+
+  return {
+    isValid: true,
+    error: '',
+  }
 }

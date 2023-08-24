@@ -12,7 +12,7 @@ import { UseInput, UserInfo } from '../../types'
 import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
-import { Auth } from '../../components'
+import { Form } from '../../components'
 
 function RegisterPage() {
   const nameInput = useInput('', validateName)
@@ -94,7 +94,7 @@ function RegisterPage() {
     },
   ]
 
-  const handleAuth = async () => {
+  const handleSubmit = async () => {
     try {
       const credentials: UserInfo = await register({
         name: nameInput.value,
@@ -113,9 +113,9 @@ function RegisterPage() {
   }
 
   return (
-    <Auth
+    <Form
       errorMessage={errorMessage}
-      handleAuth={handleAuth}
+      handleSubmit={handleSubmit}
       formInputs={formInputs}
       isLoading={isLoading}
       redirect={redirect}

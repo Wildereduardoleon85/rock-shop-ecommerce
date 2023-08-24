@@ -21,7 +21,7 @@
       display: flex;
       align-items: center;
       border-radius: $border-radius;
-      box-shadow: $box-shadow;
+      box-shadow: $box-shadow-light;
       padding: 1.5rem;
       margin-top: 1.5rem;
 
@@ -91,7 +91,7 @@
     .totalCard {
       width: 28%;
       border-radius: $border-radius;
-      box-shadow: $box-shadow;
+      box-shadow: $box-shadow-light;
       margin-left: 1.2rem;
       padding: 1.5rem;
       position: absolute;

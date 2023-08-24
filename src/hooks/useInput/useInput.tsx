@@ -1,17 +1,17 @@
 import { useState, ChangeEvent } from 'react'
-import { UseInput, Validation } from '../../types'
+import { UseInput } from '../../types'
 
 function useInput(
   initialValue: string,
-  validateFunction: (value: string, validateValue?: string) => Validation,
-  validatePasswordValue: string = ''
+  validateFunction: Function,
+  validateArg: number | string = ''
 ): UseInput {
   const [value, setValue] = useState<string>(initialValue)
   const [isTouched, setIsTouched] = useState<boolean>(false)
 
   const { isValid, error: validationError } = validateFunction(
     value,
-    validatePasswordValue
+    validateArg
   )
   const error = !isValid && isTouched ? validationError : ''
 
