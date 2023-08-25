@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
@@ -24,17 +24,19 @@ function ProductPage() {
   const fetchBaseQueryError = error as FetchBaseQueryError
   const { qty } = useSelector((state: RootState) => state.qty)
 
+  useEffect(() => {
+    dispatch(setQty(1))
+  }, [])
+
   const [showAlert, setShowAlert] = useState<boolean>(false)
 
   function onAddToCart() {
-    dispatch(setQty(1))
     dispatch(addToCart({ product: product as Product, qty }))
     setShowAlert(true)
   }
 
   function onByuNow() {
     dispatch(addToCart({ product: product as Product, qty }))
-    dispatch(setQty(1))
     navigate(ROUTES.cart)
   }
 
