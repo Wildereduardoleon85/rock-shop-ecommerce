@@ -23,6 +23,8 @@ export const ROUTES: Routes = {
   login: '/login',
   register: '/register',
   shipping: '/shipping',
+  payment: '/payment',
+  placeOrder: '/place-order',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

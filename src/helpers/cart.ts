@@ -48,7 +48,6 @@ export function updateState(state: CartState): void {
   )
 
   state.itemsPrice = Number(itemsPrice.toFixed(2))
-  state.paymentMethod = 'PayPal'
   // Shipping price would be 0 if the order amount is greater than 100
   state.shippingPrice = Number((state.itemsPrice > 100 ? 0 : 10).toFixed(2))
   state.taxPrice = Number((state.itemsPrice * 0.15).toFixed(2))

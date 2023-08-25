@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+
+.root {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  align-items: center;
+
+  a:first-child {
+    margin: 0 1rem;
+    color: $red;
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0 1rem;
+    color: $very-light-gray;
+  }
+
+  p:first-child {
+    color: $red;
+  }
+
+  .active {
+    color: $red;
+  }
+
+  svg {
+    fill: $very-light-gray;
+  }
+
+  svg:first-of-type {
+    fill: $red;
+  }
+
+  .iconActive {
+    fill: $red;
+  }
+}

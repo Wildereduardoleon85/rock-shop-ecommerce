@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks'
 import { saveShippingAddress } from '../../slices'
 import { UseInput } from '../../types'
 import { validateSingleString } from '../../utils'
-import { Form } from '../../components'
+import { Breadcrumbs, Form } from '../../components'
 import { RootState } from '../../store'
+import styles from './ShippingPage.module.scss'
+import { ROUTES } from '../../constants'
 
 function ShippingPage() {
   const dispatch = useDispatch()
   const { shippingAddress } = useSelector((state: RootState) => state.cart)
+  const navigate = useNavigate()
   const addressInput = useInput(
     shippingAddress.address,
     validateSingleString,
@@ -72,7 +76,7 @@ function ShippingPage() {
       onBlur: countryInput.onBlur,
       value: countryInput.value,
       error: countryInput.error,
-      label: 'Confirm Password',
+      label: 'Country',
     },
   ]
 
@@ -85,15 +89,20 @@ function ShippingPage() {
         postalCode: postalCodeInput.value,
       })
     )
+    navigate(ROUTES.payment)
   }
 
   return (
-    <Form
-      handleSubmit={handleSubmit}
-      formInputs={formInputs}
-      formValues={formValues}
-      variant='shipping'
-    />
+    <>
+      <Breadcrumbs />
+      <Form
+        className={styles.form}
+        handleSubmit={handleSubmit}
+        formInputs={formInputs}
+        formValues={formValues}
+        variant='shipping'
+      />
+    </>
   )
 }
 

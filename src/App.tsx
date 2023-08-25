@@ -5,7 +5,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import { Layout } from './components'
+import { Layout, PrivateRoute } from './components'
 import {
   CartPage,
   HomePage,
@@ -13,6 +13,7 @@ import {
   LoginPage,
   RegisterPage,
   ShippingPage,
+  PaymentPage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -24,7 +25,12 @@ const router = createBrowserRouter(
       <Route path={ROUTES.cart} element={<CartPage />} />
       <Route path={ROUTES.login} element={<LoginPage />} />
       <Route path={ROUTES.register} element={<RegisterPage />} />
-      <Route path={ROUTES.shipping} element={<ShippingPage />} />
+
+      {/* private routes */}
+      <Route path='' element={<PrivateRoute />}>
+        <Route path={ROUTES.shipping} element={<ShippingPage />} />
+        <Route path={ROUTES.payment} element={<PaymentPage />} />
+      </Route>
     </Route>
   )
 )

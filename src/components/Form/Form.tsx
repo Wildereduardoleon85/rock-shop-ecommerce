@@ -49,6 +49,7 @@ type FormProps = {
   redirect?: string
   handleSubmit: () => void
   variant?: 'login' | 'register' | 'shipping'
+  className?: string
 }
 
 function Form({
@@ -59,6 +60,7 @@ function Form({
   redirect = '/',
   handleSubmit,
   variant = 'login',
+  className = '',
 }: FormProps) {
   function checkValidation(values: UseInput) {
     if (values.isValid) {
@@ -93,7 +95,7 @@ function Form({
           {`Error: ${capitalize(errorMessage)}`}
         </div>
       )}
-      <div className={styles.root}>
+      <div className={getClassNames([styles.root, className])}>
         <h1>{CONFIG[variant].title}</h1>
         <form onSubmit={onSubmit}>
           {formInputs.map((formInputProps) => (

@@ -54,6 +54,8 @@ export type RouteEnums =
   | 'login'
   | 'register'
   | 'shipping'
+  | 'payment'
+  | 'placeOrder'
 
 export type Routes = {
   [key in RouteEnums]: string

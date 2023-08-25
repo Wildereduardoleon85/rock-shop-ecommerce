@@ -24,36 +24,38 @@ function CartPage() {
       <h1 className={styles.title}>Shopping Cart</h1>
       <div className={styles.container}>
         <div>
-          {cartItems.map((product: CartItem) => (
-            <div key={product._id} className={styles.productCard}>
-              <img
-                width={IMAGE_WIDTH}
-                height={IMAGE_WIDTH * PRODUCT_IMAGE_ASPECT_RATIO}
-                src={product.image}
-                alt={product.name}
-              />
-              <div className={styles.descriptionContainer}>
-                <Link to={ROUTES.product.replace(':id', product._id)}>
-                  {subString(product.name, 40)}
-                </Link>
-                <QtyButton
-                  className={styles.qtyButton}
-                  product={product}
-                  isCartContext
+          {cartItems.length > 0 &&
+            cartItems[0]._id &&
+            cartItems.map((product: CartItem) => (
+              <div key={product._id} className={styles.productCard}>
+                <img
+                  width={IMAGE_WIDTH}
+                  height={IMAGE_WIDTH * PRODUCT_IMAGE_ASPECT_RATIO}
+                  src={product.image}
+                  alt={product.name}
                 />
-                <p className={styles.price}>
-                  ${formatCurrency(product.price * product.qty)}
-                </p>
-                <button
-                  onClick={() => dispatch(removeItem(product._id))}
-                  className={styles.deleteButton}
-                  type='button'
-                >
-                  <FaTrashAlt />
-                </button>
+                <div className={styles.descriptionContainer}>
+                  <Link to={ROUTES.product.replace(':id', product._id)}>
+                    {subString(product.name, 40)}
+                  </Link>
+                  <QtyButton
+                    className={styles.qtyButton}
+                    product={product}
+                    isCartContext
+                  />
+                  <p className={styles.price}>
+                    ${formatCurrency(product.price * product.qty)}
+                  </p>
+                  <button
+                    onClick={() => dispatch(removeItem(product._id))}
+                    className={styles.deleteButton}
+                    type='button'
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         <div className={styles.totalCard}>
