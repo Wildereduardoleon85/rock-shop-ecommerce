@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { IoMdArrowRoundBack } from 'react-icons/io'
@@ -14,6 +14,7 @@ import { RootState } from '../../store'
 
 function ProductPage() {
   const { id: productId } = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {
     data: product,
@@ -29,6 +30,12 @@ function ProductPage() {
     dispatch(setQty(1))
     dispatch(addToCart({ product: product as Product, qty }))
     setShowAlert(true)
+  }
+
+  function onByuNow() {
+    dispatch(addToCart({ product: product as Product, qty }))
+    dispatch(setQty(1))
+    navigate(ROUTES.cart)
   }
 
   if (isLoading) {
@@ -74,6 +81,7 @@ function ProductPage() {
               disabled={product.countInStock === 0}
               type='button'
               className={styles.buyNowButton}
+              onClick={onByuNow}
             >
               buy now
             </button>

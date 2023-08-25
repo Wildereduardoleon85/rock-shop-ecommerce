@@ -6,33 +6,11 @@
   position: relative;
 
   > a:first-of-type {
-    text-transform: uppercase;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    max-width: fit-content;
-    @include transition(all);
-
-    &:hover {
-      color: $dark-red;
-      border-bottom-color: $dark-red;
-    }
-
-    &:hover > svg {
-      fill: $dark-red;
-    }
-
-    > svg {
-      margin-right: 0.5rem;
-      transform: translateY(-0.05rem);
-      @include transition(fill);
-    }
+    @include gobackButtonStyles();
   }
 
   .container {
-    margin-top: 2rem;
+    margin-top: 3rem;
     display: flex;
 
     > img:first-of-type {
@@ -83,18 +61,8 @@
       .addToCartButton:disabled {
         opacity: 0.4;
         cursor: not-allowed;
-
         &:hover {
           background-color: $red;
-        }
-      }
-
-      .buyNowButton:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-
-        &:hover {
-          background-color: $black;
         }
       }
 

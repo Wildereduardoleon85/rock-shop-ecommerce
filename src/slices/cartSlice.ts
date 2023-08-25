@@ -8,23 +8,7 @@ import {
 } from '../helpers'
 
 const initialState: CartState = {
-  cartItems: [
-    {
-      _id: '',
-      user: '',
-      name: '',
-      image: '',
-      description: '',
-      brand: '',
-      category: '',
-      price: 0,
-      countInStock: 0,
-      rating: 0,
-      numReviews: 0,
-      reviews: [],
-      qty: 0,
-    },
-  ],
+  cartItems: [],
   itemsPrice: 0,
   paymentMethod: '',
   shippingAddress: {
@@ -48,7 +32,7 @@ export const cartSlice = createSlice({
     ) => {
       const { product, qty } = action.payload
 
-      if (state.cartItems.length > 0 && state.cartItems[0]._id) {
+      if (state.cartItems.length > 0) {
         const foundItemIndex = getItemIndex(state.cartItems, product._id)
 
         if (foundItemIndex !== null) {

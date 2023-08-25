@@ -57,3 +57,12 @@ export function updateState(state: CartState): void {
 
   localStorage.setItem('cart', JSON.stringify(state))
 }
+
+export function isNotCartInfo(cart: CartState): boolean {
+  return !!(
+    cart.cartItems.length === 0 ||
+    !cart.itemsPrice ||
+    !cart.taxPrice ||
+    !cart.totalPrice
+  )
+}

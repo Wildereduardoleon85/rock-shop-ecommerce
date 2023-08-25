@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks'
@@ -8,11 +9,20 @@ import { Breadcrumbs, Form } from '../../components'
 import { RootState } from '../../store'
 import styles from './ShippingPage.module.scss'
 import { ROUTES } from '../../constants'
+import { isNotCartInfo } from '../../helpers'
 
 function ShippingPage() {
   const dispatch = useDispatch()
-  const { shippingAddress } = useSelector((state: RootState) => state.cart)
   const navigate = useNavigate()
+  const cart = useSelector((state: RootState) => state.cart)
+  const { shippingAddress } = cart
+
+  useEffect(() => {
+    if (isNotCartInfo(cart)) {
+      navigate(ROUTES.cart)
+    }
+  }, [])
+
   const addressInput = useInput(
     shippingAddress.address,
     validateSingleString,

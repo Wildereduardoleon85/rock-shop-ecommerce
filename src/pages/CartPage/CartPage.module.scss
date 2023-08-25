@@ -2,16 +2,45 @@
 @import '../../styles/mixins';
 
 .root {
-  margin-top: 5rem;
+  margin-top: 3rem;
+
+  .goBackButton {
+    @include gobackButtonStyles();
+  }
 
   .title {
     font-size: 3rem;
+    margin-top: 3rem;
   }
 
   .container {
     display: flex;
     margin-top: 2rem;
     position: relative;
+
+    .emptyCartContainer {
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+
+      > h2 {
+        margin-top: 2rem;
+      }
+
+      > h3 {
+        font-weight: 500;
+        margin-top: 1rem;
+      }
+
+      > a:first-of-type {
+        text-decoration: none;
+        margin-top: 2rem;
+        @include buttonStyles();
+      }
+    }
 
     > div:first-of-type {
       width: 70%;
@@ -109,6 +138,11 @@
         margin-top: 1.2rem;
         display: block;
         max-width: fit-content;
+        @include buttonStyles();
+      }
+
+      .checkoutButton {
+        margin-top: 1.2rem;
         @include buttonStyles();
       }
     }
