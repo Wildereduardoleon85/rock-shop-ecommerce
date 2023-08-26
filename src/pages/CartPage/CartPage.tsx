@@ -8,9 +8,9 @@ import { formatCurrency, subString } from '../../utils'
 import { RootState } from '../../store'
 import { CartItem } from '../../types'
 import { QtyButton } from '../../components'
-import { removeItem } from '../../slices'
 import { isNotCartInfo } from '../../helpers'
 import { ShoppingBagIcon } from '../../components/Icons'
+import { removeItem } from '../../slices'
 
 const IMAGE_WIDTH = 150
 

@@ -12,6 +12,12 @@
     text-decoration: none;
   }
 
+  > a:nth-child(3) {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: $red;
+  }
+
   p {
     margin: 0 1rem;
     color: $very-light-gray;

@@ -1,0 +1,98 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  margin-top: 3rem;
+  display: flex;
+
+  .leftContainer {
+    width: 70%;
+
+    .descriptionCard {
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        margin-top: 1.5rem;
+        font-weight: 600;
+
+        span {
+          font-weight: 500;
+          margin-left: 0.5rem;
+        }
+      }
+
+      .items {
+        padding: 1.5rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        border-top: 1px solid $very-light-gray;
+
+        > a:first-of-type {
+          margin-left: 1.5rem;
+          margin-right: 1rem;
+          text-decoration: none;
+          border-bottom: 1px solid transparent;
+          @include transition(all);
+
+          &:hover {
+            color: $red;
+            border-bottom-color: $red;
+          }
+        }
+
+        > p {
+          margin-top: 0;
+          margin-left: auto;
+          color: $dark-gray;
+        }
+      }
+
+      .items:nth-child(2) {
+        border-top: none;
+      }
+    }
+
+    .descriptionCard:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .rightContainer {
+    width: 28%;
+    margin-left: 1.2rem;
+
+    .summaryCard {
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
+      padding: 1.5rem;
+
+      > div {
+        display: flex;
+        padding: 1rem 0;
+        border-top: 1px solid $very-light-gray;
+
+        p {
+          width: 50%;
+        }
+      }
+
+      > div:nth-child(2) {
+        border-top: none;
+        margin-top: 1rem;
+      }
+
+      .placeOrderButton {
+        @include buttonStyles();
+        margin-top: 1rem;
+      }
+    }
+  }
+}

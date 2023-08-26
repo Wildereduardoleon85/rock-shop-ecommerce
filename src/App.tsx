@@ -14,6 +14,7 @@ import {
   RegisterPage,
   ShippingPage,
   PaymentPage,
+  PlaceOrderPage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='' element={<PrivateRoute />}>
         <Route path={ROUTES.shipping} element={<ShippingPage />} />
         <Route path={ROUTES.payment} element={<PaymentPage />} />
+        <Route path={ROUTES.placeOrder} element={<PlaceOrderPage />} />
       </Route>
     </Route>
   )

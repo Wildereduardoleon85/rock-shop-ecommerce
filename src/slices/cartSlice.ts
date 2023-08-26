@@ -66,8 +66,17 @@ export const cartSlice = createSlice({
       state.paymentMethod = action.payload
       updateState(state)
     },
+    clearCartItems: () => {
+      localStorage.removeItem('cart')
+      return initialState
+    },
   },
 })
 
-export const { addToCart, removeItem, saveShippingAddress, savePaymentMethod } =
-  cartSlice.actions
+export const {
+  addToCart,
+  removeItem,
+  saveShippingAddress,
+  savePaymentMethod,
+  clearCartItems,
+} = cartSlice.actions
