@@ -13,6 +13,7 @@ import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
 import { Form } from '../../components'
+import { Alert } from '../../components/UI'
 
 function RegisterPage() {
   const nameInput = useInput('', validateName)
@@ -35,7 +36,7 @@ function RegisterPage() {
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
-  const [register, { isLoading }] = useRegisterMutation()
+  const [register, { isLoading, isError }] = useRegisterMutation()
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
@@ -104,24 +105,22 @@ function RegisterPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      if (err.status === 400) {
-        setErrorMessage(err.data.message)
-      } else {
-        setErrorMessage('Something went wrong')
-      }
+      setErrorMessage(err.data.message)
     }
   }
 
   return (
-    <Form
-      errorMessage={errorMessage}
-      handleSubmit={handleSubmit}
-      formInputs={formInputs}
-      isLoading={isLoading}
-      redirect={redirect}
-      formValues={formValues}
-      variant='register'
-    />
+    <>
+      {isError && <Alert message={errorMessage} trigger={isError} />}
+      <Form
+        handleSubmit={handleSubmit}
+        formInputs={formInputs}
+        isLoading={isLoading}
+        redirect={redirect}
+        formValues={formValues}
+        variant='register'
+      />
+    </>
   )
 }
 

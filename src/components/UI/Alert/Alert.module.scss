@@ -1,0 +1,48 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.root {
+  position: fixed;
+  right: 1rem;
+  top: calc($navbar-height + 1rem);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: white;
+  background-color: $black;
+  border-radius: $border-radius;
+  padding: 0.8rem;
+  transform: translateX(130%);
+  @include transition(transform);
+
+  > svg {
+    fill: $red;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .description {
+    p {
+      font-size: 0.8rem;
+      color: white;
+      margin: 0 0.8rem;
+    }
+  }
+
+  .cartButton {
+    @include buttonStyles();
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    text-decoration: none;
+  }
+
+  .cartButton:nth-child(3) {
+    margin-right: 0.5rem;
+  }
+}
+
+.root.show {
+  transform: translateX(0);
+}

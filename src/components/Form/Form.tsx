@@ -1,8 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { FaRegTimesCircle } from 'react-icons/fa'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './Form.module.scss'
-import { capitalize, getClassNames } from '../../utils'
+import { getClassNames } from '../../utils'
 import { Input, SmallLoader } from '../UI'
 import { ROUTES } from '../../constants'
 import { UseInput } from '../../types'
@@ -43,7 +42,6 @@ type FormInputs = {
 }
 
 type FormProps = {
-  errorMessage?: string
   formValues: UseInput[]
   formInputs: FormInputs[]
   isLoading?: boolean
@@ -54,7 +52,6 @@ type FormProps = {
 }
 
 function Form({
-  errorMessage = '',
   formValues,
   formInputs,
   isLoading = false,
@@ -89,56 +86,46 @@ function Form({
   }
 
   return (
-    <>
+    <div className={getClassNames([styles.root, className])}>
       {isAuthForm && (
-        <div
-          className={getClassNames([styles.toast, errorMessage && styles.show])}
+        <button
+          type='button'
+          className={styles.goBackButton}
+          onClick={() => navigate(-1)}
         >
-          <FaRegTimesCircle />
-          {`Error: ${capitalize(errorMessage)}`}
-        </div>
+          <IoMdArrowRoundBack />
+          Go Back
+        </button>
       )}
-      <div className={getClassNames([styles.root, className])}>
-        {isAuthForm && (
-          <button
-            type='button'
-            className={styles.goBackButton}
-            onClick={() => navigate(-1)}
-          >
-            <IoMdArrowRoundBack />
-            Go Back
-          </button>
-        )}
-        <div className={styles.formContainer}>
-          <h1>{CONFIG[variant].title}</h1>
-          <form onSubmit={onSubmit}>
-            {formInputs.map((formInputProps) => (
-              <Input key={formInputProps.name} inputProps={formInputProps} />
-            ))}
-            <div className={styles.buttonsContainer}>
-              {variant === 'shipping' && <Link to={ROUTES.cart}>GO BACK</Link>}
-              <button
-                type='submit'
-                className={styles.submitButton}
-                disabled={isLoading}
-              >
-                {isLoading ? <SmallLoader /> : CONFIG[variant].buttonLabel}
-              </button>
-            </div>
-            {isAuthForm && (
-              <p className={styles.linkTo}>
-                {CONFIG[variant].linkToLabelP}{' '}
-                <span>
-                  <Link to={`${CONFIG[variant].linkTo}?redirect=${redirect}`}>
-                    {CONFIG[variant].linkToLabelSpan}
-                  </Link>
-                </span>
-              </p>
-            )}
-          </form>
-        </div>
+      <div className={styles.formContainer}>
+        <h1>{CONFIG[variant].title}</h1>
+        <form onSubmit={onSubmit}>
+          {formInputs.map((formInputProps) => (
+            <Input key={formInputProps.name} inputProps={formInputProps} />
+          ))}
+          <div className={styles.buttonsContainer}>
+            {variant === 'shipping' && <Link to={ROUTES.cart}>GO BACK</Link>}
+            <button
+              type='submit'
+              className={styles.submitButton}
+              disabled={isLoading}
+            >
+              {isLoading ? <SmallLoader /> : CONFIG[variant].buttonLabel}
+            </button>
+          </div>
+          {isAuthForm && (
+            <p className={styles.linkTo}>
+              {CONFIG[variant].linkToLabelP}{' '}
+              <span>
+                <Link to={`${CONFIG[variant].linkTo}?redirect=${redirect}`}>
+                  {CONFIG[variant].linkToLabelSpan}
+                </Link>
+              </span>
+            </p>
+          )}
+        </form>
       </div>
-    </>
+    </div>
   )
 }
 

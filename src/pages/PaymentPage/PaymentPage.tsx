@@ -7,20 +7,26 @@ import styles from './PaymentPage.module.scss'
 import { ROUTES } from '../../constants'
 import { savePaymentMethod } from '../../slices'
 import { RootState } from '../../store'
+import { isNotCartInfo } from '../../helpers'
 
 type SelectedMethod = 'paypal' | 'other'
 
 function PaymentPage() {
   const [selectedMethod, setSelectedMethod] = useState<SelectedMethod>('paypal')
-  const { shippingAddress } = useSelector((state: RootState) => state.cart)
+  const cart = useSelector((state: RootState) => state.cart)
+  const { shippingAddress } = cart
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (isNotCartInfo(cart)) {
+      navigate(ROUTES.home)
+    }
+
     if (!shippingAddress.address) {
       navigate(ROUTES.shipping)
     }
-  }, [shippingAddress])
+  }, [cart])
 
   function handleRadioChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setSelectedMethod(e.target.value as SelectedMethod)

@@ -92,6 +92,20 @@
       .placeOrderButton {
         @include buttonStyles();
         margin-top: 1rem;
+        height: 35px;
+        width: 138px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:disabled {
+          background-color: $super-very-light-gray;
+
+          &:hover {
+            background-color: $super-very-light-gray;
+          }
+        }
       }
     }
   }

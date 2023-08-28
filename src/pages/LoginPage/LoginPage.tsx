@@ -8,6 +8,7 @@ import { useLoginMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
 import { Form } from '../../components'
+import { Alert } from '../../components/UI'
 
 function LoginPage() {
   const emailInput = useInput('', validateEmail)
@@ -19,15 +20,8 @@ function LoginPage() {
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading, isError }] = useLoginMutation()
   const [errorMessage, setErrorMessage] = useState<string>('')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setErrorMessage('')
-    }, 3000)
-    return () => clearTimeout(timer)
-  }, [errorMessage])
 
   useEffect(() => {
     if (userInfo) {
@@ -76,14 +70,18 @@ function LoginPage() {
   }
 
   return (
-    <Form
-      errorMessage={errorMessage}
-      handleSubmit={handleSubmit}
-      formInputs={formInputs}
-      isLoading={isLoading}
-      redirect={redirect}
-      formValues={formValues}
-    />
+    <>
+      {isError && (
+        <Alert variant='error' message={errorMessage} trigger={isError} />
+      )}
+      <Form
+        handleSubmit={handleSubmit}
+        formInputs={formInputs}
+        isLoading={isLoading}
+        redirect={redirect}
+        formValues={formValues}
+      />
+    </>
   )
 }
 

@@ -69,6 +69,10 @@
 
           &:disabled {
             background-color: $super-very-light-gray;
+
+            &:hover {
+              background-color: $super-very-light-gray;
+            }
           }
         }
       }

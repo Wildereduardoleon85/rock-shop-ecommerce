@@ -25,6 +25,7 @@ export const ROUTES: Routes = {
   shipping: '/shipping',
   payment: '/payment',
   placeOrder: '/place-order',
+  order: '/order/:id',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

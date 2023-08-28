@@ -56,6 +56,7 @@ export type RouteEnums =
   | 'shipping'
   | 'payment'
   | 'placeOrder'
+  | 'order'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -131,4 +132,42 @@ export type LoginCredentials = {
 
 export interface RegisterCredentials extends LoginCredentials {
   name: string
+}
+
+export type OrderItems = {
+  name: string
+  qty: number
+  image: string
+  price: number
+  product: string
+}
+
+export type Order = {
+  orderItems: OrderItems[]
+  shippingAddress: ShippingAddress
+  paymentMethod: string
+  itemsPrice: number
+  shippingPrice: number
+  taxPrice: number
+  totalPrice: number
+}
+
+export interface OrderItemsResponse extends OrderItems {
+  _id: string
+}
+
+export type OrderResponse = {
+  user: string
+  orderItems: OrderItemsResponse[]
+  paymentMethod: string
+  itemsPrice: number
+  taxPrice: number
+  shippingPrice: number
+  totalPrice: number
+  isPaid: boolean
+  isDelivered: boolean
+  _id: string
+  createdAt: string
+  updatedAt: string
+  __v: number
 }

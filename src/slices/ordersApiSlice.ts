@@ -1,11 +1,11 @@
+import { Order, OrderResponse } from '../types'
 import { apiSlice } from './apiSlice'
 
 const ORDERS_URL = import.meta.env.VITE_ORDERS_URL
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // TODO: add type definitions for mutation (see  `userApiSlice example`)
-    createOrder: builder.mutation({
+    createOrder: builder.mutation<OrderResponse, Order>({
       query: (data) => ({
         url: ORDERS_URL,
         method: 'POST',

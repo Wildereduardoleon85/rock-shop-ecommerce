@@ -19,7 +19,7 @@ function ShippingPage() {
 
   useEffect(() => {
     if (isNotCartInfo(cart)) {
-      navigate(ROUTES.cart)
+      navigate(ROUTES.home)
     }
   }, [])
 
