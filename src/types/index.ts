@@ -171,3 +171,28 @@ export type OrderResponse = {
   updatedAt: string
   __v: number
 }
+
+export interface ShippingAddressResponse extends ShippingAddress {
+  _id: string
+}
+
+export type OrderDetailsResponse = {
+  _id: string
+  user: {
+    _id: string
+    name: string
+    email: string
+  }
+  orderItems: OrderItemsResponse[]
+  shippingAddress: ShippingAddressResponse
+  paymentMethod: string
+  itemsPrice: number
+  taxPrice: number
+  shippingPrice: number
+  totalPrice: number
+  isPaid: boolean
+  isDelivered: boolean
+  createdAt: string
+  updatedAt: string
+  __v: number
+}

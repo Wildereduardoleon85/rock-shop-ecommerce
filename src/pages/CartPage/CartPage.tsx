@@ -16,10 +16,9 @@ const IMAGE_WIDTH = 150
 
 function CartPage() {
   const cart = useSelector((state: RootState) => state.cart)
-  const navigate = useNavigate()
-  const { cartItems, itemsPrice } = cart
   const { userInfo } = useSelector((state: RootState) => state.auth)
-
+  const { cartItems, itemsPrice } = cart
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function onCheckoutClick() {
@@ -28,14 +27,10 @@ function CartPage() {
 
   return (
     <div className={styles.root}>
-      <button
-        type='button'
-        className={styles.goBackButton}
-        onClick={() => navigate(ROUTES.home)}
-      >
+      <Link to={ROUTES.home} className={styles.goBackButton}>
         <IoMdArrowRoundBack />
         Go Back
-      </button>
+      </Link>
       <h1 className={styles.title}>Shopping Cart</h1>
       <div className={styles.container}>
         <div>
