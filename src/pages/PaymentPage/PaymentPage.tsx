@@ -1,21 +1,18 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { BsCreditCard } from 'react-icons/bs'
 import { Breadcrumbs, PaymentForm } from '../../components'
 import styles from './PaymentPage.module.scss'
 import { ROUTES } from '../../constants'
-import { savePaymentMethod } from '../../slices'
 import { RootState } from '../../store'
 import { isNotCartInfo } from '../../helpers'
-
-const CARD = 'New credit or debit card'
+import { getClassNames } from '../../utils'
 
 function PaymentPage() {
-  const [selectedMethod, setSelectedMethod] = useState<string>(CARD)
+  const [cardSelected, setCardSelected] = useState<string>('new-card')
   const cart = useSelector((state: RootState) => state.cart)
   const { shippingAddress } = cart
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -28,69 +25,27 @@ function PaymentPage() {
     }
   }, [cart])
 
-  function handleRadioChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setSelectedMethod(e.target.value)
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent<HTMLLabelElement>): void {
-    if (e.key === 'Enter') {
-      const target = e.target as HTMLElement
-      const input = target.firstChild as HTMLInputElement
-      setSelectedMethod(input.value)
-    }
-  }
-
-  function onContinueButtonClick(): void {
-    dispatch(savePaymentMethod(selectedMethod))
-    navigate(ROUTES.placeOrder)
-  }
-
   return (
     <>
       <Breadcrumbs />
       <div className={styles.root}>
         <h1>Payment Method</h1>
         <h2>Select Method</h2>
-        <div className={styles.checkboxContainer}>
-          <label
-            role='button'
-            tabIndex={0}
-            htmlFor={CARD}
-            onKeyDown={handleKeyDown}
+        <div className={styles.buttonCardsContainer}>
+          <button
+            id='new-card'
+            type='button'
+            className={getClassNames([
+              styles.buttonCard,
+              cardSelected === 'new-card' && styles.active,
+            ])}
+            onClick={() => setCardSelected('new-card')}
           >
-            <input
-              id={CARD}
-              type='radio'
-              value={CARD}
-              name='payment-method'
-              checked={selectedMethod === CARD}
-              onChange={handleRadioChange}
-            />
-            {CARD}
-            <span />
-          </label>
-          {/* <label
-            role='button'
-            tabIndex={0}
-            htmlFor='new-debit-card'
-            onKeyDown={handleKeyDown}
-          >
-            <input
-              id='new-debit-card'
-              value='new-debit-card'
-              type='radio'
-              name='payment-method'
-              checked={selectedMethod === 'new-debit-card'}
-              onChange={handleRadioChange}
-            />
-            New debit card
-            <span />
-          </label> */}
-        </div>
-        <div className={styles.buttons}>
-          <Link to={ROUTES.shipping}>GO BACK</Link>
-          <button type='button' onClick={onContinueButtonClick}>
-            CONTINUE
+            <div className={styles.radio}>
+              <div />
+            </div>
+            <BsCreditCard className={styles.cardIcon} />
+            <p className={styles.buttonCardLabel}>New Credit or Debit Card</p>
           </button>
         </div>
         <PaymentForm />

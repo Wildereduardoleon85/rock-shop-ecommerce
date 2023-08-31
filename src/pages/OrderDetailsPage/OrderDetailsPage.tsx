@@ -6,9 +6,7 @@ import { ErrorPage, Loader } from '../../components/UI'
 
 function OrderDetailsPage() {
   const { id: orderId } = useParams()
-  const { data, refetch, isLoading, error } = useGetOrderDetailsQuery(
-    orderId as string
-  )
+  const { data, isLoading, error } = useGetOrderDetailsQuery(orderId as string)
   const rtkError = error as FetchBaseQueryError
 
   if (isLoading) {

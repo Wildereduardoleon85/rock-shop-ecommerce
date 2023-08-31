@@ -52,6 +52,8 @@ function PlaceOrderPage() {
         shippingPrice,
         taxPrice,
         totalPrice,
+        isPaid: true,
+        paidAt: new Date(Date.now()),
       }).unwrap()
       dispatch(clearCartItems())
       navigate(ROUTES.order.replace(':id', res._id))

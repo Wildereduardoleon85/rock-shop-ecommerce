@@ -51,22 +51,22 @@ function PaidDeliveredTag({
   if (variant === 'delivered') {
     return isDelivered ? (
       <div className={styles.paidDeliveredBanner}>
-        <BsFillCheckCircleFill /> Delivered
+        <BsFillCheckCircleFill className={styles.checkIcon} /> Delivered
       </div>
     ) : (
       <div className={styles.paidDeliveredBanner}>
-        <IoIosWarning /> Not delivered
+        <IoIosWarning className={styles.warningIcon} /> Not delivered
       </div>
     )
   }
 
   return isPaid ? (
     <div className={styles.paidDeliveredBanner}>
-      <BsFillCheckCircleFill /> Paid
+      <BsFillCheckCircleFill className={styles.checkIcon} /> Paid
     </div>
   ) : (
     <div className={styles.paidDeliveredBanner}>
-      <IoIosWarning /> Not paid
+      <IoIosWarning className={styles.warningIcon} /> Not paid
     </div>
   )
 }
@@ -119,7 +119,7 @@ function Order({
           <div className={styles.descriptionCard}>
             <h2>Payment Method</h2>
             <p>
-              Method: <span>{capitalize(paymentMethod)}</span>
+              Method: <span>{`Card ending in ${paymentMethod}`}</span>
             </p>
             {variant === 'order-details' && (
               <PaidDeliveredTag variant='paid' isPaid={isPaid} />
@@ -161,14 +161,16 @@ function Order({
               <p>Total:</p>
               <p>${formatCurrency(totalPrice)}</p>
             </div>
-            <button
-              className={styles.placeOrderButton}
-              type='button'
-              onClick={onPlaceOrder}
-              disabled={isLoading}
-            >
-              {isLoading ? <SmallLoader /> : 'PLACE ORDER'}
-            </button>
+            {variant === 'place-order' && (
+              <button
+                className={styles.placeOrderButton}
+                type='button'
+                onClick={onPlaceOrder}
+                disabled={isLoading}
+              >
+                {isLoading ? <SmallLoader /> : 'PLACE ORDER'}
+              </button>
+            )}
           </div>
         </div>
       </div>

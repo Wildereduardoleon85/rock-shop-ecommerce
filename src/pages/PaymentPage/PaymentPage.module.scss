@@ -13,64 +13,68 @@
     margin-top: 2rem;
   }
 
-  .checkboxContainer {
+  .buttonCardsContainer {
     margin-top: 1rem;
 
-    > label {
+    .buttonCard {
+      padding: 1.5rem;
+      width: 724px;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
-      position: relative;
-      color: $light-gray;
-      padding: 0.5rem 0.5rem 0.5rem 2rem;
-      max-width: fit-content;
+      border: none;
+      background-color: white;
+      font-size: 1rem;
       cursor: pointer;
+      margin-top: 0.8rem;
+      position: relative;
+      z-index: 1;
+      @include transition(background-color);
 
-      > input {
-        display: none;
+      &:hover {
+        background-color: $super-very-light-gray;
       }
 
-      > span {
-        height: 20px;
-        width: 20px;
+      .radio {
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
-        border: 3px solid $light-gray;
-        position: absolute;
-        left: 0;
+        border: 2px solid $dark-gray;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        &:after {
-          content: '';
-          height: 8px;
+        > div:first-of-type {
           width: 8px;
-          background-color: $red;
-          display: block;
+          height: 8px;
           border-radius: 50%;
+          background-color: $red;
           transform: scale(0);
           @include transition(transform);
         }
       }
 
-      > input:checked + span::after {
-        transform: scale(1);
+      .cardIcon {
+        font-size: 1.2rem;
+        margin-left: 1rem;
+      }
+
+      .buttonCardLabel {
+        margin-left: 1rem;
       }
     }
-  }
 
-  .buttons {
-    margin-top: 2rem;
-
-    > a:first-of-type {
-      text-decoration: none;
-      @include buttonStyles('black');
+    .buttonCard:first-child {
+      margin-top: 0;
     }
 
-    > button:nth-child(2) {
-      margin-left: 1rem;
-      text-decoration: none;
-      @include buttonStyles();
+    .active {
+      .radio {
+        > div:first-of-type {
+          transform: scale(1);
+        }
+      }
     }
   }
 }

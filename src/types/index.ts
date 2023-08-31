@@ -151,6 +151,8 @@ export type Order = {
   shippingPrice: number
   taxPrice: number
   totalPrice: number
+  isPaid: boolean
+  paidAt: Date
 }
 
 export interface OrderItemsResponse extends OrderItems {

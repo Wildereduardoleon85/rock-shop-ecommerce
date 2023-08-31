@@ -1,30 +1,52 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
-.formCard {
-  margin-top: 3rem;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow-light;
-  padding: 1.5rem;
-  display: flex;
+.formContainer {
+  margin-top: 0.8rem;
+  $form-card-height: 327px;
 
-  .leftContainer {
-    .input {
-      width: 100%;
+  .formCard {
+    position: relative;
+    border-radius: $border-radius;
+    display: flex;
+    padding: 1.5rem;
+    box-shadow: $box-shadow-light;
+    @include transition(all);
+
+    .leftContainer {
+      .input {
+        width: 100%;
+      }
+
+      .shortInputs {
+        display: flex;
+        justify-content: space-between;
+
+        .shortInput {
+          width: 48%;
+        }
+      }
     }
 
-    .shortInputs {
+    .rightContainer {
       display: flex;
-      justify-content: space-between;
-
-      .shortInput {
-        width: 48%;
-      }
+      margin-left: 2rem;
+      align-items: center;
     }
   }
 
-  .rightContainer {
-    display: flex;
-    margin-left: 2rem;
-    align-items: center;
+  .buttons {
+    margin-top: 2rem;
+
+    > a:first-of-type {
+      text-decoration: none;
+      @include buttonStyles('black');
+    }
+
+    > button:nth-child(2) {
+      margin-left: 1rem;
+      text-decoration: none;
+      @include buttonStyles();
+    }
   }
 }

@@ -65,18 +65,21 @@
       }
 
       .paidDeliveredBanner {
-        border-radius: $border-radius;
-        background-color: $dark-green;
-        color: white;
         max-width: fit-content;
         margin-top: 1rem;
-        padding: 0.8rem 1.5rem;
         display: flex;
         align-items: center;
         font-size: 1.2rem;
 
-        > svg {
-          fill: white;
+        .checkIcon {
+          fill: green;
+          font-size: 1.5rem;
+          transform: translateY(-0.05rem);
+          margin-right: 0.5rem;
+        }
+
+        .warningIcon {
+          fill: orange;
           font-size: 1.5rem;
           transform: translateY(-0.05rem);
           margin-right: 0.5rem;

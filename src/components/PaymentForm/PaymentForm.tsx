@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { PaymentCard } from '..'
 import { useInput } from '../../hooks'
 import { Input } from '../UI'
@@ -13,9 +15,14 @@ import {
   validateExpirationDate,
   validateSingleString,
 } from '../../helpers'
+import { ROUTES } from '../../constants'
+import { UseInput } from '../../types'
+import { savePaymentMethod } from '../../slices'
 
 function PaymentForm() {
   const [rotate, setRotate] = useState<boolean>(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const cardNumberInput = useInput({
     initialValue: '',
@@ -45,6 +52,36 @@ function PaymentForm() {
     onInputBlur: () => setRotate(false),
     maskFunction: maskCvvInput,
   })
+
+  const formValues: UseInput[] = [
+    cardNumberInput,
+    nameAndSurnameInput,
+    expirationDateInput,
+    cvvCodeInput,
+  ]
+
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!isFormValid) {
+      formValues.forEach((formValue: UseInput) => {
+        formValue.onBlur()
+      })
+      return
+    }
+
+    dispatch(savePaymentMethod(cardNumberInput.value.slice(-5)))
+    navigate(ROUTES.placeOrder)
+  }
 
   const cardInputProps = {
     name: 'card-number',
@@ -84,7 +121,7 @@ function PaymentForm() {
     label: 'CVV / CVC',
     error: cvvCodeInput.error,
     type: 'text',
-    placeholder: 'Enter expiration date',
+    placeholder: 'Enter CVV / CVC',
     onChange: cvvCodeInput.onChange,
     onBlur: cvvCodeInput.onBlur,
     value: cvvCodeInput.value,
@@ -92,23 +129,35 @@ function PaymentForm() {
   }
 
   return (
-    <div className={styles.formCard}>
-      <div className={styles.leftContainer}>
-        <Input className={styles.input} inputProps={cardInputProps} />
-        <Input className={styles.input} inputProps={nameAndSurnameInputProps} />
-        <div className={styles.shortInputs}>
+    <form onSubmit={onSubmit} className={styles.formContainer}>
+      <div className={styles.formCard}>
+        <div className={styles.leftContainer}>
+          <Input className={styles.input} inputProps={cardInputProps} />
           <Input
-            className={styles.shortInput}
-            inputProps={expirationDateInputProps}
+            className={styles.input}
+            inputProps={nameAndSurnameInputProps}
           />
-          <Input className={styles.shortInput} inputProps={cvvCodeInputProps} />
+          <div className={styles.shortInputs}>
+            <Input
+              className={styles.shortInput}
+              inputProps={expirationDateInputProps}
+            />
+            <Input
+              className={styles.shortInput}
+              inputProps={cvvCodeInputProps}
+            />
+          </div>
         </div>
-        {/* <Input className={styles.input} inputProps={input1} /> */}
+        <div className={styles.rightContainer}>
+          <PaymentCard flipCard={rotate} />
+        </div>
       </div>
-      <div className={styles.rightContainer}>
-        <PaymentCard flipCard={rotate} />
+
+      <div className={styles.buttons}>
+        <Link to={ROUTES.shipping}>GO BACK</Link>
+        <button type='submit'>CONTINUE</button>
       </div>
-    </div>
+    </form>
   )
 }
 

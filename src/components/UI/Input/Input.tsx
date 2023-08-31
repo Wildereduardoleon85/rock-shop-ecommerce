@@ -16,6 +16,8 @@ type InputProps = {
     onBlur: () => void
     onFocus?: () => void
     value: string
+    ariaHidden?: boolean
+    tabIndex?: number
   }
   className?: string
 }
@@ -32,6 +34,8 @@ function Input({ inputProps, className = '' }: InputProps) {
     onBlur,
     value,
     onFocus,
+    ariaHidden,
+    tabIndex,
   } = inputProps
 
   const passwordInputType = togglePassword ? 'text' : 'password'
@@ -44,6 +48,8 @@ function Input({ inputProps, className = '' }: InputProps) {
       </div>
       <div className={styles.inputContainer}>
         <input
+          tabIndex={tabIndex ?? 0}
+          aria-hidden={!!ariaHidden}
           autoComplete='off'
           name={name}
           type={type === 'password' ? passwordInputType : type}
