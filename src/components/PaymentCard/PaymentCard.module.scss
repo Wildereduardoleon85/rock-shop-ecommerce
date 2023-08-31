@@ -1,0 +1,103 @@
+@import '../../styles/variables';
+
+.root {
+  $card-width: 258px;
+  $card-height: 155px;
+  $card-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+  width: $card-width;
+  height: $card-height;
+
+  .creditCardFront,
+  .creditCardBack {
+    backface-visibility: hidden;
+    transition: ease-in-out 0.3s;
+    width: $card-width;
+    height: $card-height;
+    background: linear-gradient(to right, #a5a5a5, #e6e6e6);
+    border-radius: 10px;
+    box-shadow: $card-box-shadow;
+    position: absolute;
+  }
+
+  .creditCardFront {
+    transform: perspective(500px) rotateY(0deg);
+
+    > img:first-of-type {
+      position: absolute;
+      top: 38px;
+      left: 20px;
+    }
+
+    > p:first-of-type {
+      position: absolute;
+      left: 16px;
+      top: 83px;
+      font-size: 25px;
+      color: $dark-gray;
+    }
+
+    > div:first-of-type {
+      width: calc($card-width - 32px);
+      position: absolute;
+      top: 118px;
+      left: 16px;
+      display: flex;
+
+      > p {
+        font-size: 13px;
+      }
+
+      > p:nth-child(2) {
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .creditCardBack {
+    transform: perspective(500px) rotateY(180deg);
+
+    > div:first-of-type {
+      height: 35px;
+      width: 100%;
+      background-color: rgb(56, 56, 56);
+      position: absolute;
+      top: 12px;
+    }
+
+    > div:nth-child(2) {
+      height: 25px;
+      width: calc($card-width - 32px);
+      background-color: white;
+      position: absolute;
+      top: 58px;
+      left: 16px;
+    }
+
+    > div:nth-child(3) {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background-color: white;
+      position: absolute;
+      top: 35px;
+      right: 5px;
+      border: 2px solid #a5a5a5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      box-shadow: $box-shadow;
+    }
+  }
+}
+
+.flip {
+  .creditCardFront {
+    transform: perspective(500px) rotateY(180deg);
+  }
+
+  .creditCardBack {
+    transform: perspective(500px) rotateY(360deg);
+  }
+}

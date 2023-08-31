@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.formCard {
+  margin-top: 3rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+  padding: 1.5rem;
+  display: flex;
+
+  .leftContainer {
+    .input {
+      width: 100%;
+    }
+
+    .shortInputs {
+      display: flex;
+      justify-content: space-between;
+
+      .shortInput {
+        width: 48%;
+      }
+    }
+  }
+
+  .rightContainer {
+    display: flex;
+    margin-left: 2rem;
+    align-items: center;
+  }
+}

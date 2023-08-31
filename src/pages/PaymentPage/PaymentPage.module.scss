@@ -3,7 +3,7 @@
 
 .root {
   margin: 3rem auto 0 auto;
-  width: 30rem;
+  max-width: fit-content;
 
   > h1 {
     font-size: 3rem;
@@ -56,11 +56,6 @@
       > input:checked + span::after {
         transform: scale(1);
       }
-    }
-
-    > label:nth-child(2) {
-      text-decoration: line-through;
-      cursor: not-allowed;
     }
   }
 

@@ -91,6 +91,7 @@ export type UseInput = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onBlur: () => void
   reset: () => void
+  onFocus: () => void
 }
 
 export type FormInputDefaultAttrs = {

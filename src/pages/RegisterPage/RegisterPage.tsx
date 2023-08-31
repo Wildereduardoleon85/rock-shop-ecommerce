@@ -7,7 +7,7 @@ import {
   validateEmail,
   validateName,
   validatePassword,
-} from '../../utils'
+} from '../../helpers'
 import { UseInput, UserInfo } from '../../types'
 import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
@@ -15,15 +15,30 @@ import { setCredentials } from '../../slices'
 import { Form } from '../../components'
 import { Alert } from '../../components/UI'
 
+const nameInputProps = {
+  initialValue: '',
+  validateFunction: validateName,
+}
+
+const emailInputProps = {
+  initialValue: '',
+  validateFunction: validateEmail,
+}
+
+const passwordInputProps = {
+  initialValue: '',
+  validateFunction: validatePassword,
+}
+
 function RegisterPage() {
-  const nameInput = useInput('', validateName)
-  const emailInput = useInput('', validateEmail)
-  const passwordInput = useInput('', validatePassword)
-  const confirmPasswordInput = useInput(
-    '',
-    validateConfirmPassword,
-    passwordInput.value
-  )
+  const nameInput = useInput(nameInputProps)
+  const emailInput = useInput(emailInputProps)
+  const passwordInput = useInput(passwordInputProps)
+  const confirmPasswordInput = useInput({
+    initialValue: '',
+    validateFunction: validateConfirmPassword,
+    validateArg: passwordInput.value,
+  })
   const formValues: UseInput[] = [
     nameInput,
     emailInput,

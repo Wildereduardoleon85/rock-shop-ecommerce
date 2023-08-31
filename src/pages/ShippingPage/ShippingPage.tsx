@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks'
 import { saveShippingAddress } from '../../slices'
 import { UseInput } from '../../types'
-import { validateSingleString } from '../../utils'
 import { Breadcrumbs, Form } from '../../components'
 import { RootState } from '../../store'
 import styles from './ShippingPage.module.scss'
 import { ROUTES } from '../../constants'
-import { isNotCartInfo } from '../../helpers'
+import { isNotCartInfo, validateSingleString } from '../../helpers'
 
 function ShippingPage() {
   const dispatch = useDispatch()
@@ -23,22 +22,29 @@ function ShippingPage() {
     }
   }, [])
 
-  const addressInput = useInput(
-    shippingAddress.address,
-    validateSingleString,
-    5
-  )
-  const cityInput = useInput(shippingAddress.city, validateSingleString, 4)
-  const postalCodeInput = useInput(
-    shippingAddress.postalCode,
-    validateSingleString,
-    5
-  )
-  const countryInput = useInput(
-    shippingAddress.country,
-    validateSingleString,
-    4
-  )
+  const addressInput = useInput({
+    initialValue: shippingAddress.address,
+    validateFunction: validateSingleString,
+    validateArg: 5,
+  })
+
+  const cityInput = useInput({
+    initialValue: shippingAddress.city,
+    validateFunction: validateSingleString,
+    validateArg: 4,
+  })
+
+  const postalCodeInput = useInput({
+    initialValue: shippingAddress.postalCode,
+    validateFunction: validateSingleString,
+    validateArg: 5,
+  })
+
+  const countryInput = useInput({
+    initialValue: shippingAddress.country,
+    validateFunction: validateSingleString,
+    validateArg: 4,
+  })
 
   const formValues: UseInput[] = [
     addressInput,

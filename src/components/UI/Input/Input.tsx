@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import styles from './Input.module.scss'
-import { getClassNames } from '../../../utils'
+import { capitalize, getClassNames } from '../../../utils'
 
 const { labelGroup, errorClassName } = styles
 
@@ -14,6 +14,7 @@ type InputProps = {
     placeholder: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     onBlur: () => void
+    onFocus?: () => void
     value: string
   }
   className?: string
@@ -21,8 +22,17 @@ type InputProps = {
 
 function Input({ inputProps, className = '' }: InputProps) {
   const [togglePassword, setTogglePassword] = useState<boolean>(false)
-  const { name, label, error, type, placeholder, onChange, onBlur, value } =
-    inputProps
+  const {
+    name,
+    label,
+    error,
+    type,
+    placeholder,
+    onChange,
+    onBlur,
+    value,
+    onFocus,
+  } = inputProps
 
   const passwordInputType = togglePassword ? 'text' : 'password'
 
@@ -30,7 +40,7 @@ function Input({ inputProps, className = '' }: InputProps) {
     <div className={getClassNames([styles.root, className])}>
       <div className={labelGroup}>
         <label htmlFor={name}>{label}</label>
-        {error && <span>{error}</span>}
+        {error && <span>{capitalize(error)}</span>}
       </div>
       <div className={styles.inputContainer}>
         <input
@@ -41,6 +51,7 @@ function Input({ inputProps, className = '' }: InputProps) {
           className={error ? errorClassName : ''}
           onChange={onChange}
           onBlur={onBlur}
+          onFocus={onFocus}
           value={value}
         />
         {type === 'password' && (

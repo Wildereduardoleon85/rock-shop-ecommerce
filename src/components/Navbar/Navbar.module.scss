@@ -164,7 +164,7 @@
           .loader {
             margin-left: 0.5rem;
             &::after {
-              background: white;
+              background: $super-very-light-gray;
             }
           }
         }

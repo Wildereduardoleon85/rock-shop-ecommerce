@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInput } from '../../hooks'
-import { validateEmail, validatePassword } from '../../utils'
+import { validateEmail, validatePassword } from '../../helpers'
 import { UseInput, UserInfo } from '../../types'
 import { useLoginMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
@@ -10,9 +10,19 @@ import { setCredentials } from '../../slices'
 import { Form } from '../../components'
 import { Alert } from '../../components/UI'
 
+const emailInputProps = {
+  initialValue: '',
+  validateFunction: validateEmail,
+}
+
+const passwordInputProps = {
+  initialValue: '',
+  validateFunction: validatePassword,
+}
+
 function LoginPage() {
-  const emailInput = useInput('', validateEmail)
-  const passwordInput = useInput('', validatePassword)
+  const emailInput = useInput(emailInputProps)
+  const passwordInput = useInput(passwordInputProps)
   const formValues: UseInput[] = [emailInput, passwordInput]
   const { userInfo } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()

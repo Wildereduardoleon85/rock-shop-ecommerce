@@ -2,17 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { Breadcrumbs } from '../../components'
+import { Breadcrumbs, PaymentForm } from '../../components'
 import styles from './PaymentPage.module.scss'
 import { ROUTES } from '../../constants'
 import { savePaymentMethod } from '../../slices'
 import { RootState } from '../../store'
 import { isNotCartInfo } from '../../helpers'
 
-type SelectedMethod = 'paypal' | 'other'
+const CARD = 'New credit or debit card'
 
 function PaymentPage() {
-  const [selectedMethod, setSelectedMethod] = useState<SelectedMethod>('paypal')
+  const [selectedMethod, setSelectedMethod] = useState<string>(CARD)
   const cart = useSelector((state: RootState) => state.cart)
   const { shippingAddress } = cart
   const dispatch = useDispatch()
@@ -29,14 +29,14 @@ function PaymentPage() {
   }, [cart])
 
   function handleRadioChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setSelectedMethod(e.target.value as SelectedMethod)
+    setSelectedMethod(e.target.value)
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLLabelElement>): void {
     if (e.key === 'Enter') {
       const target = e.target as HTMLElement
       const input = target.firstChild as HTMLInputElement
-      setSelectedMethod(input.value as SelectedMethod)
+      setSelectedMethod(input.value)
     }
   }
 
@@ -55,33 +55,37 @@ function PaymentPage() {
           <label
             role='button'
             tabIndex={0}
-            htmlFor='paypal-method'
+            htmlFor={CARD}
             onKeyDown={handleKeyDown}
           >
             <input
-              id='paypal-method'
+              id={CARD}
               type='radio'
-              value='paypal'
+              value={CARD}
               name='payment-method'
-              checked={selectedMethod === 'paypal'}
+              checked={selectedMethod === CARD}
               onChange={handleRadioChange}
             />
-            Paypal or Credit Card
+            {CARD}
             <span />
           </label>
-          <label role='button' tabIndex={0} htmlFor='another-method'>
+          {/* <label
+            role='button'
+            tabIndex={0}
+            htmlFor='new-debit-card'
+            onKeyDown={handleKeyDown}
+          >
             <input
-              id='another-method'
-              value='other'
+              id='new-debit-card'
+              value='new-debit-card'
               type='radio'
               name='payment-method'
-              checked={selectedMethod === 'other'}
+              checked={selectedMethod === 'new-debit-card'}
               onChange={handleRadioChange}
-              disabled
             />
-            Another method
+            New debit card
             <span />
-          </label>
+          </label> */}
         </div>
         <div className={styles.buttons}>
           <Link to={ROUTES.shipping}>GO BACK</Link>
@@ -89,6 +93,7 @@ function PaymentPage() {
             CONTINUE
           </button>
         </div>
+        <PaymentForm />
       </div>
     </>
   )
