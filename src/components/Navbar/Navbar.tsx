@@ -43,6 +43,11 @@ function Navbar() {
     navigate(ROUTES.login)
   }
 
+  async function onProfileClick() {
+    setIsActive(false)
+    navigate(ROUTES.profile)
+  }
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
@@ -94,7 +99,9 @@ function Navbar() {
                       </button>
                     </li>
                     <li>
-                      <Link to='/'>Profile</Link>
+                      <button type='button' onClick={onProfileClick}>
+                        Profile
+                      </button>
                     </li>
                   </ul>
                 )}

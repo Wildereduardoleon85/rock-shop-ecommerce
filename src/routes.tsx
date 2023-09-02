@@ -8,6 +8,7 @@ import {
   ProductPage,
   RegisterPage,
   ShippingPage,
+  ProfilePage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -59,6 +60,11 @@ export const routes = {
       name: 'shipping',
       path: ROUTES.shipping,
       page: <ShippingPage />,
+    },
+    {
+      name: 'profile',
+      path: ROUTES.profile,
+      page: <ProfilePage />,
     },
   ],
 }

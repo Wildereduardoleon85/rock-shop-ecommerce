@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+
+  .userProfile {
+    width: 29%;
+
+    form {
+      width: 100%;
+    }
+  }
+}

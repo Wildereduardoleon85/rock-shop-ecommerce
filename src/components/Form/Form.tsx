@@ -28,6 +28,13 @@ const CONFIG = {
     linkToLabelSpan: null,
     buttonLabel: 'CONTINUE',
   },
+  profile: {
+    title: 'User Profile',
+    linkTo: null,
+    linkToLabelP: null,
+    linkToLabelSpan: null,
+    buttonLabel: 'UPDATE',
+  },
 }
 
 type FormInputs = {
@@ -47,7 +54,7 @@ type FormProps = {
   isLoading?: boolean
   redirect?: string
   handleSubmit: () => void
-  variant?: 'login' | 'register' | 'shipping'
+  variant?: 'login' | 'register' | 'shipping' | 'profile'
   className?: string
 }
 
@@ -100,9 +107,11 @@ function Form({
       <div className={styles.formContainer}>
         <h1>{CONFIG[variant].title}</h1>
         <form onSubmit={onSubmit}>
-          {formInputs.map((formInputProps) => (
-            <Input key={formInputProps.name} inputProps={formInputProps} />
-          ))}
+          <div className={styles.inputsCard}>
+            {formInputs.map((formInputProps) => (
+              <Input key={formInputProps.name} inputProps={formInputProps} />
+            ))}
+          </div>
           <div className={styles.buttonsContainer}>
             {variant === 'shipping' && <Link to={ROUTES.cart}>GO BACK</Link>}
             <button

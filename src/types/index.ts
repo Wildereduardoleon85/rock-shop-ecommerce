@@ -57,6 +57,7 @@ export type RouteEnums =
   | 'payment'
   | 'placeOrder'
   | 'order'
+  | 'profile'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -170,9 +171,11 @@ export type OrderResponse = {
   isPaid: boolean
   isDelivered: boolean
   _id: string
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
   __v: number
+  paidAt: Date
+  deliveredAt: Date
 }
 
 export interface ShippingAddressResponse extends ShippingAddress {

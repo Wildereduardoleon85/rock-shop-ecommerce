@@ -9,6 +9,7 @@ import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
 import { Form } from '../../components'
 import { Alert } from '../../components/UI'
+import styles from './Login.module.scss'
 
 const emailInputProps = {
   initialValue: '',
@@ -85,6 +86,7 @@ function LoginPage() {
         <Alert variant='error' message={errorMessage} trigger={isError} />
       )}
       <Form
+        className={styles.form}
         handleSubmit={handleSubmit}
         formInputs={formInputs}
         isLoading={isLoading}

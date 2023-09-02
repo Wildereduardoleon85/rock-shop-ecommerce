@@ -36,7 +36,6 @@
   }
 
   .formContainer {
-    max-width: fit-content;
     margin: 0 auto;
 
     > h1 {
@@ -46,6 +45,13 @@
 
     form {
       margin-top: 3rem;
+      width: 30rem;
+
+      .inputsCard {
+        box-shadow: $box-shadow-light;
+        border-radius: $border-radius;
+        padding: 1.5rem;
+      }
 
       .buttonsContainer {
         margin-top: 0.5rem;
@@ -55,6 +61,7 @@
         > a:first-of-type {
           text-decoration: none;
           margin-right: 1rem;
+          margin-top: 1.5rem;
           @include buttonStyles('black');
         }
 
@@ -66,6 +73,7 @@
           padding: 0;
           height: 35px;
           width: 98px;
+          margin-top: 1.5rem;
 
           &:disabled {
             background-color: $super-very-light-gray;

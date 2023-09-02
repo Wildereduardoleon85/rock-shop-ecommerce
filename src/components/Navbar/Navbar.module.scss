@@ -136,24 +136,13 @@
             list-style: none;
           }
 
-          a {
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            display: block;
-            cursor: pointer;
-
-            &:hover {
-              background-color: $super-very-light-gray;
-            }
-          }
-
           button {
             background: none;
             border: none;
             font-size: 1rem;
             padding: 0.5rem 1rem;
             display: block;
+            width: 100%;
             cursor: pointer;
 
             &:hover {
