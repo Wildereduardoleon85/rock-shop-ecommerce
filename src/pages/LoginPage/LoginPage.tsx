@@ -19,6 +19,7 @@ const emailInputProps = {
 const passwordInputProps = {
   initialValue: '',
   validateFunction: validatePassword,
+  validateArg: true,
 }
 
 function LoginPage() {
@@ -31,7 +32,7 @@ function LoginPage() {
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
-  const [login, { isLoading, isError }] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation()
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
@@ -63,7 +64,29 @@ function LoginPage() {
     },
   ]
 
-  const handleSubmit = async () => {
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (errorMessage) {
+      setErrorMessage('')
+    }
+
+    if (!isFormValid) {
+      formValues.forEach((formValue: UseInput) => {
+        formValue.onBlur()
+      })
+      return
+    }
+
     try {
       const credentials: UserInfo = await login({
         email: emailInput.value,
@@ -72,26 +95,19 @@ function LoginPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      if (err.status === 401) {
-        setErrorMessage(err.data.message)
-      } else {
-        setErrorMessage('Something went wrong')
-      }
+      setErrorMessage(err?.data?.message || 'Internal server error')
     }
   }
 
   return (
     <>
-      {isError && (
-        <Alert variant='error' message={errorMessage} trigger={isError} />
-      )}
+      <Alert variant='error' message={errorMessage} />
       <Form
         className={styles.form}
-        handleSubmit={handleSubmit}
+        onFormSubmit={onFormSubmit}
         formInputs={formInputs}
         isLoading={isLoading}
         redirect={redirect}
-        formValues={formValues}
       />
     </>
   )

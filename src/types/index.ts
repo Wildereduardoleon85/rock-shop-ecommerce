@@ -58,6 +58,7 @@ export type RouteEnums =
   | 'placeOrder'
   | 'order'
   | 'profile'
+  | 'orderList'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -202,3 +203,12 @@ export type OrderDetailsResponse = {
   updatedAt: string
   __v: number
 }
+
+export type UpdateProfileCredentials = {
+  name: string
+  email: string
+  password?: string
+  confirmPassword?: string
+}
+
+export type VariantEnums = 'success' | 'error' | 'productAddedToCart'

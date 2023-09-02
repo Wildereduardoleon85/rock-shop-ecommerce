@@ -4,7 +4,6 @@ import styles from './Form.module.scss'
 import { getClassNames } from '../../utils'
 import { Input, SmallLoader } from '../UI'
 import { ROUTES } from '../../constants'
-import { UseInput } from '../../types'
 
 const CONFIG = {
   login: {
@@ -49,48 +48,27 @@ type FormInputs = {
 }
 
 type FormProps = {
-  formValues: UseInput[]
   formInputs: FormInputs[]
   isLoading?: boolean
   redirect?: string
-  handleSubmit: () => void
+  onFormSubmit:
+    | ((e: React.FormEvent<HTMLFormElement>) => Promise<void>)
+    | ((e: React.FormEvent<HTMLFormElement>) => void)
   variant?: 'login' | 'register' | 'shipping' | 'profile'
   className?: string
 }
 
 function Form({
-  formValues,
   formInputs,
   isLoading = false,
   redirect = '/',
-  handleSubmit,
+  onFormSubmit,
   variant = 'login',
   className = '',
 }: FormProps) {
   const navigate = useNavigate()
 
-  function checkValidation(values: UseInput) {
-    if (values.isValid) {
-      return true
-    }
-    return false
-  }
-
-  const isFormValid = formValues.every(checkValidation)
   const isAuthForm = variant === 'login' || variant === 'register'
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    if (!isFormValid) {
-      formValues.forEach((formValue: UseInput) => {
-        formValue.onBlur()
-      })
-      return
-    }
-
-    handleSubmit()
-  }
 
   return (
     <div className={getClassNames([styles.root, className])}>
@@ -106,7 +84,7 @@ function Form({
       )}
       <div className={styles.formContainer}>
         <h1>{CONFIG[variant].title}</h1>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onFormSubmit}>
           <div className={styles.inputsCard}>
             {formInputs.map((formInputProps) => (
               <Input key={formInputProps.name} inputProps={formInputProps} />

@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   validateConfirmPassword,
   validateEmail,
@@ -6,13 +7,21 @@ import {
   validatePassword,
 } from '../../helpers'
 import { useInput } from '../../hooks'
-import { UseInput } from '../../types'
+import { UseInput, VariantEnums } from '../../types'
 import styles from './ProfilePage.module.scss'
 import { RootState } from '../../store'
 import { Form, Orders } from '../../components'
+import { setCredentials, useUpdateProfileMutation } from '../../slices'
+import { Alert } from '../../components/UI'
 
 function ProfilePage() {
+  const [alert, setAlert] = useState<{
+    variant: string
+    message: string
+  } | null>(null)
   const { userInfo } = useSelector((state: RootState) => state.auth)
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation()
+  const dispatch = useDispatch()
 
   const nameInput = useInput({
     initialValue: userInfo?.name ?? '',
@@ -25,6 +34,7 @@ function ProfilePage() {
   const passwordInput = useInput({
     initialValue: '',
     validateFunction: validatePassword,
+    validateArg: false,
   })
   const confirmPasswordInput = useInput({
     initialValue: '',
@@ -82,22 +92,69 @@ function ProfilePage() {
     },
   ]
 
-  const handleSubmit = () => {
-    // console.log('submit')
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (
+      userInfo?.email !== emailInput.value ||
+      userInfo?.name !== nameInput.value ||
+      passwordInput.value
+    ) {
+      if (alert) {
+        setAlert(null)
+      }
+
+      if (!isFormValid) {
+        formValues.forEach((formValue: UseInput) => {
+          formValue.onBlur()
+        })
+        return
+      }
+
+      try {
+        const credentials = await updateProfile({
+          name: nameInput.value,
+          email: emailInput.value,
+          password: passwordInput.value,
+        }).unwrap()
+        dispatch(setCredentials(credentials))
+        setAlert({ variant: 'success', message: 'Profile updated successfuly' })
+        passwordInput.reset()
+        confirmPasswordInput.reset()
+      } catch (err: any) {
+        setAlert({ variant: 'error', message: 'something went wrong' })
+      }
+    }
   }
 
   return (
-    <div className={styles.root}>
-      <div className={styles.userProfile}>
-        <Form
-          handleSubmit={handleSubmit}
-          formInputs={formInputs}
-          formValues={formValues}
-          variant='profile'
-        />
+    <>
+      <Alert
+        variant={alert?.variant as VariantEnums}
+        message={alert?.message}
+      />
+
+      <div className={styles.root}>
+        <div className={styles.userProfile}>
+          <Form
+            onFormSubmit={onFormSubmit}
+            formInputs={formInputs}
+            variant='profile'
+            isLoading={isLoading}
+          />
+        </div>
+        <Orders />
       </div>
-      <Orders />
-    </div>
+    </>
   )
 }
 

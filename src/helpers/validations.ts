@@ -56,49 +56,48 @@ export function validateEmail(value: string): Validation {
   }
 }
 
-export const validatePassword = (password: any): Validation => {
-  if (!password) {
-    return {
-      isValid: false,
-      error: 'Field password is required',
-    }
+export const validatePassword = (
+  password: any,
+  required: boolean = true
+): Validation => {
+  let error = ''
+  let isValid = true
+
+  if (required && !password) {
+    isValid = false
+    error = 'Field password is required'
   }
 
   if (typeof password !== 'string') {
-    return {
-      isValid: false,
-      error: 'Field password must be a string',
-    }
+    isValid = false
+    error = 'Field password must be a string'
   }
 
-  if (password.trim().length < 6) {
-    return {
-      isValid: false,
-      error: 'Field password must be at least 6 characters',
-    }
+  if (password.trim().length > 0 && password.trim().length < 6) {
+    isValid = false
+    error = 'Field password must be at least 6 characters'
   }
 
   if (password.trim().length > 16) {
-    return {
-      isValid: false,
-      error: 'Field password must must not exceed 16 characters',
-    }
+    isValid = false
+    error = 'Field password must must not exceed 16 characters'
   }
 
   if (
-    /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>?~]/.test(password) &&
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(password)
+    password.trim().length > 0 &&
+    !(
+      /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>?~]/.test(password) &&
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(password)
+    )
   ) {
-    return {
-      isValid: true,
-      error: '',
-    }
+    isValid = false
+    error =
+      'must contain: Uppercase letter, Lowercase letter, number and a special character'
   }
 
   return {
-    isValid: false,
-    error:
-      'must contain: Uppercase letter, Lowercase letter, number and a special character',
+    isValid,
+    error,
   }
 }
 

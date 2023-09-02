@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { Order } from '../../components'
 import { useGetOrderDetailsQuery } from '../../slices'
-import { ErrorPage, Loader } from '../../components/UI'
+import { Loader } from '../../components/UI'
+import { ErrorPage } from '..'
 
 function OrderDetailsPage() {
   const { id: orderId } = useParams()

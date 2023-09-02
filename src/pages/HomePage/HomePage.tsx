@@ -1,5 +1,6 @@
+import { ErrorPage } from '..'
 import { ProductCard } from '../../components'
-import { ErrorPage, Loader } from '../../components/UI'
+import { Loader } from '../../components/UI'
 import { useGetProductsQuery } from '../../slices'
 import styles from './HomePage.module.scss'
 

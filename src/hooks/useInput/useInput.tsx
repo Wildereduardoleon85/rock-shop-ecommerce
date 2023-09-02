@@ -4,7 +4,7 @@ import { UseInput } from '../../types'
 type UseInputArgs = {
   initialValue: string
   validateFunction: Function
-  validateArg?: number | string
+  validateArg?: any
   onInputBlur?: () => void
   onInputFocus?: () => void
   maskFunction?: (

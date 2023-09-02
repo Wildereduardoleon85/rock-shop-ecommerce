@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
@@ -7,16 +7,16 @@ import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
 import { addToCart, setQty, useGetProductDetailsQuery } from '../../slices'
-import { Alert, ErrorPage, Loader } from '../../components/UI'
+import { Alert, Loader } from '../../components/UI'
 import { Product } from '../../types'
 import { ROUTES } from '../../constants'
 import { RootState } from '../../store'
+import { ErrorPage } from '..'
 
 function ProductPage() {
   const { id: productId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [showAlert, setShowAlert] = useState<boolean>(false)
   const {
     data: product,
     error,
@@ -24,7 +24,7 @@ function ProductPage() {
   } = useGetProductDetailsQuery(productId as string)
   const fetchBaseQueryError = error as FetchBaseQueryError
   const { qty } = useSelector((state: RootState) => state.qty)
-  const cart = useSelector((state: RootState) => state.cart)
+  const { cartItems } = useSelector((state: RootState) => state.cart)
 
   useEffect(() => {
     dispatch(setQty(1))
@@ -32,7 +32,6 @@ function ProductPage() {
 
   function onAddToCart() {
     dispatch(addToCart({ product: product as Product, qty }))
-    setShowAlert(true)
   }
 
   function onByuNow() {
@@ -55,14 +54,13 @@ function ProductPage() {
   return (
     product && (
       <>
-        {showAlert && (
-          <Alert
-            variant='productAddedToCart'
-            product={product}
-            trigger={cart}
-            duration={5000}
-          />
-        )}
+        <Alert
+          variant='productAddedToCart'
+          product={product}
+          duration={5000}
+          trigger={cartItems}
+        />
+
         <div className={styles.root}>
           <Link to={ROUTES.home}>
             <IoMdArrowRoundBack />

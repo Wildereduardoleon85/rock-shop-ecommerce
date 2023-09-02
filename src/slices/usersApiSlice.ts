@@ -1,5 +1,10 @@
 import { apiSlice } from '.'
-import { LoginCredentials, UserInfo, RegisterCredentials } from '../types'
+import {
+  LoginCredentials,
+  UserInfo,
+  RegisterCredentials,
+  UpdateProfileCredentials,
+} from '../types'
 
 const USERS_URL = import.meta.env.VITE_USERS_URL
 
@@ -25,7 +30,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
-    profile: builder.mutation({
+    updateProfile: builder.mutation<UserInfo, UpdateProfileCredentials>({
       query: (data) => ({
         url: `${USERS_URL}/profile`,
         method: 'PUT',
@@ -39,5 +44,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useProfileMutation,
+  useUpdateProfileMutation,
 } = usersApiSlice

@@ -27,6 +27,7 @@ export const ROUTES: Routes = {
   placeOrder: '/place-order',
   order: '/order/:id',
   profile: '/profile',
+  orderList: '/admin/order-list',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

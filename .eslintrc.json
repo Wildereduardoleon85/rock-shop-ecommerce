@@ -1,23 +1,18 @@
 {
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": ["airbnb", "airbnb-typescript", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/semi": "off",
-    "react/jsx-one-expression-per-line": "off",
     "jsx-quotes": [2, "prefer-single"],
     "@typescript-eslint/comma-dangle": "off",
     "react/require-default-props": "off",
     "react/prop-types": "off",
-    "import/no-cycle": "off",
-    "object-curly-newline": "off",
-    "operator-linebreak": "off",
-    "implicit-arrow-linebreak": "off",
-    "react/jsx-curly-newline": "off",
     "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
     "no-param-reassign": "off",
-    "no-underscore-dangle": "off"
+    "import/no-cycle": "off"
   }
 }

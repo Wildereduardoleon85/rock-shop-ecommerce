@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks'
@@ -96,7 +96,25 @@ function ShippingPage() {
     },
   ]
 
-  const handleSubmit = () => {
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!isFormValid) {
+      formValues.forEach((formValue: UseInput) => {
+        formValue.onBlur()
+      })
+      return
+    }
+
     dispatch(
       saveShippingAddress({
         address: addressInput.value,
@@ -113,9 +131,8 @@ function ShippingPage() {
       <Breadcrumbs />
       <Form
         className={styles.form}
-        handleSubmit={handleSubmit}
+        onFormSubmit={onFormSubmit}
         formInputs={formInputs}
-        formValues={formValues}
         variant='shipping'
       />
     </>

@@ -16,8 +16,15 @@
   transform: translateX(130%);
   @include transition(transform);
 
-  > svg {
+  .timesIcon {
     fill: $red;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .checkIcon {
+    fill: green;
     margin-right: 0.5rem;
     font-size: 2rem;
     flex-shrink: 0;

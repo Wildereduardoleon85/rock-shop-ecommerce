@@ -29,6 +29,7 @@ const emailInputProps = {
 const passwordInputProps = {
   initialValue: '',
   validateFunction: validatePassword,
+  validateArg: true,
 }
 
 function RegisterPage() {
@@ -52,7 +53,7 @@ function RegisterPage() {
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
-  const [register, { isLoading, isError }] = useRegisterMutation()
+  const [register, { isLoading }] = useRegisterMutation()
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
@@ -111,7 +112,27 @@ function RegisterPage() {
     },
   ]
 
-  const handleSubmit = async () => {
+  function checkValidation(values: UseInput) {
+    if (values.isValid) {
+      return true
+    }
+    return false
+  }
+
+  const isFormValid = formValues.every(checkValidation)
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (errorMessage) setErrorMessage('')
+
+    if (!isFormValid) {
+      formValues.forEach((formValue: UseInput) => {
+        formValue.onBlur()
+      })
+      return
+    }
+
     try {
       const credentials: UserInfo = await register({
         name: nameInput.value,
@@ -121,20 +142,19 @@ function RegisterPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      setErrorMessage(err.data.message)
+      setErrorMessage(err?.data?.message || 'internal server error')
     }
   }
 
   return (
     <>
-      {isError && <Alert message={errorMessage} trigger={isError} />}
+      <Alert message={errorMessage} />
       <Form
         className={styles.form}
-        handleSubmit={handleSubmit}
+        onFormSubmit={onFormSubmit}
         formInputs={formInputs}
         isLoading={isLoading}
         redirect={redirect}
-        formValues={formValues}
         variant='register'
       />
     </>

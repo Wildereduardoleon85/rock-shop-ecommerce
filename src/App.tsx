@@ -5,7 +5,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import { Layout, PrivateRoute } from './components'
+import { AdminRoute, Layout, PrivateRoute } from './components'
 import { routes } from './routes'
 
 const router = createBrowserRouter(
@@ -23,6 +23,13 @@ const router = createBrowserRouter(
       {/* private routes */}
       <Route path='' element={<PrivateRoute />}>
         {routes.private.map((route) => (
+          <Route key={route.name} path={route.path} element={route.page} />
+        ))}
+      </Route>
+
+      {/* admin routes */}
+      <Route path='' element={<AdminRoute />}>
+        {routes.admin.map((route) => (
           <Route key={route.name} path={route.path} element={route.page} />
         ))}
       </Route>
