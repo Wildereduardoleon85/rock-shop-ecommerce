@@ -57,13 +57,6 @@ function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setErrorMessage('')
-    }, 4000)
-    return () => clearTimeout(timer)
-  }, [errorMessage])
-
-  useEffect(() => {
     if (userInfo) {
       navigate(redirect)
     }

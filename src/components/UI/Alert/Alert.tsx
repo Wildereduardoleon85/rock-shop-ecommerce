@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FaRegTimesCircle } from 'react-icons/fa'
+import { FaRegTimesCircle, FaTimes } from 'react-icons/fa'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import styles from './Alert.module.scss'
@@ -24,7 +24,7 @@ const VARIANTS: {
 type AnchorLinkProps = {
   linkTo: string
   children: React.ReactNode
-  show: boolean
+  show?: boolean
 }
 
 function AnchorLink({ linkTo, children, show }: AnchorLinkProps) {
@@ -48,7 +48,8 @@ type AlertProps = {
   variant?: VariantEnums
   product?: Product
   duration?: number
-  trigger?: any
+  show?: boolean
+  onClose?: () => void
 }
 
 export function Alert({
@@ -56,18 +57,19 @@ export function Alert({
   message = '',
   product,
   duration = 3000,
-  trigger,
+  show,
+  onClose,
 }: AlertProps) {
-  const [show, setShow] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
 
   useEffect(() => {
-    setShow(true)
+    setShowAlert(true)
     const showTimer = setTimeout(() => {
-      setShow(false)
+      setShowAlert(false)
     }, duration)
 
     return () => clearTimeout(showTimer)
-  }, [message, trigger])
+  }, [message])
 
   if (variant === 'productAddedToCart' && product) {
     return (
@@ -83,6 +85,17 @@ export function Alert({
         <AnchorLink linkTo={ROUTES.cart} show={show}>
           TO CART
         </AnchorLink>
+        <button
+          style={{ pointerEvents: show ? 'auto' : 'none' }}
+          aria-hidden={!show}
+          tabIndex={show ? 0 : -1}
+          type='button'
+          onClick={onClose}
+          className={styles.closeButton}
+          aria-label='close-alert'
+        >
+          <FaTimes />
+        </button>
       </div>
     )
   }
@@ -92,7 +105,7 @@ export function Alert({
       <div
         className={getClassNames([
           styles.root,
-          !!message && show && styles.show,
+          !!message && showAlert && styles.show,
         ])}
       >
         {VARIANTS[variant].icon}
