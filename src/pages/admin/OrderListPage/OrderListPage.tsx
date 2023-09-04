@@ -1,17 +1,15 @@
-import { Orders } from '../../../components'
+import { Table } from '../../../components'
 import { useGetOrdersQuery } from '../../../slices'
-import styles from './OrderListPage.module.scss'
 
 function OrderListPage() {
   const { data, isLoading, error } = useGetOrdersQuery()
 
   return (
-    <Orders
-      className={styles.orders}
-      orders={data}
+    <Table
+      data={data}
       error={error}
       isLoading={isLoading}
-      variant='admin'
+      variant='adminOrders'
     />
   )
 }

@@ -1,7 +1,12 @@
-import styles from './ProductListPage.module.scss'
+import { Table } from '../../../components'
+import { useGetProductsQuery } from '../../../slices'
 
 function ProductListPage() {
-  return <div className={styles.root}>ProductListPage</div>
+  const { data, error, isLoading } = useGetProductsQuery()
+
+  return (
+    <Table variant='products' data={data} isLoading={isLoading} error={error} />
+  )
 }
 
 export default ProductListPage

@@ -10,7 +10,7 @@ import { useInput } from '../../hooks'
 import { UseInput, VariantEnums } from '../../types'
 import styles from './ProfilePage.module.scss'
 import { RootState } from '../../store'
-import { Form, Orders } from '../../components'
+import { Form, Table } from '../../components'
 import {
   setCredentials,
   useGetMyOrdersQuery,
@@ -161,7 +161,13 @@ function ProfilePage() {
             isLoading={isLoading}
           />
         </div>
-        <Orders orders={orders} error={error} isLoading={isOrdersLoading} />
+        <Table
+          className={styles.table}
+          variant='orders'
+          data={orders}
+          error={error}
+          isLoading={isOrdersLoading}
+        />
       </div>
     </>
   )

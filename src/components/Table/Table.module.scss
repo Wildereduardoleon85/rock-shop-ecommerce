@@ -6,7 +6,20 @@
 }
 
 .orders {
-  width: 69%;
+  .titleContainer {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    .createProductButton {
+      @include buttonStyles('black');
+    }
+  }
 
   .noOrders {
     > h3 {
@@ -48,11 +61,6 @@
     padding: 1.5rem;
   }
 
-  h2 {
-    margin-top: 3rem;
-    font-size: 3rem;
-  }
-
   table {
     width: 100%;
     border-collapse: collapse;
@@ -70,6 +78,51 @@
     .timesIcon {
       fill: $dark-red;
       font-size: 1.2rem;
+    }
+
+    .iconButtonsContainer {
+      display: flex;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      align-items: center;
+
+      .editIconButton,
+      .trashIconButton {
+        border: none;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+      }
+
+      .editIconButton {
+        &:hover svg {
+          fill: $dark-gray;
+        }
+
+        svg {
+          fill: $black;
+          @include transition(fill);
+        }
+      }
+
+      .trashIconButton {
+        margin-left: 1rem;
+        background-color: $red;
+        border-radius: $border-radius;
+        @include transition(background-color);
+
+        &:hover {
+          background-color: $dark-red;
+        }
+
+        svg {
+          fill: white;
+        }
+      }
     }
   }
 
