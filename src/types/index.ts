@@ -59,6 +59,8 @@ export type RouteEnums =
   | 'order'
   | 'profile'
   | 'orderList'
+  | 'productList'
+  | 'userList'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -162,7 +164,12 @@ export interface OrderItemsResponse extends OrderItems {
 }
 
 export type OrderResponse = {
-  user: string
+  user:
+    | string
+    | {
+        _id: string
+        name: string
+      }
   orderItems: OrderItemsResponse[]
   paymentMethod: string
   itemsPrice: number

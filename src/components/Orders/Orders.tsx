@@ -2,38 +2,45 @@ import { Link } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSad } from 'react-icons/im'
 import { FaRegTimesCircle } from 'react-icons/fa'
-import { useGetMyOrdersQuery } from '../../slices'
-import { Alert, Loader } from '../UI'
+import { Loader } from '../UI'
 import styles from './Orders.module.scss'
 import { ROUTES } from '../../constants'
-import { parseDate } from '../../utils'
+import { getClassNames, parseDate } from '../../utils'
+import { ErrorPage } from '../../pages'
+import { OrderResponse } from '../../types'
 
-function Orders() {
-  const { data: orders, error, isLoading } = useGetMyOrdersQuery()
-  const err = error as any
+type OrdersProps = {
+  variant?: 'common' | 'admin'
+  orders: OrderResponse[] | undefined
+  error: any
+  isLoading: boolean
+  className?: string
+}
 
+function Orders({
+  className = '',
+  variant = 'common',
+  orders,
+  error,
+  isLoading,
+}: OrdersProps) {
   if (isLoading) {
     return <Loader />
   }
 
   if (error) {
-    return (
-      <Alert
-        variant='error'
-        message={err?.data?.message || 'something went wrong'}
-        trigger={error}
-      />
-    )
+    return <ErrorPage className={styles.errorPage} />
   }
 
   return (
-    <div className={styles.orders}>
-      <h2>My Orders</h2>
+    <div className={getClassNames([styles.orders, className])}>
+      {variant === 'common' ? <h2>My Orders</h2> : <h2>Orders</h2>}
       {orders && orders.length > 0 ? (
         <table>
           <thead>
             <tr>
               <th>ID</th>
+              {variant === 'admin' && <th>USER</th>}
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
@@ -43,32 +50,37 @@ function Orders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{parseDate(order.createdAt)}</td>
-                <td>{order.itemsPrice}</td>
-                <td>
-                  {order.isPaid ? (
-                    parseDate(order.paidAt)
-                  ) : (
-                    <FaRegTimesCircle className={styles.timesIcon} />
-                  )}
-                </td>
-                <td>
-                  {order.isDelivered ? (
-                    parseDate(order.deliveredAt)
-                  ) : (
-                    <FaRegTimesCircle className={styles.timesIcon} />
-                  )}
-                </td>
-                <td>
-                  <Link to={ROUTES.order.replace(':id', order._id)}>
-                    DETAILS
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {orders.map((order) => {
+              const adminOrder = order.user as { _id: string; name: string }
+
+              return (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  {variant === 'admin' && <td>{adminOrder.name}</td>}
+                  <td>{parseDate(order.createdAt)}</td>
+                  <td>{order.itemsPrice}</td>
+                  <td>
+                    {order.isPaid ? (
+                      parseDate(order.paidAt)
+                    ) : (
+                      <FaRegTimesCircle className={styles.timesIcon} />
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      parseDate(order.deliveredAt)
+                    ) : (
+                      <FaRegTimesCircle className={styles.timesIcon} />
+                    )}
+                  </td>
+                  <td>
+                    <Link to={ROUTES.order.replace(':id', order._id)}>
+                      DETAILS
+                    </Link>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       ) : (

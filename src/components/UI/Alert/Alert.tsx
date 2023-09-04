@@ -16,7 +16,7 @@ const VARIANTS: {
   },
   success: {
     icon: <BsFillCheckCircleFill className={styles.checkIcon} />,
-    prefix: 'Success:',
+    prefix: '',
   },
   productAddedToCart: {},
 }

@@ -43,9 +43,9 @@ function Navbar() {
     navigate(ROUTES.login)
   }
 
-  async function onProfileClick() {
+  function onProfileButtonClick(linkTo: string) {
     setIsActive(false)
-    navigate(ROUTES.profile)
+    navigate(linkTo)
   }
 
   return (
@@ -90,6 +90,14 @@ function Navbar() {
                 {isActive && (
                   <ul className={styles.drawer}>
                     <li>
+                      <button
+                        type='button'
+                        onClick={() => onProfileButtonClick(ROUTES.profile)}
+                      >
+                        Profile
+                      </button>
+                    </li>
+                    <li>
                       <button type='button' onClick={onLogout}>
                         {isLoading ? (
                           <SmallLoader className={styles.loader} />
@@ -98,11 +106,42 @@ function Navbar() {
                         )}
                       </button>
                     </li>
-                    <li>
-                      <button type='button' onClick={onProfileClick}>
-                        Profile
-                      </button>
-                    </li>
+
+                    {userInfo.isAdmin && (
+                      <>
+                        <p>Admin:</p>
+                        <li>
+                          <button
+                            type='button'
+                            onClick={() =>
+                              onProfileButtonClick(ROUTES.orderList)
+                            }
+                          >
+                            Orders
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type='button'
+                            onClick={() =>
+                              onProfileButtonClick(ROUTES.productList)
+                            }
+                          >
+                            Products
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type='button'
+                            onClick={() =>
+                              onProfileButtonClick(ROUTES.userList)
+                            }
+                          >
+                            Users
+                          </button>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 )}
               </div>

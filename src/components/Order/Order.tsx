@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { IoIosWarning } from 'react-icons/io'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
 import { capitalize, formatCurrency } from '../../utils'
 import { ROUTES } from '../../constants'
-import { SmallLoader } from '../UI'
+import { Alert, SmallLoader } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
+import { useDeliverOrderMutation } from '../../slices'
+import { RootState } from '../../store'
 
 type OrderItem = {
   name: string
@@ -35,6 +39,7 @@ type OrderProps = {
     name: string
     email: string
   }
+  refetch?: () => void
 }
 
 type PaidDeliveredTagProps = {
@@ -86,9 +91,41 @@ function Order({
   isPaid,
   isDelivered,
   user,
+  refetch,
 }: OrderProps) {
+  const { userInfo } = useSelector((state: RootState) => state.auth)
+  const [deliverOrder, { isLoading: isDeliverLoading }] =
+    useDeliverOrderMutation()
+  const [alert, setAlert] = useState<{
+    message: string
+    variant: 'success' | 'error'
+  } | null>(null)
+
+  async function onMarkAsDeliver() {
+    setAlert(null)
+
+    try {
+      await deliverOrder(orderId as string).unwrap()
+
+      setAlert({
+        variant: 'success',
+        message: 'mark as delivered successfully',
+      })
+      if (refetch) refetch()
+    } catch (error: any) {
+      setAlert({
+        variant: 'error',
+        message: error?.data?.message || 'something went wrong',
+      })
+    }
+  }
+
   return (
     <>
+      <Alert
+        variant={alert?.variant ?? 'error'}
+        message={alert?.message ?? ''}
+      />
       {variant === 'order-details' && (
         <h1 className={styles.title}>Order {orderId}</h1>
       )}
@@ -161,6 +198,19 @@ function Order({
               <p>Total:</p>
               <p>${formatCurrency(totalPrice)}</p>
             </div>
+            {variant === 'order-details' &&
+              userInfo?.isAdmin &&
+              isPaid &&
+              !isDelivered && (
+                <button
+                  className={styles.placeOrderButton}
+                  type='button'
+                  onClick={onMarkAsDeliver}
+                  disabled={isDeliverLoading}
+                >
+                  {isDeliverLoading ? <SmallLoader /> : 'MARK AS DELIVER'}
+                </button>
+              )}
             {variant === 'place-order' && (
               <button
                 className={styles.placeOrderButton}

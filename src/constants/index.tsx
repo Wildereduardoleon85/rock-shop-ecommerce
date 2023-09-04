@@ -28,6 +28,8 @@ export const ROUTES: Routes = {
   order: '/order/:id',
   profile: '/profile',
   orderList: '/admin/order-list',
+  productList: '/admin/product-list',
+  userList: '/admin/user-list',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

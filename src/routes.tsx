@@ -10,6 +10,7 @@ import {
   ShippingPage,
   ProfilePage,
   OrderListPage,
+  ProductListPage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -73,6 +74,11 @@ export const routes = {
       name: 'orderList',
       path: ROUTES.orderList,
       page: <OrderListPage />,
+    },
+    {
+      name: 'productList',
+      path: ROUTES.productList,
+      page: <ProductListPage />,
     },
   ],
 }

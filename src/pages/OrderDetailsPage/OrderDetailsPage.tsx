@@ -7,7 +7,9 @@ import { ErrorPage } from '..'
 
 function OrderDetailsPage() {
   const { id: orderId } = useParams()
-  const { data, isLoading, error } = useGetOrderDetailsQuery(orderId as string)
+  const { data, refetch, isLoading, error } = useGetOrderDetailsQuery(
+    orderId as string
+  )
   const rtkError = error as FetchBaseQueryError
 
   if (isLoading) {
@@ -37,6 +39,7 @@ function OrderDetailsPage() {
         isPaid={data.isPaid}
         isDelivered={data.isDelivered}
         user={data.user}
+        refetch={refetch}
       />
     )
   )

@@ -11,7 +11,11 @@ import { UseInput, VariantEnums } from '../../types'
 import styles from './ProfilePage.module.scss'
 import { RootState } from '../../store'
 import { Form, Orders } from '../../components'
-import { setCredentials, useUpdateProfileMutation } from '../../slices'
+import {
+  setCredentials,
+  useGetMyOrdersQuery,
+  useUpdateProfileMutation,
+} from '../../slices'
 import { Alert } from '../../components/UI'
 
 function ProfilePage() {
@@ -22,6 +26,11 @@ function ProfilePage() {
   const { userInfo } = useSelector((state: RootState) => state.auth)
   const [updateProfile, { isLoading }] = useUpdateProfileMutation()
   const dispatch = useDispatch()
+  const {
+    data: orders,
+    error,
+    isLoading: isOrdersLoading,
+  } = useGetMyOrdersQuery()
 
   const nameInput = useInput({
     initialValue: userInfo?.name ?? '',
@@ -152,7 +161,7 @@ function ProfilePage() {
             isLoading={isLoading}
           />
         </div>
-        <Orders />
+        <Orders orders={orders} error={error} isLoading={isOrdersLoading} />
       </div>
     </>
   )
