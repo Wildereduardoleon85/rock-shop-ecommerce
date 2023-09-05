@@ -140,7 +140,10 @@ function ProfilePage() {
         passwordInput.reset()
         confirmPasswordInput.reset()
       } catch (err: any) {
-        setAlert({ variant: 'error', message: 'something went wrong' })
+        setAlert({
+          variant: 'error',
+          message: err?.data?.message || 'something went wrong',
+        })
       }
     }
   }

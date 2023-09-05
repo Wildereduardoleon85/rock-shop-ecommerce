@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSad } from 'react-icons/im'
 import { FaRegTimesCircle, FaEdit, FaTrashAlt } from 'react-icons/fa'
-import { Loader } from '../UI'
+import { Loader, SmallLoader } from '../UI'
 import styles from './Table.module.scss'
 import { ROUTES } from '../../constants'
 import {
@@ -32,6 +32,8 @@ type TableProps = {
   error: any
   isLoading: boolean
   className?: string
+  onCreateProduct?: () => Promise<void>
+  createProductLoading?: boolean
 }
 
 const ORDER_HEADERS = {
@@ -105,7 +107,7 @@ function ProductsTable({ products }: ProductsTableProps) {
       <td>{product.brand}</td>
       <td className={styles.iconButtonsContainer}>
         <Link
-          to={ROUTES.editProduct}
+          to={ROUTES.productEdit.replace(':id', product._id)}
           aria-label='edit-product'
           className={styles.editIconButton}
         >
@@ -129,6 +131,8 @@ function Table({
   data,
   error,
   isLoading,
+  createProductLoading,
+  onCreateProduct,
 }: TableProps) {
   if (isLoading) {
     return <Loader />
@@ -143,8 +147,13 @@ function Table({
       <div className={styles.titleContainer}>
         <h2>{VARIANTS[variant].title}</h2>
         {variant === 'products' && (
-          <button type='button' className={styles.createProductButton}>
-            CREATE PRODUCT
+          <button
+            type='button'
+            className={styles.createProductButton}
+            onClick={onCreateProduct}
+            disabled={createProductLoading}
+          >
+            {createProductLoading ? <SmallLoader /> : 'CREATE PRODUCT'}
           </button>
         )}
       </div>

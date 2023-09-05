@@ -208,7 +208,7 @@ function Order({
                   onClick={onMarkAsDeliver}
                   disabled={isDeliverLoading}
                 >
-                  {isDeliverLoading ? <SmallLoader /> : 'MARK AS DELIVER'}
+                  {isDeliverLoading ? <SmallLoader /> : 'MARK AS DELIVERED'}
                 </button>
               )}
             {variant === 'place-order' && (
