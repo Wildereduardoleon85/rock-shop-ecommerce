@@ -157,11 +157,12 @@ function ProfilePage() {
 
       <div className={styles.root}>
         <div className={styles.userProfile}>
+          <h1>Profile</h1>
           <Form
             onFormSubmit={onFormSubmit}
             formInputs={formInputs}
-            variant='profile'
             isLoading={isLoading}
+            buttonLabel='UPDATE'
           />
         </div>
         <Table

@@ -7,7 +7,7 @@ import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
 import { addToCart, setQty, useGetProductDetailsQuery } from '../../slices'
-import { Alert, Loader } from '../../components/UI'
+import { Alert, Button, Loader } from '../../components/UI'
 import { Product } from '../../types'
 import { ROUTES } from '../../constants'
 import { RootState } from '../../store'
@@ -30,12 +30,12 @@ function ProductPage() {
     dispatch(setQty(1))
   }, [])
 
-  function onAddToCart() {
+  const onAddToCart = () => {
     dispatch(addToCart({ product: product as Product, qty }))
     setShowAlert(true)
   }
 
-  function onByuNow() {
+  const onByuNow = () => {
     dispatch(addToCart({ product: product as Product, qty }))
     navigate(ROUTES.cart)
   }
@@ -78,22 +78,21 @@ function ProductPage() {
               <h1>{product.name}</h1>
               <p className={styles.price}>${product.price}</p>
               <QtyButton className={styles.qtyButton} product={product} />
-              <button
+              <Button
                 disabled={product.countInStock === 0}
-                type='button'
                 className={styles.addToCartButton}
                 onClick={onAddToCart}
               >
-                add to cart
-              </button>
-              <button
+                ADD TO CART
+              </Button>
+              <Button
+                color='black'
                 disabled={product.countInStock === 0}
-                type='button'
                 className={styles.buyNowButton}
                 onClick={onByuNow}
               >
-                buy now
-              </button>
+                BUY NOW
+              </Button>
               <Rating
                 value={product.rating}
                 text={`${product.numReviews} reviews`}

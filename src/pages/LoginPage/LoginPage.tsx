@@ -7,8 +7,7 @@ import { UseInput, UserInfo } from '../../types'
 import { useLoginMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
-import { Form } from '../../components'
-import { Alert } from '../../components/UI'
+import { AuthFormContainer, Form } from '../../components'
 import styles from './Login.module.scss'
 
 const emailInputProps = {
@@ -100,16 +99,19 @@ function LoginPage() {
   }
 
   return (
-    <>
-      <Alert variant='error' message={errorMessage} />
+    <AuthFormContainer
+      variant='login'
+      errorMessage={errorMessage}
+      redirect={redirect}
+    >
       <Form
         className={styles.form}
         onFormSubmit={onFormSubmit}
         formInputs={formInputs}
         isLoading={isLoading}
-        redirect={redirect}
+        buttonLabel='SIGN IN'
       />
-    </>
+    </AuthFormContainer>
   )
 }
 

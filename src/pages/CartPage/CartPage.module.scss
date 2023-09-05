@@ -143,7 +143,7 @@
 
       .checkoutButton {
         margin-top: 1.2rem;
-        @include buttonStyles();
+        color: initial;
       }
     }
   }

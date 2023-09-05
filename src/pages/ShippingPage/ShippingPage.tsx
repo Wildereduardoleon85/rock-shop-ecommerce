@@ -129,12 +129,15 @@ function ShippingPage() {
   return (
     <>
       <Breadcrumbs />
-      <Form
-        className={styles.form}
-        onFormSubmit={onFormSubmit}
-        formInputs={formInputs}
-        variant='shipping'
-      />
+      <div className={styles.container}>
+        <h1>Shipping</h1>
+        <Form
+          className={styles.form}
+          onFormSubmit={onFormSubmit}
+          formInputs={formInputs}
+          buttonLabel='CONTINUE'
+        />
+      </div>
     </>
   )
 }

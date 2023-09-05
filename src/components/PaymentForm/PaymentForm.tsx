@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { PaymentCard } from '..'
 import { useInput } from '../../hooks'
-import { Input } from '../UI'
+import { Button, Input } from '../UI'
 import styles from './PaymentForm.module.scss'
 import {
   maskCardNameInput,
@@ -155,7 +155,7 @@ function PaymentForm() {
 
       <div className={styles.buttons}>
         <Link to={ROUTES.shipping}>GO BACK</Link>
-        <button type='submit'>CONTINUE</button>
+        <Button type='submit'>CONTINUE</Button>
       </div>
     </form>
   )

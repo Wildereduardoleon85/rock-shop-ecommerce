@@ -23,26 +23,11 @@
 
   .searchButton {
     display: flex;
-    align-items: center;
-    background-color: $red;
-    border: none;
-    border-radius: $border-radius;
     height: 100%;
-    color: white;
-    padding: 0 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    @include transition(background-color);
-
-    &:hover {
-      background-color: $dark-red;
-    }
 
     .searchIcon {
       margin-right: 0.5rem;
       fill: white;
     }
   }
-
-
 }

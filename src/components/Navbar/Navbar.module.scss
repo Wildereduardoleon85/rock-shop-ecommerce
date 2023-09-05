@@ -148,13 +148,22 @@
               background: none;
               border: none;
               font-size: 1rem;
-              padding: 0.5rem 2rem;
-              display: block;
+              padding: 0 2rem;
+              height: 35px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
               width: 100%;
               cursor: pointer;
 
               &:hover {
                 background-color: $super-very-light-gray;
+              }
+
+              &:hover > span {
+                &::after {
+                  background-color: $super-very-light-gray;
+                }
               }
             }
           }
@@ -162,7 +171,7 @@
           .loader {
             margin-left: 0.5rem;
             &::after {
-              background: $super-very-light-gray;
+              background: white;
             }
           }
         }

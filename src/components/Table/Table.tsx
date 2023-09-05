@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSad } from 'react-icons/im'
 import { FaRegTimesCircle, FaEdit, FaTrashAlt } from 'react-icons/fa'
-import { Loader, SmallLoader } from '../UI'
+import { Button, Loader } from '../UI'
 import styles from './Table.module.scss'
 import { ROUTES } from '../../constants'
 import {
@@ -147,14 +147,14 @@ function Table({
       <div className={styles.titleContainer}>
         <h2>{VARIANTS[variant].title}</h2>
         {variant === 'products' && (
-          <button
-            type='button'
-            className={styles.createProductButton}
+          <Button
+            color='black'
             onClick={onCreateProduct}
             disabled={createProductLoading}
+            isLoading={createProductLoading}
           >
-            {createProductLoading ? <SmallLoader /> : 'CREATE PRODUCT'}
-          </button>
+            CREATE PRODUCT
+          </Button>
         )}
       </div>
       {data && data.length > 0 ? (

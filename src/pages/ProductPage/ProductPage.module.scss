@@ -45,14 +45,12 @@
       }
 
       .addToCartButton {
-        @include buttonStyles();
         margin-top: 2rem;
         display: block;
         width: $button-width;
       }
 
       .buyNowButton {
-        @include buttonStyles('black');
         display: block;
         margin-top: 0.5rem;
         width: $button-width;

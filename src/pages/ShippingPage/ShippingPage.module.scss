@@ -1,4 +1,13 @@
-.form {
-  margin-top: 2rem;
-  max-width: fit-content;
+.container {
+  width: 480px;
+  margin: 0 auto;
+  margin-top: 3rem;
+
+  > h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    margin-top: 3rem;
+  }
 }

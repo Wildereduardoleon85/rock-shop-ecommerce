@@ -1,14 +1,15 @@
 import { AiOutlineSearch } from 'react-icons/ai'
 import styles from './Search.module.scss'
+import { Button } from '../UI'
 
 function Search() {
   return (
     <div className={styles.root}>
       <input type='text' />
-      <button className={styles.searchButton} type='button'>
+      <Button className={styles.searchButton} type='button'>
         <AiOutlineSearch className={styles.searchIcon} />
         SEARCH
-      </button>
+      </Button>
     </div>
   )
 }

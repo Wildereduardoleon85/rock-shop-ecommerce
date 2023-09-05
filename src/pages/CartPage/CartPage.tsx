@@ -11,6 +11,7 @@ import { QtyButton } from '../../components'
 import { isNotCartInfo } from '../../helpers'
 import { ShoppingBagIcon } from '../../components/Icons'
 import { removeItem } from '../../slices'
+import { Button } from '../../components/UI'
 
 const IMAGE_WIDTH = 150
 
@@ -21,7 +22,7 @@ function CartPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  function onCheckoutClick() {
+  const onCheckoutClick = () => {
     navigate(userInfo ? ROUTES.shipping : `${ROUTES.login}?redirect=/shipping`)
   }
 
@@ -86,14 +87,13 @@ function CartPage() {
           </h2>
           <p className={styles.subtotalPrice}>${formatCurrency(itemsPrice)}</p>
 
-          <button
-            type='button'
+          <Button
             className={styles.checkoutButton}
             onClick={onCheckoutClick}
             disabled={isNotCartInfo(cart)}
           >
             PROCEED TO CHECKOUT
-          </button>
+          </Button>
         </div>
       </div>
     </div>

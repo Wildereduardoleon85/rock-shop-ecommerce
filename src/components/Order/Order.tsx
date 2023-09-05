@@ -6,7 +6,7 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
 import { capitalize, formatCurrency } from '../../utils'
 import { ROUTES } from '../../constants'
-import { Alert, SmallLoader } from '../UI'
+import { Alert, Button } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
 import { useDeliverOrderMutation } from '../../slices'
 import { RootState } from '../../store'
@@ -101,7 +101,7 @@ function Order({
     variant: 'success' | 'error'
   } | null>(null)
 
-  async function onMarkAsDeliver() {
+  const onMarkAsDelivered = async () => {
     setAlert(null)
 
     try {
@@ -202,24 +202,24 @@ function Order({
               userInfo?.isAdmin &&
               isPaid &&
               !isDelivered && (
-                <button
+                <Button
                   className={styles.placeOrderButton}
-                  type='button'
-                  onClick={onMarkAsDeliver}
+                  onClick={onMarkAsDelivered}
                   disabled={isDeliverLoading}
+                  isLoading={isDeliverLoading}
                 >
-                  {isDeliverLoading ? <SmallLoader /> : 'MARK AS DELIVERED'}
-                </button>
+                  MARK AS DELIVERED
+                </Button>
               )}
             {variant === 'place-order' && (
-              <button
+              <Button
                 className={styles.placeOrderButton}
-                type='button'
                 onClick={onPlaceOrder}
                 disabled={isLoading}
+                isLoading={isLoading}
               >
-                {isLoading ? <SmallLoader /> : 'PLACE ORDER'}
-              </button>
+                PLACE ORDER
+              </Button>
             )}
           </div>
         </div>

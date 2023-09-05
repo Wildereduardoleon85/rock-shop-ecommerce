@@ -1,0 +1,52 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.root {
+  @include buttonStyles();
+  position: relative;
+
+  &:disabled {
+    background-color: $super-very-light-gray;
+    color: transparent;
+
+    &:hover {
+      background-color: $super-very-light-gray;
+    }
+  }
+
+  > span {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.black {
+  @include buttonStyles('black');
+
+  &:disabled {
+    background-color: rgb(17, 17, 17);
+
+    &:hover {
+      background-color: rgb(17, 17, 17);
+    }
+  }
+
+  > span {
+    > span {
+      background-image: linear-gradient(
+        0deg,
+        rgba(196, 196, 196, 0.2) 33%,
+        white 100%
+      );
+      &::after {
+        background-color: rgb(17, 17, 17);
+      }
+    }
+  }
+}

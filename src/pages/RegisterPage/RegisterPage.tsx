@@ -12,8 +12,7 @@ import { UseInput, UserInfo } from '../../types'
 import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
-import { Form } from '../../components'
-import { Alert } from '../../components/UI'
+import { AuthFormContainer, Form } from '../../components'
 import styles from './Register.module.scss'
 
 const nameInputProps = {
@@ -140,17 +139,19 @@ function RegisterPage() {
   }
 
   return (
-    <>
-      <Alert message={errorMessage} />
+    <AuthFormContainer
+      errorMessage={errorMessage}
+      variant='register'
+      redirect={redirect}
+    >
       <Form
         className={styles.form}
         onFormSubmit={onFormSubmit}
         formInputs={formInputs}
         isLoading={isLoading}
-        redirect={redirect}
-        variant='register'
+        buttonLabel='REGISTER'
       />
-    </>
+    </AuthFormContainer>
   )
 }
 
