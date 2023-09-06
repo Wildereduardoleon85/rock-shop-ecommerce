@@ -203,3 +203,23 @@ export function validateExpirationDate(value: string): Validation {
     error,
   }
 }
+
+export function validateNumber(value: any) {
+  let isValid = true
+  let error = ''
+
+  if (!value || String(value).trim().length === 0) {
+    isValid = false
+    error = 'this field is required'
+  }
+
+  if (Number.isNaN(+value)) {
+    isValid = false
+    error = 'this field must be a number'
+  }
+
+  return {
+    isValid,
+    error,
+  }
+}

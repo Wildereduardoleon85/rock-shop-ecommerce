@@ -27,7 +27,7 @@ function PaymentPage() {
 
   return (
     <>
-      <Breadcrumbs />
+      <Breadcrumbs step1 step2 />
       <div className={styles.root}>
         <h1>Payment Method</h1>
         <h2>Select Method</h2>

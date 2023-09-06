@@ -143,7 +143,10 @@
 
       .checkoutButton {
         margin-top: 1.2rem;
-        color: initial;
+
+        &:disabled {
+          color: initial;
+        }
       }
     }
   }

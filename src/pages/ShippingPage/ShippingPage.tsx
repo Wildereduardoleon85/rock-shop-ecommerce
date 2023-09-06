@@ -128,7 +128,7 @@ function ShippingPage() {
 
   return (
     <>
-      <Breadcrumbs />
+      <Breadcrumbs step1 />
       <div className={styles.container}>
         <h1>Shipping</h1>
         <Form

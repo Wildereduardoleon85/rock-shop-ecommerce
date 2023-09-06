@@ -64,8 +64,8 @@ function PlaceOrderPage() {
 
   return (
     <>
-      {isError && <Alert message={errorMessage} trigger={isError} />}
-      <Breadcrumbs />
+      {isError && <Alert message={errorMessage} />}
+      <Breadcrumbs step1 step2 step3 />
       <Order
         cartItems={cartItems}
         shippingAddress={shippingAddress}

@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .root {
   display: flex;
@@ -6,40 +7,39 @@
   margin-top: 2rem;
   align-items: center;
 
-  a:first-child {
-    margin: 0 1rem;
-    color: $red;
+  a {
     text-decoration: none;
   }
 
-  > a:nth-child(3) {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: $red;
-  }
-
+  .link,
   p {
-    margin: 0 1rem;
     color: $very-light-gray;
   }
 
-  p:first-child {
-    color: $red;
-  }
-
-  .active {
-    color: $red;
-  }
-
-  svg {
+  .icon {
     fill: $very-light-gray;
-  }
-
-  svg:first-of-type {
-    fill: $red;
+    margin: 0 1rem;
+    @include transition(fill);
   }
 
   .iconActive {
     fill: $red;
+  }
+
+  .active {
+    color: $red;
+    @include transition(color);
+
+    &:hover {
+      color: $dark-red;
+    }
+
+    &:hover ~ .iconActive {
+      fill: $dark-red;
+    }
+  }
+
+  .pActive {
+    color: $red;
   }
 }
