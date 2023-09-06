@@ -12,7 +12,7 @@ type InputProps = {
     error: string
     type: string
     placeholder: string
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
     onBlur: () => void
     onFocus?: () => void
     value: string
@@ -47,19 +47,36 @@ function Input({ inputProps, className = '' }: InputProps) {
         {error && <span>{capitalize(error)}</span>}
       </div>
       <div className={styles.inputContainer}>
-        <input
-          tabIndex={tabIndex ?? 0}
-          aria-hidden={!!ariaHidden}
-          autoComplete='off'
-          name={name}
-          type={type === 'password' ? passwordInputType : type}
-          placeholder={placeholder}
-          className={error ? errorClassName : ''}
-          onChange={onChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          value={value}
-        />
+        {type === 'textarea' ? (
+          <textarea
+            className={error ? errorClassName : ''}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            aria-hidden={!!ariaHidden}
+            tabIndex={tabIndex ?? 0}
+            autoComplete='off'
+            name={name}
+            placeholder={placeholder}
+            value={value}
+            spellCheck={false}
+          />
+        ) : (
+          <input
+            tabIndex={tabIndex ?? 0}
+            aria-hidden={!!ariaHidden}
+            autoComplete='off'
+            name={name}
+            type={type === 'password' ? passwordInputType : type}
+            placeholder={placeholder}
+            className={error ? errorClassName : ''}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            value={value}
+          />
+        )}
+
         {type === 'password' && (
           <button
             type='button'

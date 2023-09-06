@@ -93,7 +93,9 @@ export type UseInput = {
   value: string
   error: string
   isValid: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
   onBlur: () => void
   reset: () => void
   onFocus: () => void
@@ -220,3 +222,13 @@ export type UpdateProfileCredentials = {
 }
 
 export type VariantEnums = 'success' | 'error' | 'productAddedToCart'
+
+export type InputConfig = {
+  initialValue: string
+  name: string
+  type: string
+  placeholder: string
+  label: string
+  validateFunction: Function
+  validateArg?: any
+}[]

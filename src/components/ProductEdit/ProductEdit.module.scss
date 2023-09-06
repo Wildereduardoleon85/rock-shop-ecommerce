@@ -1,12 +1,23 @@
-.root {
-  width: 480px;
-  margin: 3rem auto 0 auto;
+@import '../../styles/mixins';
+@import '../../styles/variables';
 
-  > h1 {
-    font-size: 3rem;
+.root {
+  .formContainer {
+    width: 480px;
+    margin: 3rem auto 0 auto;
+
+    > h1 {
+      font-size: 3rem;
+    }
+
+    .form {
+      width: 100%;
+      margin-top: 3rem;
+    }
   }
 
-  .form {
+  .goBackButton {
+    @include gobackButtonStyles();
     margin-top: 3rem;
   }
 }

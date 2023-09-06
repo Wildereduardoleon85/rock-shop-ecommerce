@@ -1,4 +1,4 @@
-export function isformValid(values: { isValid: boolean }[]) {
+export function isFormValid(values: { isValid: boolean }[]) {
   let isValid = true
 
   values.forEach((value) => {

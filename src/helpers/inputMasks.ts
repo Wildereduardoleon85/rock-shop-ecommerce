@@ -1,5 +1,5 @@
 export function maskCardNumberInput(
-  e: React.ChangeEvent<HTMLInputElement>,
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setValue: (value: string) => void
 ) {
   const value = e.target.value.replace(/\D/g, '') // Remove non-digit characters
@@ -18,7 +18,7 @@ export function maskCardNumberInput(
 }
 
 export function maskExpirationDateInput(
-  e: React.ChangeEvent<HTMLInputElement>,
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setValue: (value: string) => void
 ) {
   const value = e.target.value.replace(/\D/g, '')
@@ -37,7 +37,7 @@ export function maskExpirationDateInput(
 }
 
 export function maskCvvInput(
-  e: React.ChangeEvent<HTMLInputElement>,
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setValue: (value: string) => void
 ) {
   const value = e.target.value.replace(/\D/g, '')
@@ -48,7 +48,7 @@ export function maskCvvInput(
 }
 
 export function maskCardNameInput(
-  e: React.ChangeEvent<HTMLInputElement>,
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setValue: (value: string) => void
 ) {
   const value = e.target.value.replace(/\d+/g, '')

@@ -1,4 +1,5 @@
 import { validateNumber, validateSingleString } from '../helpers'
+import { InputConfig } from '../types'
 
 type ProductEditFormValues = {
   nameValue: string
@@ -6,6 +7,7 @@ type ProductEditFormValues = {
   brandValue: string
   categoryValue: string
   countInStockValue: string
+  descriptionValue: string
 }
 
 export const productEditFormValues = ({
@@ -14,7 +16,8 @@ export const productEditFormValues = ({
   brandValue,
   categoryValue,
   countInStockValue,
-}: ProductEditFormValues) => [
+  descriptionValue,
+}: ProductEditFormValues): InputConfig => [
   {
     initialValue: nameValue,
     name: 'name',
@@ -32,11 +35,19 @@ export const productEditFormValues = ({
     validateFunction: validateNumber,
   },
   {
+    initialValue: descriptionValue,
+    name: 'description',
+    type: 'textarea',
+    placeholder: 'Product description',
+    label: 'Description',
+    validateFunction: validateSingleString,
+  },
+  {
     initialValue: brandValue,
     name: 'brand',
     type: 'text',
     placeholder: 'Product brand',
-    label: 'Price',
+    label: 'Brand',
     validateFunction: validateSingleString,
   },
   {

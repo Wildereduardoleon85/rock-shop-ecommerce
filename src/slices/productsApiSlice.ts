@@ -4,6 +4,7 @@ import { Product } from '../types'
 const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL
 
 type UpdateProductSchema = {
+  productId: string
   name?: string
   price?: number
   description?: string
@@ -32,16 +33,15 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: PRODUCTS_URL,
         method: 'POST',
       }),
+      invalidatesTags: ['Product'],
     }),
-    updateProduct: builder.mutation<
-      Product,
-      { productId: string; body: UpdateProductSchema }
-    >({
-      query: ({ productId, body }) => ({
-        url: `${PRODUCTS_URL}/${productId}`,
-        method: 'POST',
-        body,
+    updateProduct: builder.mutation<Product, UpdateProductSchema>({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data.productId}`,
+        method: 'PUT',
+        body: data,
       }),
+      invalidatesTags: ['Product'],
     }),
   }),
 })

@@ -17,6 +17,10 @@ function ProductEditPage() {
   }
 
   if (error) {
+    const err = error as any
+    if (err.status === 404) {
+      return <ErrorPage variant='not-found' />
+    }
     return <ErrorPage />
   }
 

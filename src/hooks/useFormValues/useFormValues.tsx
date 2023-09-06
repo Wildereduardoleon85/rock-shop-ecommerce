@@ -1,14 +1,5 @@
 import { useInput } from '..'
-
-type InputConfig = {
-  initialValue: string
-  name: string
-  type: string
-  placeholder: string
-  label: string
-  validateFunction: Function
-  validateArg?: any
-}[]
+import { InputConfig } from '../../types'
 
 function useFormValues(inputConfig: InputConfig) {
   return inputConfig.map((input) => {

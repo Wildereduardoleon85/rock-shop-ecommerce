@@ -1,51 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useInput } from '../../hooks'
-import {
-  validateConfirmPassword,
-  validateEmail,
-  validateName,
-  validatePassword,
-} from '../../helpers'
-import { UseInput, UserInfo } from '../../types'
+import { useFormValues, useInput } from '../../hooks'
+import { UserInfo } from '../../types'
 import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
 import { setCredentials } from '../../slices'
 import { AuthFormContainer, Form } from '../../components'
 import styles from './Register.module.scss'
-
-const nameInputProps = {
-  initialValue: '',
-  validateFunction: validateName,
-}
-
-const emailInputProps = {
-  initialValue: '',
-  validateFunction: validateEmail,
-}
-
-const passwordInputProps = {
-  initialValue: '',
-  validateFunction: validatePassword,
-  validateArg: true,
-}
+import { registerFormValues } from '../../config'
+import { isFormValid, validateConfirmPassword } from '../../helpers'
 
 function RegisterPage() {
-  const nameInput = useInput(nameInputProps)
-  const emailInput = useInput(emailInputProps)
-  const passwordInput = useInput(passwordInputProps)
-  const confirmPasswordInput = useInput({
-    initialValue: '',
-    validateFunction: validateConfirmPassword,
-    validateArg: passwordInput.value,
-  })
-  const formValues: UseInput[] = [
-    nameInput,
-    emailInput,
-    passwordInput,
-    confirmPasswordInput,
-  ]
   const { userInfo } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
   const { search } = useLocation()
@@ -61,37 +27,16 @@ function RegisterPage() {
     }
   }, [navigate, userInfo, redirect])
 
-  const formInputs = [
-    {
-      name: 'name',
-      type: 'text',
-      placeholder: 'e.g. John Doe',
-      onChange: nameInput.onChange,
-      onBlur: nameInput.onBlur,
-      value: nameInput.value,
-      error: nameInput.error,
-      label: 'Name',
-    },
-    {
-      name: 'email',
-      type: 'text',
-      placeholder: 'joe@email.com',
-      onChange: emailInput.onChange,
-      onBlur: emailInput.onBlur,
-      value: emailInput.value,
-      error: emailInput.error,
-      label: 'Email',
-    },
-    {
-      name: 'password',
-      type: 'password',
-      placeholder: 'Enter password',
-      onChange: passwordInput.onChange,
-      onBlur: passwordInput.onBlur,
-      value: passwordInput.value,
-      error: passwordInput.error,
-      label: 'Password',
-    },
+  const initialValues = useFormValues(registerFormValues)
+  const [nameInput, emailInput, passwordInput] = initialValues
+  const confirmPasswordInput = useInput({
+    initialValue: '',
+    validateFunction: validateConfirmPassword,
+    validateArg: passwordInput.value,
+  })
+
+  const formValues = [
+    ...initialValues,
     {
       name: 'confirmPassword',
       type: 'password',
@@ -101,25 +46,17 @@ function RegisterPage() {
       value: confirmPasswordInput.value,
       error: confirmPasswordInput.error,
       label: 'Confirm Password',
+      isValid: confirmPasswordInput.isValid,
     },
   ]
-
-  function checkValidation(values: UseInput) {
-    if (values.isValid) {
-      return true
-    }
-    return false
-  }
-
-  const isFormValid = formValues.every(checkValidation)
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (errorMessage) setErrorMessage('')
 
-    if (!isFormValid) {
-      formValues.forEach((formValue: UseInput) => {
+    if (!isFormValid(formValues)) {
+      formValues.forEach((formValue) => {
         formValue.onBlur()
       })
       return
@@ -147,7 +84,7 @@ function RegisterPage() {
       <Form
         className={styles.form}
         onFormSubmit={onFormSubmit}
-        formInputs={formInputs}
+        formInputs={formValues}
         isLoading={isLoading}
         buttonLabel='REGISTER'
       />

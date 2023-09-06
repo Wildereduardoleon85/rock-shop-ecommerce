@@ -31,7 +31,8 @@
     position: relative;
     $input-height: 47px;
 
-    input {
+    input,
+    textarea {
       width: 100%;
       height: $input-height;
       border: none;
@@ -44,7 +45,15 @@
       margin-bottom: 20px;
     }
 
-    input:focus {
+    textarea {
+      resize: vertical;
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem;
+      height: calc($input-height * 2);
+    }
+
+    input:focus,
+    textarea:focus {
       border-color: $black;
     }
 

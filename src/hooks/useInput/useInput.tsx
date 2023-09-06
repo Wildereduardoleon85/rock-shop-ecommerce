@@ -8,7 +8,7 @@ type UseInputArgs = {
   onInputBlur?: () => void
   onInputFocus?: () => void
   maskFunction?: (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     setValue: (value: string) => void
   ) => void
 }
@@ -30,7 +30,7 @@ function useInput({
   )
   const error = !isValid && isTouched ? validationError : ''
 
-  function onChange(e: ChangeEvent<HTMLInputElement>) {
+  function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (maskFunction) {
       maskFunction(e, setValue)
     } else {

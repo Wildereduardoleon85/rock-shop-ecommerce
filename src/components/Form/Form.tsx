@@ -6,7 +6,9 @@ type FormInputs = {
   name: string
   type: string
   placeholder: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
   onBlur: () => void
   value: string
   error: string

@@ -1,13 +1,8 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  validateConfirmPassword,
-  validateEmail,
-  validateName,
-  validatePassword,
-} from '../../helpers'
-import { useInput } from '../../hooks'
-import { UseInput, VariantEnums } from '../../types'
+import { isFormValid, validateConfirmPassword } from '../../helpers'
+import { useFormValues, useInput } from '../../hooks'
+import { VariantEnums } from '../../types'
 import styles from './ProfilePage.module.scss'
 import { RootState } from '../../store'
 import { Form, Table } from '../../components'
@@ -17,6 +12,7 @@ import {
   useUpdateProfileMutation,
 } from '../../slices'
 import { Alert } from '../../components/UI'
+import { profileFormValues } from '../../config'
 
 function ProfilePage() {
   const [alert, setAlert] = useState<{
@@ -32,63 +28,22 @@ function ProfilePage() {
     isLoading: isOrdersLoading,
   } = useGetMyOrdersQuery()
 
-  const nameInput = useInput({
-    initialValue: userInfo?.name ?? '',
-    validateFunction: validateName,
-  })
-  const emailInput = useInput({
-    initialValue: userInfo?.email ?? '',
-    validateFunction: validateEmail,
-  })
-  const passwordInput = useInput({
-    initialValue: '',
-    validateFunction: validatePassword,
-    validateArg: false,
-  })
+  const initialFormValues = useFormValues(
+    profileFormValues({
+      nameValue: userInfo?.name ?? '',
+      emailValue: userInfo?.email ?? '',
+    })
+  )
+  const [nameInput, emailInput, passwordInput] = initialFormValues
+
   const confirmPasswordInput = useInput({
     initialValue: '',
     validateFunction: validateConfirmPassword,
     validateArg: passwordInput.value,
   })
 
-  const formValues: UseInput[] = [
-    nameInput,
-    emailInput,
-    passwordInput,
-    confirmPasswordInput,
-  ]
-
-  const formInputs = [
-    {
-      name: 'name',
-      type: 'text',
-      placeholder: 'e.g. John Doe',
-      onChange: nameInput.onChange,
-      onBlur: nameInput.onBlur,
-      value: nameInput.value,
-      error: nameInput.error,
-      label: 'Name',
-    },
-    {
-      name: 'email',
-      type: 'text',
-      placeholder: 'joe@email.com',
-      onChange: emailInput.onChange,
-      onBlur: emailInput.onBlur,
-      value: emailInput.value,
-      error: emailInput.error,
-      label: 'Email',
-    },
-    {
-      name: 'password',
-      type: 'password',
-      placeholder: 'Enter password',
-      onChange: passwordInput.onChange,
-      onBlur: passwordInput.onBlur,
-      value: passwordInput.value,
-      error: passwordInput.error,
-      label: 'Password',
-    },
+  const formValues = [
+    ...initialFormValues,
     {
       name: 'confirmPassword',
       type: 'password',
@@ -98,17 +53,9 @@ function ProfilePage() {
       value: confirmPasswordInput.value,
       error: confirmPasswordInput.error,
       label: 'Confirm Password',
+      isValid: confirmPasswordInput.isValid,
     },
   ]
-
-  function checkValidation(values: UseInput) {
-    if (values.isValid) {
-      return true
-    }
-    return false
-  }
-
-  const isFormValid = formValues.every(checkValidation)
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -122,27 +69,29 @@ function ProfilePage() {
         setAlert(null)
       }
 
-      if (!isFormValid) {
-        formValues.forEach((formValue: UseInput) => {
+      if (isFormValid(formValues)) {
+        try {
+          const credentials = await updateProfile({
+            name: nameInput.value,
+            email: emailInput.value,
+            password: passwordInput.value,
+          }).unwrap()
+          dispatch(setCredentials(credentials))
+          setAlert({
+            variant: 'success',
+            message: 'Profile updated successfuly',
+          })
+          passwordInput.reset()
+          confirmPasswordInput.reset()
+        } catch (err: any) {
+          setAlert({
+            variant: 'error',
+            message: err?.data?.message || 'something went wrong',
+          })
+        }
+      } else {
+        formValues.forEach((formValue) => {
           formValue.onBlur()
-        })
-        return
-      }
-
-      try {
-        const credentials = await updateProfile({
-          name: nameInput.value,
-          email: emailInput.value,
-          password: passwordInput.value,
-        }).unwrap()
-        dispatch(setCredentials(credentials))
-        setAlert({ variant: 'success', message: 'Profile updated successfuly' })
-        passwordInput.reset()
-        confirmPasswordInput.reset()
-      } catch (err: any) {
-        setAlert({
-          variant: 'error',
-          message: err?.data?.message || 'something went wrong',
         })
       }
     }
@@ -160,7 +109,7 @@ function ProfilePage() {
           <h1>Profile</h1>
           <Form
             onFormSubmit={onFormSubmit}
-            formInputs={formInputs}
+            formInputs={formValues}
             isLoading={isLoading}
             buttonLabel='UPDATE'
           />
