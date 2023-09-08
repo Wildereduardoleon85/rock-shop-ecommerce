@@ -1,4 +1,4 @@
-import { validateEmail, validateName, validatePassword } from '../helpers'
+import { validateString } from '../helpers'
 import { InputConfig } from '../types'
 
 type ProfileFormValuesArgs = {
@@ -17,7 +17,15 @@ export function profileFormValues({
       label: 'Name',
       type: 'text',
       placeholder: 'e.g. John Doe',
-      validateFunction: validateName,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          alphabetic: true,
+          min: 2,
+          max: 50,
+        },
+      },
     },
     {
       name: 'email',
@@ -25,7 +33,13 @@ export function profileFormValues({
       label: 'Email',
       type: 'text',
       placeholder: 'john@email.com',
-      validateFunction: validateEmail,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          email: true,
+        },
+      },
     },
     {
       name: 'password',
@@ -33,8 +47,15 @@ export function profileFormValues({
       label: 'Password',
       type: 'password',
       placeholder: 'Enter password',
-      validateFunction: validatePassword,
-      validateArg: false,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          password: true,
+          min: 6,
+          max: 12,
+        },
+      },
     },
   ]
 }

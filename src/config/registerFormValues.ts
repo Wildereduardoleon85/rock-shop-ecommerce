@@ -1,4 +1,4 @@
-import { validateEmail, validateName, validatePassword } from '../helpers'
+import { validateString } from '../helpers'
 import { InputConfig } from '../types'
 
 export const registerFormValues: InputConfig = [
@@ -8,7 +8,15 @@ export const registerFormValues: InputConfig = [
     label: 'Name',
     placeholder: 'e.g. John Doe',
     type: 'text',
-    validateFunction: validateName,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        min: 2,
+        max: 50,
+        alphabetic: true,
+      },
+    },
   },
   {
     initialValue: '',
@@ -16,7 +24,13 @@ export const registerFormValues: InputConfig = [
     label: 'Email',
     placeholder: 'john@email.com',
     type: 'text',
-    validateFunction: validateEmail,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        email: true,
+      },
+    },
   },
   {
     initialValue: '',
@@ -24,7 +38,14 @@ export const registerFormValues: InputConfig = [
     label: 'Password',
     placeholder: 'Enter password',
     type: 'text',
-    validateFunction: validatePassword,
-    validateArg: true,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        min: 6,
+        max: 12,
+        password: true,
+      },
+    },
   },
 ]

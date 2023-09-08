@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isFormValid, validateConfirmPassword } from '../../helpers'
+import { isFormValid, validateString } from '../../helpers'
 import { useFormValues, useInput } from '../../hooks'
 import { VariantEnums } from '../../types'
 import styles from './ProfilePage.module.scss'
@@ -38,8 +38,12 @@ function ProfilePage() {
 
   const confirmPasswordInput = useInput({
     initialValue: '',
-    validateFunction: validateConfirmPassword,
-    validateArg: passwordInput.value,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        matchWithValue: passwordInput,
+      },
+    },
   })
 
   const formValues = [

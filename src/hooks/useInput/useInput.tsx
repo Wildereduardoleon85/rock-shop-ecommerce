@@ -1,6 +1,5 @@
-import Joi from 'joi'
 import { useState, ChangeEvent } from 'react'
-import { UseInput } from '../../types'
+import { UseInput, ValidateOptions, Validation } from '../../types'
 
 type UseInputArgs = {
   initialValue: string
@@ -10,8 +9,10 @@ type UseInputArgs = {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     setValue: (value: string) => void
   ) => void
-  schemaValidation?: Joi.Schema
-  name: string
+  validation?: {
+    validateFunction: (value: any, opts: ValidateOptions) => Validation
+    opts: ValidateOptions
+  }
 }
 
 function useInput({
@@ -19,8 +20,7 @@ function useInput({
   onInputBlur,
   onInputFocus,
   maskFunction,
-  schemaValidation,
-  name,
+  validation,
 }: UseInputArgs): UseInput {
   const [value, setValue] = useState<string>(initialValue)
   const [isTouched, setIsTouched] = useState<boolean>(false)
@@ -28,10 +28,10 @@ function useInput({
   let isValid = true
   let error = ''
 
-  if (schemaValidation) {
-    const { error: err } = schemaValidation.validate(value)
-    if (err && isTouched) {
-      error = err.details[0].message.replace('"value"', `field ${name}`)
+  if (validation) {
+    const validationResult = validation.validateFunction(value, validation.opts)
+    if (!validationResult.isValid && isTouched) {
+      error = validationResult.error
       isValid = false
     }
   }

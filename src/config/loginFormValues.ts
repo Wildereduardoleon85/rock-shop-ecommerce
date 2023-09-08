@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '../helpers'
+import { validateString } from '../helpers'
 import { InputConfig } from '../types'
 
 export const loginFormValues: InputConfig = [
@@ -8,7 +8,13 @@ export const loginFormValues: InputConfig = [
     type: 'text',
     placeholder: 'joe@email.com',
     label: 'Email',
-    validateFunction: validateEmail,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        email: true,
+      },
+    },
   },
   {
     initialValue: '',
@@ -16,7 +22,13 @@ export const loginFormValues: InputConfig = [
     type: 'password',
     placeholder: 'Enter password',
     label: 'Password',
-    validateFunction: validatePassword,
-    validateArg: true,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        min: 6,
+        max: 12,
+      },
+    },
   },
 ]

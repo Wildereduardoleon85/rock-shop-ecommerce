@@ -1,4 +1,4 @@
-import { validateSingleString } from '../helpers'
+import { validateString } from '../helpers'
 import { InputConfig } from '../types'
 
 type ShippingFormValuesArgs = {
@@ -21,7 +21,14 @@ export function shippingFormValues({
       label: 'Address',
       placeholder: 'Enter address',
       type: 'text',
-      validateFunction: validateSingleString,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          min: 3,
+          max: 200,
+        },
+      },
     },
     {
       initialValue: cityValue,
@@ -29,7 +36,14 @@ export function shippingFormValues({
       label: 'City',
       placeholder: 'Enter city',
       type: 'text',
-      validateFunction: validateSingleString,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          min: 3,
+          max: 50,
+        },
+      },
     },
     {
       initialValue: postalCodeValue,
@@ -37,7 +51,14 @@ export function shippingFormValues({
       label: 'Postal code',
       placeholder: 'Enter postal code',
       type: 'text',
-      validateFunction: validateSingleString,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          min: 3,
+          max: 50,
+        },
+      },
     },
     {
       initialValue: countryValue,
@@ -45,7 +66,14 @@ export function shippingFormValues({
       label: 'Country',
       placeholder: 'Enter country',
       type: 'text',
-      validateFunction: validateSingleString,
+      validation: {
+        validateFunction: validateString,
+        opts: {
+          required: true,
+          min: 3,
+          max: 50,
+        },
+      },
     },
   ]
 }

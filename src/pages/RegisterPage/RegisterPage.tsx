@@ -9,7 +9,7 @@ import { setCredentials } from '../../slices'
 import { AuthFormContainer, Form } from '../../components'
 import styles from './Register.module.scss'
 import { registerFormValues } from '../../config'
-import { isFormValid, validateConfirmPassword } from '../../helpers'
+import { isFormValid, validateString } from '../../helpers'
 
 function RegisterPage() {
   const { userInfo } = useSelector((state: RootState) => state.auth)
@@ -31,8 +31,13 @@ function RegisterPage() {
   const [nameInput, emailInput, passwordInput] = initialValues
   const confirmPasswordInput = useInput({
     initialValue: '',
-    validateFunction: validateConfirmPassword,
-    validateArg: passwordInput.value,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        matchWithValue: passwordInput.value,
+        customMatchMessage: "passwords don't match",
+      },
+    },
   })
 
   const formValues = [

@@ -1,4 +1,4 @@
-import { Validation } from '../types'
+import { ValidateOptions, Validation } from '../types'
 
 export function validateName(value: string): Validation {
   if (!value) {
@@ -204,22 +204,125 @@ export function validateExpirationDate(value: string): Validation {
   }
 }
 
-export function validateNumber(value: any) {
-  let isValid = true
-  let error = ''
-
-  if (!value || String(value).trim().length === 0) {
-    isValid = false
-    error = 'this field is required'
+export function validateString(
+  value: any,
+  {
+    required,
+    min,
+    max,
+    regex,
+    regexError,
+    alphanum,
+    numeric,
+    currency,
+    email,
+    password,
+    alphabetic,
+    matchWithValue,
+    customMatchMessage,
+  }: ValidateOptions
+): Validation {
+  if (!value && required) {
+    return {
+      isValid: false,
+      error: 'this field is required',
+    }
   }
 
-  if (Number.isNaN(+value)) {
-    isValid = false
-    error = 'this field must be a number'
+  if (typeof value !== 'string') {
+    return {
+      isValid: false,
+      error: 'must be a string',
+    }
+  }
+
+  if (required && value.trim().length === 0) {
+    return {
+      isValid: false,
+      error: 'empty field not allowed',
+    }
+  }
+
+  if (min && value.trim().length < min) {
+    return {
+      isValid: false,
+      error: `at least ${min} characters long`,
+    }
+  }
+
+  if (max && value.trim().length > max) {
+    return {
+      isValid: false,
+      error: 'max character length exceeded',
+    }
+  }
+
+  if (regex && !regex.test(value)) {
+    return {
+      isValid: false,
+      error: regexError ?? `must match with ${regex} pattern`,
+    }
+  }
+
+  if (alphanum && !/^[a-zA-ZÀ-ÖØ-öø-ÿ\s0-9]+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'only alphanumeric allowed',
+    }
+  }
+
+  if (alphabetic && !/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'only letters allowed',
+    }
+  }
+
+  if (numeric && !/^\d+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'only number allowed',
+    }
+  }
+
+  if (currency && !/^[0-9.]+$/.test(value)) {
+    return {
+      isValid: false,
+      error: 'invalid format',
+    }
+  }
+
+  if (
+    email &&
+    !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+  ) {
+    return {
+      isValid: false,
+      error: 'invalid email',
+    }
+  }
+
+  if (
+    value.trim().length > 0 &&
+    password &&
+    !/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[\W_]).+$/.test(value)
+  ) {
+    return {
+      isValid: false,
+      error:
+        'must contain: uppercased, lowercased letter, number and special character',
+    }
+  }
+
+  if (matchWithValue && value !== matchWithValue) {
+    return {
+      isValid: false,
+      error: customMatchMessage ?? "field value doesn't match",
+    }
   }
 
   return {
-    isValid,
-    error,
+    isValid: true,
+    error: '',
   }
 }
