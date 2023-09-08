@@ -15,6 +15,7 @@ type ButtonProps = {
   tabIndex?: number
   color?: 'red' | 'black'
   ariaHidden?: boolean
+  large?: boolean
 }
 
 function Button({
@@ -28,6 +29,7 @@ function Button({
   tabIndex = 0,
   color = 'red',
   ariaHidden = false,
+  large = false,
 }: ButtonProps) {
   return (
     <button
@@ -37,6 +39,7 @@ function Button({
         styles.root,
         className,
         color === 'black' && styles.black,
+        large && styles.large,
       ])}
       disabled={disabled}
       aria-label={ariaLabel}

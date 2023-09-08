@@ -5,8 +5,8 @@ function useFormValues(inputConfig: InputConfig) {
   return inputConfig.map((input) => {
     const populatedInput = useInput({
       initialValue: input.initialValue,
-      validateFunction: input.validateFunction,
-      validateArg: input.validateArg,
+      name: input.name,
+      schemaValidation: input.validation,
     })
 
     return {
@@ -14,6 +14,7 @@ function useFormValues(inputConfig: InputConfig) {
       type: input.type,
       placeholder: input.placeholder,
       label: input.label,
+      readOnly: input.readOnly,
       ...populatedInput,
     }
   })

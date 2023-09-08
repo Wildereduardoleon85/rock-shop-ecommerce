@@ -44,12 +44,10 @@
           margin-left: 1.5rem;
           margin-right: 1rem;
           text-decoration: none;
-          border-bottom: 1px solid transparent;
           @include transition(all);
 
           &:hover {
-            color: $red;
-            border-bottom-color: $red;
+            color: $dark-red;
           }
         }
 

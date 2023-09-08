@@ -47,6 +47,7 @@ function Form({
         className={styles.button}
         isLoading={isLoading}
         disabled={isLoading}
+        large
       >
         {buttonLabel}
       </Button>

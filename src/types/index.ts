@@ -1,3 +1,5 @@
+import Joi from 'joi'
+
 export type Product = {
   _id: string
   name: string
@@ -229,6 +231,8 @@ export type InputConfig = {
   type: string
   placeholder: string
   label: string
-  validateFunction: Function
+  validateFunction?: Function
   validateArg?: any
+  readOnly?: boolean
+  validation?: Joi.Schema
 }[]

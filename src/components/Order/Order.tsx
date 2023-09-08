@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { IoIosWarning } from 'react-icons/io'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
-import { capitalize, formatCurrency } from '../../utils'
+import { capitalize, formatCurrency, subString } from '../../utils'
 import { ROUTES } from '../../constants'
 import { Alert, Button } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
@@ -164,19 +164,22 @@ function Order({
           </div>
           <div className={styles.descriptionCard}>
             <h2>Order Items</h2>
-            {cartItems.map((item) => (
-              <div key={item._id} className={styles.items}>
-                <img src={item.image} alt={item.name} width={50} />
-                <Link to={ROUTES.product.replace(':id', item._id)}>
-                  {item.name}
-                </Link>
-                <p>
-                  {`${item.qty} x $${formatCurrency(
-                    item.price
-                  )} = $${formatCurrency(item.price * item.qty)}`}
-                </p>
-              </div>
-            ))}
+            {cartItems.map((item) => {
+              const orderItem = item as OrderItem
+              return (
+                <div key={item._id} className={styles.items}>
+                  <img src={item.image} alt={item.name} width={50} />
+                  <Link to={ROUTES.product.replace(':id', orderItem.product)}>
+                    {subString(item.name, 100)}
+                  </Link>
+                  <p>
+                    {`${item.qty} x $${formatCurrency(
+                      item.price
+                    )} = $${formatCurrency(item.price * item.qty)}`}
+                  </p>
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className={styles.rightContainer}>
@@ -207,6 +210,7 @@ function Order({
                   onClick={onMarkAsDelivered}
                   disabled={isDeliverLoading}
                   isLoading={isDeliverLoading}
+                  large
                 >
                   MARK AS DELIVERED
                 </Button>
@@ -217,6 +221,7 @@ function Order({
                 onClick={onPlaceOrder}
                 disabled={isLoading}
                 isLoading={isLoading}
+                large
               >
                 PLACE ORDER
               </Button>

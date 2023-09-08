@@ -18,6 +18,7 @@ type InputProps = {
     value: string
     ariaHidden?: boolean
     tabIndex?: number
+    readOnly?: boolean
   }
   className?: string
 }
@@ -36,6 +37,7 @@ function Input({ inputProps, className = '' }: InputProps) {
     onFocus,
     ariaHidden,
     tabIndex,
+    readOnly,
   } = inputProps
 
   const passwordInputType = togglePassword ? 'text' : 'password'
@@ -60,6 +62,7 @@ function Input({ inputProps, className = '' }: InputProps) {
             placeholder={placeholder}
             value={value}
             spellCheck={false}
+            readOnly={!!readOnly}
           />
         ) : (
           <input
@@ -74,6 +77,7 @@ function Input({ inputProps, className = '' }: InputProps) {
             onBlur={onBlur}
             onFocus={onFocus}
             value={value}
+            readOnly={!!readOnly}
           />
         )}
 

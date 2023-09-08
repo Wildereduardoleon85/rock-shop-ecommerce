@@ -1,0 +1,54 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.root {
+  .labelGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    .labelError {
+      color: $dark-red;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+  }
+
+  .inputContainer {
+    border: 1px solid $very-light-gray;
+    height: 2.8125rem;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+
+    input[type='file'] {
+      display: none;
+    }
+
+    > span {
+      margin-left: 1rem;
+    }
+
+    > label {
+      @include buttonStyles('black');
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+      flex-shrink: 0;
+
+      > span {
+        > svg {
+          fill: white;
+          font-size: 1.5rem;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .error {
+    border-color: $dark-red;
+  }
+}

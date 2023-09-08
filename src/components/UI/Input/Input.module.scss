@@ -49,7 +49,7 @@
       resize: vertical;
       padding-top: 0.9rem;
       padding-bottom: 0.9rem;
-      height: calc($input-height * 2);
+      min-height: calc($input-height * 2);
     }
 
     input:focus,

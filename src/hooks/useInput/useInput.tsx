@@ -1,34 +1,40 @@
+import Joi from 'joi'
 import { useState, ChangeEvent } from 'react'
 import { UseInput } from '../../types'
 
 type UseInputArgs = {
   initialValue: string
-  validateFunction: Function
-  validateArg?: any
   onInputBlur?: () => void
   onInputFocus?: () => void
   maskFunction?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     setValue: (value: string) => void
   ) => void
+  schemaValidation?: Joi.Schema
+  name: string
 }
 
 function useInput({
   initialValue,
-  validateFunction,
-  validateArg = '',
   onInputBlur,
   onInputFocus,
   maskFunction,
+  schemaValidation,
+  name,
 }: UseInputArgs): UseInput {
   const [value, setValue] = useState<string>(initialValue)
   const [isTouched, setIsTouched] = useState<boolean>(false)
 
-  const { isValid, error: validationError } = validateFunction(
-    value,
-    validateArg
-  )
-  const error = !isValid && isTouched ? validationError : ''
+  let isValid = true
+  let error = ''
+
+  if (schemaValidation) {
+    const { error: err } = schemaValidation.validate(value)
+    if (err && isTouched) {
+      error = err.details[0].message.replace('"value"', `field ${name}`)
+      isValid = false
+    }
+  }
 
   function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (maskFunction) {

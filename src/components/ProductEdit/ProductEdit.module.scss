@@ -13,6 +13,23 @@
     .form {
       width: 100%;
       margin-top: 3rem;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
+      padding: 1.5rem;
+
+      .shortInputsContainer {
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+          width: 48%;
+        }
+      }
+    }
+
+    .submitButton {
+      margin-top: 2rem;
+      width: 100%;
     }
   }
 

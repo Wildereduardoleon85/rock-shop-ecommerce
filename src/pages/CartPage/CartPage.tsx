@@ -91,6 +91,7 @@ function CartPage() {
             className={styles.checkoutButton}
             onClick={onCheckoutClick}
             disabled={isNotCartInfo(cart)}
+            large
           >
             PROCEED TO CHECKOUT
           </Button>

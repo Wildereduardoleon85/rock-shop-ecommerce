@@ -1,3 +1,4 @@
+import joi from 'joi'
 import { validateNumber, validateSingleString } from '../helpers'
 import { InputConfig } from '../types'
 
@@ -8,7 +9,28 @@ type ProductEditFormValues = {
   categoryValue: string
   countInStockValue: string
   descriptionValue: string
+  currentImageValue: string
 }
+
+const onlyLettersValidation = joi
+  .string()
+  .required()
+  .min(3)
+  .pattern(/^[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF\s]+$/u)
+  .max(60)
+  .messages({
+    'string.pattern.base': '"value" must contain only letters',
+    'string.max': '"value" must not exceed {#limit} characters long',
+  })
+
+const onLyNumbersValidation = joi
+  .string()
+  .pattern(/^[0-9.]+$/)
+  .required()
+  .messages({
+    'string.pattern.base': '"value" must contain only numbers',
+    'string.max': '"value" must not exceed {#limit} characters long',
+  })
 
 export const productEditFormValues = ({
   nameValue,
@@ -17,6 +39,7 @@ export const productEditFormValues = ({
   categoryValue,
   countInStockValue,
   descriptionValue,
+  currentImageValue,
 }: ProductEditFormValues): InputConfig => [
   {
     initialValue: nameValue,
@@ -24,23 +47,7 @@ export const productEditFormValues = ({
     type: 'text',
     placeholder: 'Product name',
     label: 'Name',
-    validateFunction: validateSingleString,
-  },
-  {
-    initialValue: priceValue,
-    name: 'price',
-    type: 'text',
-    placeholder: 'Product price',
-    label: 'Price',
-    validateFunction: validateNumber,
-  },
-  {
-    initialValue: descriptionValue,
-    name: 'description',
-    type: 'textarea',
-    placeholder: 'Product description',
-    label: 'Description',
-    validateFunction: validateSingleString,
+    validation: onlyLettersValidation,
   },
   {
     initialValue: brandValue,
@@ -48,7 +55,7 @@ export const productEditFormValues = ({
     type: 'text',
     placeholder: 'Product brand',
     label: 'Brand',
-    validateFunction: validateSingleString,
+    validation: joi.string().required().min(2).max(60),
   },
   {
     initialValue: categoryValue,
@@ -56,7 +63,15 @@ export const productEditFormValues = ({
     type: 'text',
     placeholder: 'Product category',
     label: 'Category',
-    validateFunction: validateSingleString,
+    validation: onlyLettersValidation,
+  },
+  {
+    initialValue: priceValue,
+    name: 'price',
+    type: 'text',
+    placeholder: 'Product price',
+    label: 'Price',
+    validation: onLyNumbersValidation,
   },
   {
     initialValue: countInStockValue,
@@ -64,6 +79,25 @@ export const productEditFormValues = ({
     type: 'text',
     placeholder: 'Product count in stock',
     label: 'Count in stock',
-    validateFunction: validateNumber,
+    validation: joi.string().pattern(/^\d+$/).required().messages({
+      'string.pattern.base': '"value" must contain only numbers',
+      'string.max': '"value" must not exceed {#limit} characters long',
+    }),
+  },
+  {
+    initialValue: descriptionValue,
+    name: 'description',
+    type: 'textarea',
+    placeholder: 'Product description',
+    label: 'Description',
+    validation: joi.string().required().min(2).max(200),
+  },
+  {
+    initialValue: currentImageValue,
+    name: 'currentImage',
+    type: 'text',
+    placeholder: 'Current image',
+    label: 'Current image',
+    readOnly: true,
   },
 ]

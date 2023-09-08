@@ -7,10 +7,12 @@
 @mixin buttonStyles($variant-color: '') {
   $background-color: $red;
   $hover-color: $dark-red;
+  $focus-color: $black;
 
   @if $variant-color == 'black' {
     $background-color: $black;
     $hover-color: $dark-gray;
+    $focus-color: $red;
   }
 
   @if $variant-color == 'dark-gray' {
@@ -30,6 +32,10 @@
 
   &:hover {
     background-color: $hover-color;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $focus-color;
   }
 
   &:disabled {

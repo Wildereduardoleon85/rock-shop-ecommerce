@@ -37,15 +37,20 @@
 
   .buttons {
     margin-top: 2rem;
+    display: flex;
 
     > a:first-of-type {
       text-decoration: none;
       @include buttonStyles('black');
+      display: flex;
+      width: 48%;
+      justify-content: center;
     }
 
     > button:nth-child(2) {
       margin-left: 1rem;
       text-decoration: none;
+      width: 48%;
     }
   }
 }
