@@ -13,6 +13,9 @@ import { ROUTES } from '../../constants'
 import { RootState } from '../../store'
 import { ErrorPage } from '..'
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const IMAGES_URL = import.meta.env.VITE_IMAGES_URL
+
 function ProductPage() {
   const { id: productId } = useParams()
   const navigate = useNavigate()
@@ -71,7 +74,7 @@ function ProductPage() {
             <img
               width={636}
               height={506}
-              src={product.image}
+              src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
               alt={product.name}
             />
             <div className={styles.details}>

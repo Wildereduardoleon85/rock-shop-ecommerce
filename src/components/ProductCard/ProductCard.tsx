@@ -4,6 +4,9 @@ import { Rating } from '../Rating'
 import { subString } from '../../utils'
 import { PRODUCT_CARD_STRING_LIMIT, ROUTES } from '../../constants'
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const IMAGES_URL = import.meta.env.VITE_IMAGES_URL
+
 type ProductCardProps = {
   product: {
     _id: string
@@ -25,7 +28,12 @@ function ProductCard({ product }: ProductCardProps) {
       className={styles.root}
       to={ROUTES.product.replace(':id', product._id)}
     >
-      <img width={265} height={211} src={product.image} alt={product.name} />
+      <img
+        width={265}
+        height={211}
+        src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+        alt={product.name}
+      />
 
       <h3 className={styles.productName}>
         {product.name.length > PRODUCT_CARD_STRING_LIMIT
