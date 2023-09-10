@@ -2,6 +2,7 @@ import { apiSlice } from '.'
 import { Product } from '../types'
 
 const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL
+const UPLOAD_URL = import.meta.env.VITE_UPLOAD_IMAGE_URL
 
 type UpdateProductSchema = {
   productId: string
@@ -12,6 +13,11 @@ type UpdateProductSchema = {
   brand?: string
   category?: string
   countInStock?: number
+}
+
+type UploadImageRespose = {
+  message: string
+  image: File
 }
 
 export const productsApiSlice = apiSlice.injectEndpoints({
@@ -44,6 +50,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
+    uploadProductImage: builder.mutation<UploadImageRespose, FormData>({
+      query: (data) => ({
+        url: UPLOAD_URL,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 })
 
@@ -52,4 +65,5 @@ export const {
   useGetProductDetailsQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+  useUploadProductImageMutation,
 } = productsApiSlice

@@ -234,6 +234,12 @@ export type InputConfig = {
     validateFunction: (value: any, opts: ValidateOptions) => Validation
     opts: ValidateOptions
   }
+  maskFunction?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    setValue: (value: string) => void
+  ) => void
+  onBlur?: () => void
+  onFocus?: () => void
 }[]
 
 export type ValidateOptions = {
@@ -241,7 +247,6 @@ export type ValidateOptions = {
   min?: number
   max?: number
   regex?: RegExp
-  regexError?: string
   alphanum?: boolean
   currency?: boolean
   numeric?: boolean
@@ -249,5 +254,7 @@ export type ValidateOptions = {
   password?: boolean
   alphabetic?: boolean
   matchWithValue?: any
-  customMatchMessage?: string
+  messages?: {
+    [key: string]: string
+  }
 }

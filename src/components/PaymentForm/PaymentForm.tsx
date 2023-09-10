@@ -2,78 +2,61 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { PaymentCard } from '..'
-import { useInput } from '../../hooks'
+import { useFormValues, useInput } from '../../hooks'
 import { Button, Input } from '../UI'
 import styles from './PaymentForm.module.scss'
-import {
-  maskCardNameInput,
-  maskCardNumberInput,
-  maskCvvInput,
-  maskExpirationDateInput,
-  validateCardNumber,
-  validateCvv,
-  validateExpirationDate,
-  validateSingleString,
-} from '../../helpers'
+import { isFormValid, maskCvvInput, validateString } from '../../helpers'
 import { ROUTES } from '../../constants'
-import { UseInput } from '../../types'
 import { savePaymentMethod } from '../../slices'
+import { paymentFormValues } from '../../config/paymentFormValues'
 
 function PaymentForm() {
   const [rotate, setRotate] = useState<boolean>(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const cardNumberInput = useInput({
-    initialValue: '',
-    validateFunction: validateCardNumber,
-    validateArg: 22,
-    maskFunction: maskCardNumberInput,
-  })
-
-  const nameAndSurnameInput = useInput({
-    initialValue: '',
-    validateFunction: validateSingleString,
-    maskFunction: maskCardNameInput,
-  })
-
-  const expirationDateInput = useInput({
-    initialValue: '',
-    validateFunction: validateExpirationDate,
-    validateArg: 7,
-    maskFunction: maskExpirationDateInput,
-  })
+  const initialFormValues = useFormValues(paymentFormValues)
+  const [cardNumberInput, nameAndSurnameInput, expirationDateInput] =
+    initialFormValues
 
   const cvvCodeInput = useInput({
     initialValue: '',
-    validateFunction: validateCvv,
-    validateArg: 3,
+    validation: {
+      validateFunction: validateString,
+      opts: {
+        required: true,
+        min: 3,
+        messages: {
+          required: 'required',
+          min: '3 characters min',
+        },
+      },
+    },
     onInputFocus: () => setRotate(true),
     onInputBlur: () => setRotate(false),
     maskFunction: maskCvvInput,
   })
 
-  const formValues: UseInput[] = [
-    cardNumberInput,
-    nameAndSurnameInput,
-    expirationDateInput,
-    cvvCodeInput,
-  ]
-
-  function checkValidation(values: UseInput) {
-    if (values.isValid) {
-      return true
-    }
-    return false
+  const cvvCodeInputProps = {
+    name: 'cvv',
+    label: 'CVV / CVC',
+    error: cvvCodeInput.error,
+    type: 'text',
+    placeholder: 'Enter cvv / cvc',
+    onChange: cvvCodeInput.onChange,
+    onBlur: cvvCodeInput.onBlur,
+    onFocus: cvvCodeInput.onFocus,
+    value: cvvCodeInput.value,
+    isValid: cvvCodeInput.isValid,
   }
 
-  const isFormValid = formValues.every(checkValidation)
+  const formValues = [...initialFormValues, cvvCodeInputProps]
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!isFormValid) {
-      formValues.forEach((formValue: UseInput) => {
+    if (!isFormValid(formValues)) {
+      formValues.forEach((formValue) => {
         formValue.onBlur()
       })
       return
@@ -83,64 +66,16 @@ function PaymentForm() {
     navigate(ROUTES.placeOrder)
   }
 
-  const cardInputProps = {
-    name: 'card-number',
-    label: 'Card Number',
-    error: cardNumberInput.error,
-    type: 'text',
-    placeholder: 'Enter card number',
-    onChange: cardNumberInput.onChange,
-    onBlur: cardNumberInput.onBlur,
-    value: cardNumberInput.value,
-  }
-
-  const nameAndSurnameInputProps = {
-    name: 'name-and-surname',
-    label: 'Name',
-    error: nameAndSurnameInput.error,
-    type: 'text',
-    placeholder: 'Enter name as it appears on card',
-    onChange: nameAndSurnameInput.onChange,
-    onBlur: nameAndSurnameInput.onBlur,
-    value: nameAndSurnameInput.value,
-  }
-
-  const expirationDateInputProps = {
-    name: 'expiration-date',
-    label: 'Expiration date',
-    error: expirationDateInput.error,
-    type: 'text',
-    placeholder: 'Enter expiration date',
-    onChange: expirationDateInput.onChange,
-    onBlur: expirationDateInput.onBlur,
-    value: expirationDateInput.value,
-  }
-
-  const cvvCodeInputProps = {
-    name: 'cvv-code',
-    label: 'CVV / CVC',
-    error: cvvCodeInput.error,
-    type: 'text',
-    placeholder: 'Enter CVV / CVC',
-    onChange: cvvCodeInput.onChange,
-    onBlur: cvvCodeInput.onBlur,
-    value: cvvCodeInput.value,
-    onFocus: cvvCodeInput.onFocus,
-  }
-
   return (
     <form onSubmit={onSubmit} className={styles.formContainer}>
       <div className={styles.formCard}>
         <div className={styles.leftContainer}>
-          <Input className={styles.input} inputProps={cardInputProps} />
-          <Input
-            className={styles.input}
-            inputProps={nameAndSurnameInputProps}
-          />
+          <Input className={styles.input} inputProps={cardNumberInput} />
+          <Input className={styles.input} inputProps={nameAndSurnameInput} />
           <div className={styles.shortInputs}>
             <Input
               className={styles.shortInput}
-              inputProps={expirationDateInputProps}
+              inputProps={expirationDateInput}
             />
             <Input
               className={styles.shortInput}

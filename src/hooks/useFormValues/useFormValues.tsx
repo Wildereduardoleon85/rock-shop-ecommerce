@@ -6,6 +6,9 @@ function useFormValues(inputConfig: InputConfig) {
     const populatedInput = useInput({
       initialValue: input.initialValue,
       validation: input.validation,
+      maskFunction: input.maskFunction,
+      onInputBlur: input.onBlur,
+      onInputFocus: input.onFocus,
     })
 
     return {

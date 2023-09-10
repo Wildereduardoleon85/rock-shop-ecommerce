@@ -42,6 +42,9 @@ function ProfilePage() {
       validateFunction: validateString,
       opts: {
         matchWithValue: passwordInput,
+        messages: {
+          matchWithValue: "passwords don't match",
+        },
       },
     },
   })

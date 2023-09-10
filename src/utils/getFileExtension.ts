@@ -1,3 +1,8 @@
 export function getFileExtension(file: File): string {
-  return file.name.split('.')[1].toLowerCase()
+  const result = file.name
+    .trim()
+    .substring(file.name.length - 4)
+    .replace('.', '')
+
+  return result
 }

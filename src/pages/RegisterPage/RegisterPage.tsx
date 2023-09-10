@@ -35,7 +35,9 @@ function RegisterPage() {
       validateFunction: validateString,
       opts: {
         matchWithValue: passwordInput.value,
-        customMatchMessage: "passwords don't match",
+        messages: {
+          matchWithValue: "passwords don't match",
+        },
       },
     },
   })
