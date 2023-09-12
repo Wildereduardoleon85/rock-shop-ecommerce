@@ -38,6 +38,7 @@ function ProductListPage() {
         data={data}
         isLoading={isLoading}
         error={error}
+        refetch={refetch}
         onCreateProduct={onCreateProduct}
         createProductLoading={createProductLoading}
       />

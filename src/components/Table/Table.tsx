@@ -2,28 +2,20 @@
 import { Link } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSad } from 'react-icons/im'
-import { FaRegTimesCircle, FaEdit, FaTrashAlt } from 'react-icons/fa'
+import { FaRegTimesCircle } from 'react-icons/fa'
 import { Button, Loader } from '../UI'
 import styles from './Table.module.scss'
 import { ROUTES } from '../../constants'
-import {
-  formatCurrency,
-  getClassNames,
-  parseDate,
-  subString,
-} from '../../utils'
+import { getClassNames, parseDate } from '../../utils'
 import { ErrorPage } from '../../pages'
 import { OrderResponse, Product } from '../../types'
+import { ProductsTable } from '..'
 
 type Variants = 'orders' | 'adminOrders' | 'products'
 
 type OrderProps = {
   orders: OrderResponse[]
   variant: Variants
-}
-
-type ProductsTableProps = {
-  products: Product[]
 }
 
 type TableProps = {
@@ -34,6 +26,7 @@ type TableProps = {
   className?: string
   onCreateProduct?: () => Promise<void>
   createProductLoading?: boolean
+  refetch?: () => void
 }
 
 const ORDER_HEADERS = {
@@ -90,39 +83,16 @@ function OrdersTable({ orders, variant }: OrderProps) {
           )}
         </td>
         <td>
-          <Link to={ROUTES.order.replace(':id', order._id)}>DETAILS</Link>
+          <Link
+            className={styles.detailsButton}
+            to={ROUTES.order.replace(':id', order._id)}
+          >
+            DETAILS
+          </Link>
         </td>
       </tr>
     )
   })
-}
-
-function ProductsTable({ products }: ProductsTableProps) {
-  return products.map((product: any) => (
-    <tr key={product._id}>
-      <td>{product._id}</td>
-      <td>{subString(product.name, 100)}</td>
-      <td>{formatCurrency(product.price)}</td>
-      <td>{product.category}</td>
-      <td>{product.brand}</td>
-      <td className={styles.iconButtonsContainer}>
-        <Link
-          to={ROUTES.productEdit.replace(':id', product._id)}
-          aria-label='edit-product'
-          className={styles.editIconButton}
-        >
-          <FaEdit />
-        </Link>
-        <button
-          type='button'
-          aria-label='delete-product'
-          className={styles.trashIconButton}
-        >
-          <FaTrashAlt />
-        </button>
-      </td>
-    </tr>
-  ))
 }
 
 function Table({
@@ -133,6 +103,7 @@ function Table({
   isLoading,
   createProductLoading,
   onCreateProduct,
+  refetch,
 }: TableProps) {
   if (isLoading) {
     return <Loader />
@@ -172,7 +143,7 @@ function Table({
           </thead>
           <tbody>
             {variant === 'products' ? (
-              <ProductsTable products={data as Product[]} />
+              <ProductsTable products={data as Product[]} refetch={refetch} />
             ) : (
               <OrdersTable orders={data as OrderResponse[]} variant={variant} />
             )}

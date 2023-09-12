@@ -65,7 +65,7 @@
     box-shadow: $box-shadow-light;
     overflow: hidden;
 
-    a {
+    .detailsButton {
       @include buttonStyles();
       text-decoration: none;
       padding: 0.3rem 1.5rem;
@@ -74,51 +74,6 @@
     .timesIcon {
       fill: $dark-red;
       font-size: 1.2rem;
-    }
-
-    .iconButtonsContainer {
-      display: flex;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      align-items: center;
-
-      .editIconButton,
-      .trashIconButton {
-        border: none;
-        padding: 0.4rem;
-        font-size: 1.2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: none;
-      }
-
-      .editIconButton {
-        &:hover svg {
-          fill: $dark-gray;
-        }
-
-        svg {
-          fill: $black;
-          @include transition(fill);
-        }
-      }
-
-      .trashIconButton {
-        margin-left: 1rem;
-        background-color: $red;
-        border-radius: $border-radius;
-        @include transition(background-color);
-
-        &:hover {
-          background-color: $dark-red;
-        }
-
-        svg {
-          fill: white;
-        }
-      }
     }
   }
 

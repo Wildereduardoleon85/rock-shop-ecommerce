@@ -1,0 +1,79 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+td {
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(240, 240, 240);
+}
+
+.iconButtonsContainer {
+  display: flex;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  align-items: center;
+
+  .editIconButton,
+  .trashIconButton {
+    border: none;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+  }
+
+  .editIconButton {
+    &:hover svg {
+      fill: $dark-gray;
+    }
+
+    svg {
+      fill: $black;
+      @include transition(fill);
+    }
+  }
+
+  .trashIconButton {
+    margin-left: 1rem;
+    background-color: $red;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: $dark-red;
+    }
+
+    &:disabled {
+      background-color: $super-very-light-gray;
+    }
+
+    > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      //   background-color: black;
+      //   background-color: blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+
+      svg {
+        fill: white;
+      }
+    }
+  }
+}
