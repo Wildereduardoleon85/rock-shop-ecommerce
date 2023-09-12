@@ -64,28 +64,6 @@
           right: -10px;
           font-size: 12px;
         }
-
-        .cartItems.animate {
-          animation: highlight 0.5s ease-in-out forwards;
-        }
-
-        @keyframes highlight {
-          25% {
-            transform: scale(1.3);
-          }
-
-          50% {
-            transform: scale(1);
-          }
-
-          75% {
-            transform: scale(1.5);
-          }
-
-          100% {
-            transform: scale(1);
-          }
-        }
       }
 
       .sigInButton {

@@ -1,8 +1,6 @@
 import { apiSlice } from '.'
+import { PRODUCTS_URL, UPLOAD_URL } from '../constants'
 import { Product } from '../types'
-
-const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL
-const UPLOAD_URL = import.meta.env.VITE_UPLOAD_IMAGE_URL
 
 type UpdateProductSchema = {
   productId: string
@@ -17,7 +15,9 @@ type UpdateProductSchema = {
 
 type UploadImageRespose = {
   message: string
-  image: File
+  image: {
+    filename: string
+  }
 }
 
 export const productsApiSlice = apiSlice.injectEndpoints({

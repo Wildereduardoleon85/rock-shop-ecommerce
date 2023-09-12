@@ -8,12 +8,11 @@ import { Alert, Button, Input } from '../UI'
 import { FileInput } from '..'
 import { useFormValues } from '../../hooks'
 import { productEditFormValues } from '../../config'
-import { getFileExtension } from '../../utils'
 import {
   useUpdateProductMutation,
   useUploadProductImageMutation,
 } from '../../slices'
-import { isFormValid } from '../../helpers'
+import { getFileExtension, isFormValid, renameImageFile } from '../../helpers'
 
 const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
 
@@ -57,11 +56,16 @@ function ProductEdit({ product }: ProductEditProps) {
     if (fileErrorMessage) setFileErrorMessage('')
 
     if (files && files.length > 0) {
-      if (!ALLOWED_EXTENSIONS.includes(getFileExtension(files[0]))) {
+      const fileExtension = getFileExtension(files[0])
+
+      if (!ALLOWED_EXTENSIONS.includes(fileExtension)) {
         setFileErrorMessage('only (.png, .jpeg, .jpg or .webp) is allowed!')
         return
       }
-      setImageFile(files[0])
+
+      const newName = `images-${Date.now()}.${fileExtension}`
+      const renamedFile = renameImageFile(files[0], newName)
+      setImageFile(renamedFile)
     }
   }
 

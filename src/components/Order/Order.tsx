@@ -5,7 +5,7 @@ import { IoIosWarning } from 'react-icons/io'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
 import { capitalize, formatCurrency, subString } from '../../utils'
-import { ROUTES } from '../../constants'
+import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
 import { Alert, Button } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
 import { useDeliverOrderMutation } from '../../slices'
@@ -168,7 +168,11 @@ function Order({
               const orderItem = item as OrderItem
               return (
                 <div key={item._id} className={styles.items}>
-                  <img src={item.image} alt={item.name} width={50} />
+                  <img
+                    src={`${BASE_URL}${IMAGES_URL}/${item.image}`}
+                    alt={item.name}
+                    width={50}
+                  />
                   <Link to={ROUTES.product.replace(':id', orderItem.product)}>
                     {subString(item.name, 100)}
                   </Link>

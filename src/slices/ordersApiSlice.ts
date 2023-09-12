@@ -1,7 +1,6 @@
+import { ORDERS_URL } from '../constants'
 import { Order, OrderDetailsResponse, OrderResponse } from '../types'
 import { apiSlice } from './apiSlice'
-
-const ORDERS_URL = import.meta.env.VITE_ORDERS_URL
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

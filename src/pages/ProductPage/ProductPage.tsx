@@ -9,12 +9,9 @@ import { QtyButton } from '../../components'
 import { addToCart, setQty, useGetProductDetailsQuery } from '../../slices'
 import { Alert, Button, Loader } from '../../components/UI'
 import { Product } from '../../types'
-import { ROUTES } from '../../constants'
+import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
 import { RootState } from '../../store'
 import { ErrorPage } from '..'
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
-const IMAGES_URL = import.meta.env.VITE_IMAGES_URL
 
 function ProductPage() {
   const { id: productId } = useParams()

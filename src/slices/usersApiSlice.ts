@@ -1,12 +1,11 @@
 import { apiSlice } from '.'
+import { USERS_URL } from '../constants'
 import {
   LoginCredentials,
   UserInfo,
   RegisterCredentials,
   UpdateProfileCredentials,
 } from '../types'
-
-const USERS_URL = import.meta.env.VITE_USERS_URL
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

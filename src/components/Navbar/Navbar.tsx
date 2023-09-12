@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { RiShoppingCartFill } from 'react-icons/ri'
 import { FaChevronDown } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,19 +17,10 @@ function Navbar() {
   const [isActive, setIsActive] = useState<boolean>(false)
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const { userInfo } = useSelector((state: RootState) => state.auth)
-  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false)
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const [logout, { isLoading }] = useLogoutMutation()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    setShouldAnimate(true)
-    const timer = setTimeout(() => {
-      setShouldAnimate(false)
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [cartItems])
 
   const itemsInTheCart = cartItems.reduce(
     (acc: number, curr: CartItem) => acc + curr.qty,
@@ -58,14 +49,7 @@ function Navbar() {
           <Search />
           <Link to={ROUTES.cart} className={styles.iconButton}>
             {itemsInTheCart > 0 && (
-              <div
-                className={getClassNames([
-                  styles.cartItems,
-                  shouldAnimate && styles.animate,
-                ])}
-              >
-                {itemsInTheCart}
-              </div>
+              <div className={styles.cartItems}>{itemsInTheCart}</div>
             )}
             <RiShoppingCartFill className={styles.cartIcon} />
           </Link>

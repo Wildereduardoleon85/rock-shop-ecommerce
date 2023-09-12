@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import styles from './Alert.module.scss'
 import { capitalize, getClassNames, subString } from '../../../utils'
 import { Product, VariantEnums } from '../../../types'
-import { ROUTES } from '../../../constants'
+import { BASE_URL, IMAGES_URL, ROUTES } from '../../../constants'
 
 const VARIANTS: {
   [key in VariantEnums]: { icon?: React.JSX.Element; prefix?: string }
@@ -74,7 +74,11 @@ export function Alert({
   if (variant === 'productAddedToCart' && product) {
     return (
       <div className={getClassNames([styles.root, show && styles.show])}>
-        <img src={product.image} alt={product.name} width={40} />
+        <img
+          src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+          alt={product.name}
+          width={40}
+        />
         <div className={styles.description}>
           <p>{subString(product.name, 24)}</p>
           <p>ADDED TO CART</p>

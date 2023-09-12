@@ -3,7 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaTrashAlt } from 'react-icons/fa'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './CartPage.module.scss'
-import { PRODUCT_IMAGE_ASPECT_RATIO, ROUTES } from '../../constants'
+import {
+  BASE_URL,
+  IMAGES_URL,
+  PRODUCT_IMAGE_ASPECT_RATIO,
+  ROUTES,
+} from '../../constants'
 import { formatCurrency, subString } from '../../utils'
 import { RootState } from '../../store'
 import { CartItem } from '../../types'
@@ -48,7 +53,7 @@ function CartPage() {
                 <img
                   width={IMAGE_WIDTH}
                   height={IMAGE_WIDTH * PRODUCT_IMAGE_ASPECT_RATIO}
-                  src={product.image}
+                  src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
                   alt={product.name}
                 />
                 <div className={styles.descriptionContainer}>

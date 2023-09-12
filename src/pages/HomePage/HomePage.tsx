@@ -5,13 +5,17 @@ import { useGetProductsQuery } from '../../slices'
 import styles from './HomePage.module.scss'
 
 function HomePage() {
-  const { data: products, isError, isLoading } = useGetProductsQuery()
+  const { data: products, error, isLoading } = useGetProductsQuery()
 
   if (isLoading) {
     return <Loader />
   }
 
-  if (isError) {
+  if (error) {
+    const err = error as any
+    if (err.status === 404) {
+      return <ErrorPage variant='not-found' message={err.data.message} />
+    }
     return <ErrorPage />
   }
 

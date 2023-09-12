@@ -1,5 +1,11 @@
 import { ErrorPageConfig, Routes, FormInputDefaultAttrs } from '../types'
 
+export const BASE_URL = import.meta.env.VITE_BASE_URL
+export const IMAGES_URL = import.meta.env.VITE_IMAGES_URL
+export const ORDERS_URL = import.meta.env.VITE_ORDERS_URL
+export const PRODUCTS_URL = import.meta.env.VITE_PRODUCTS_URL
+export const UPLOAD_URL = import.meta.env.VITE_UPLOAD_IMAGE_URL
+export const USERS_URL = import.meta.env.VITE_USERS_URL
 export const PRODUCT_CARD_STRING_LIMIT: number = 55
 export const ERROR_PAGE_CONFIG: ErrorPageConfig = {
   'not-found': {

@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.scss'
 import { Rating } from '../Rating'
 import { subString } from '../../utils'
-import { PRODUCT_CARD_STRING_LIMIT, ROUTES } from '../../constants'
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
-const IMAGES_URL = import.meta.env.VITE_IMAGES_URL
+import {
+  BASE_URL,
+  IMAGES_URL,
+  PRODUCT_CARD_STRING_LIMIT,
+  ROUTES,
+} from '../../constants'
 
 type ProductCardProps = {
   product: {
