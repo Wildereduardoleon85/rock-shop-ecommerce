@@ -41,8 +41,11 @@
   &:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+    background-color: $super-very-light-gray;
+    color: $dark-gray;
+
     &:hover {
-      background-color: $background-color;
+      background-color: $super-very-light-gray;
     }
   }
 }

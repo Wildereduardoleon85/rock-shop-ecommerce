@@ -258,3 +258,5 @@ export type ValidateOptions = {
     [key: string]: string
   }
 }
+
+export type AlertVariant = 'success' | 'error'

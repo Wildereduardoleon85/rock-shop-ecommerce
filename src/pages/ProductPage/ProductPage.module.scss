@@ -56,14 +56,6 @@
         width: $button-width;
       }
 
-      .addToCartButton:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-        &:hover {
-          background-color: $red;
-        }
-      }
-
       .qtyButton {
         margin-top: 2rem;
       }

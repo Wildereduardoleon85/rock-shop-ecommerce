@@ -5,7 +5,7 @@ import { useFormValues, useInput } from '../../hooks'
 import { UserInfo } from '../../types'
 import { useRegisterMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
-import { setCredentials } from '../../slices'
+import { setAlert, setCredentials } from '../../slices'
 import { AuthFormContainer, Form } from '../../components'
 import styles from './Register.module.scss'
 import { registerFormValues } from '../../config'
@@ -78,16 +78,15 @@ function RegisterPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      setErrorMessage(err?.data?.message || 'internal server error')
+      setAlert({
+        variant: 'error',
+        message: err?.data?.message || 'internal server error',
+      })
     }
   }
 
   return (
-    <AuthFormContainer
-      errorMessage={errorMessage}
-      variant='register'
-      redirect={redirect}
-    >
+    <AuthFormContainer variant='register' redirect={redirect}>
       <Form
         className={styles.form}
         onFormSubmit={onFormSubmit}

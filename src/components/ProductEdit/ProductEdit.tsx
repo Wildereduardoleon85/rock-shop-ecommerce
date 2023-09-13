@@ -1,14 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { IoMdArrowRoundBack } from 'react-icons/io'
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './ProductEdit.module.scss'
 import { ROUTES } from '../../constants'
 import { Product } from '../../types'
-import { Alert, Button, Input } from '../UI'
+import { Button, Input } from '../UI'
 import { FileInput } from '..'
 import { useFormValues } from '../../hooks'
 import { productEditFormValues } from '../../config'
 import {
+  setAlert,
   useUpdateProductMutation,
   useUploadProductImageMutation,
 } from '../../slices'
@@ -22,9 +24,9 @@ type ProductEditProps = {
 
 function ProductEdit({ product }: ProductEditProps) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [fileErrorMessage, setFileErrorMessage] = useState<string>('')
-  const [errorMessage, setErrorMessage] = useState<string>('')
   const [updateProduct, { isLoading }] = useUpdateProductMutation()
   const [uploadProductImage, { isLoading: isLoadingUpload }] =
     useUploadProductImageMutation()
@@ -72,8 +74,6 @@ function ProductEdit({ product }: ProductEditProps) {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (errorMessage) setErrorMessage('')
-
     if (isFormValid(formValues)) {
       try {
         if (imageFile) {
@@ -95,7 +95,12 @@ function ProductEdit({ product }: ProductEditProps) {
 
         navigate(ROUTES.productList)
       } catch (error: any) {
-        setErrorMessage(error.data.message ?? 'something went wrong')
+        dispatch(
+          setAlert({
+            variant: 'error',
+            message: error.data.message ?? 'something went wrong',
+          })
+        )
       }
     } else {
       formValues.forEach((value) => {
@@ -105,44 +110,41 @@ function ProductEdit({ product }: ProductEditProps) {
   }
 
   return (
-    <>
-      <Alert variant='error' message={errorMessage} />
-      <div className={styles.root}>
-        <Link className={styles.goBackButton} to={ROUTES.productList}>
-          <IoMdArrowRoundBack />
-          Go Back
-        </Link>
-        <form onSubmit={onSubmit} className={styles.formContainer}>
-          <h1>Product Edit</h1>
-          <div className={styles.form}>
-            {formValues.slice(0, 3).map((value) => (
+    <div className={styles.root}>
+      <Link className={styles.goBackButton} to={ROUTES.productList}>
+        <IoMdArrowRoundBack />
+        Go Back
+      </Link>
+      <form onSubmit={onSubmit} className={styles.formContainer}>
+        <h1>Product Edit</h1>
+        <div className={styles.form}>
+          {formValues.slice(0, 3).map((value) => (
+            <Input key={value.name} inputProps={value} />
+          ))}
+          <div className={styles.shortInputsContainer}>
+            {formValues.slice(3, 5).map((value) => (
               <Input key={value.name} inputProps={value} />
             ))}
-            <div className={styles.shortInputsContainer}>
-              {formValues.slice(3, 5).map((value) => (
-                <Input key={value.name} inputProps={value} />
-              ))}
-            </div>
-            {formValues.slice(5, formValues.length).map((value) => (
-              <Input key={value.name} inputProps={value} />
-            ))}
-            <FileInput
-              errorMessage={fileErrorMessage}
-              file={imageFile}
-              onFileInputChange={onFileInputChange}
-            />
           </div>
-          <Button
-            isLoading={isLoading || isLoadingUpload}
-            disabled={isLoading || isLoadingUpload}
-            className={styles.submitButton}
-            type='submit'
-          >
-            update
-          </Button>
-        </form>
-      </div>
-    </>
+          {formValues.slice(5, formValues.length).map((value) => (
+            <Input key={value.name} inputProps={value} />
+          ))}
+          <FileInput
+            errorMessage={fileErrorMessage}
+            file={imageFile}
+            onFileInputChange={onFileInputChange}
+          />
+        </div>
+        <Button
+          isLoading={isLoading || isLoadingUpload}
+          disabled={isLoading || isLoadingUpload}
+          className={styles.submitButton}
+          type='submit'
+        >
+          update
+        </Button>
+      </form>
+    </div>
   )
 }
 

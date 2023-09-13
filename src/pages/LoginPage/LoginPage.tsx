@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFormValues } from '../../hooks'
 import { UseInput, UserInfo } from '../../types'
 import { useLoginMutation } from '../../slices/usersApiSlice'
 import { RootState } from '../../store'
-import { setCredentials } from '../../slices'
+import { setAlert, setCredentials } from '../../slices'
 import { AuthFormContainer, Form } from '../../components'
 import styles from './Login.module.scss'
 import { loginFormValues } from '../../config'
@@ -19,7 +19,6 @@ function LoginPage() {
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
   const [login, { isLoading }] = useLoginMutation()
-  const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
     if (userInfo) {
@@ -33,10 +32,6 @@ function LoginPage() {
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (errorMessage) {
-      setErrorMessage('')
-    }
-
     if (isFormValid(formValues)) {
       try {
         const credentials: UserInfo = await login({
@@ -46,7 +41,12 @@ function LoginPage() {
         dispatch(setCredentials(credentials))
         navigate(redirect)
       } catch (err: any) {
-        setErrorMessage(err?.data?.message || 'Internal server error')
+        dispatch(
+          setAlert({
+            variant: 'error',
+            message: err?.data?.message || 'Internal server error',
+          })
+        )
       }
     } else {
       formValues.forEach((formValue: UseInput) => {
@@ -56,11 +56,7 @@ function LoginPage() {
   }
 
   return (
-    <AuthFormContainer
-      variant='login'
-      errorMessage={errorMessage}
-      redirect={redirect}
-    >
+    <AuthFormContainer variant='login' redirect={redirect}>
       <Form
         className={styles.form}
         onFormSubmit={onFormSubmit}

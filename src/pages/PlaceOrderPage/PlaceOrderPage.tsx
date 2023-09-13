@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumbs, Order } from '../../components'
 import { RootState } from '../../store'
 import { ROUTES } from '../../constants'
-import { clearCartItems, useCreateOrderMutation } from '../../slices'
-import { Alert } from '../../components/UI'
+import { clearCartItems, setAlert, useCreateOrderMutation } from '../../slices'
 
 function PlaceOrderPage() {
   const {
@@ -19,8 +18,7 @@ function PlaceOrderPage() {
   } = useSelector((state: RootState) => state.cart)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [createOrder, { isLoading, isError }] = useCreateOrderMutation()
-  const [errorMessage, setErrorMessage] = useState<string>('')
+  const [createOrder, { isLoading }] = useCreateOrderMutation()
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -58,13 +56,17 @@ function PlaceOrderPage() {
       dispatch(clearCartItems())
       navigate(ROUTES.order.replace(':id', res._id))
     } catch (err: any) {
-      setErrorMessage(err.data.message)
+      dispatch(
+        setAlert({
+          variant: 'error',
+          message: err?.data?.message ?? 'something went wrong',
+        })
+      )
     }
   }
 
   return (
     <>
-      {isError && <Alert message={errorMessage} />}
       <Breadcrumbs step1 step2 step3 />
       <Order
         cartItems={cartItems}

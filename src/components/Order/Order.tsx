@@ -1,14 +1,13 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { IoIosWarning } from 'react-icons/io'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
 import { capitalize, formatCurrency, subString } from '../../utils'
 import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
-import { Alert, Button } from '../UI'
+import { Button } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
-import { useDeliverOrderMutation } from '../../slices'
+import { setAlert, useDeliverOrderMutation } from '../../slices'
 import { RootState } from '../../store'
 
 type OrderItem = {
@@ -96,36 +95,25 @@ function Order({
   const { userInfo } = useSelector((state: RootState) => state.auth)
   const [deliverOrder, { isLoading: isDeliverLoading }] =
     useDeliverOrderMutation()
-  const [alert, setAlert] = useState<{
-    message: string
-    variant: 'success' | 'error'
-  } | null>(null)
+  const dispatch = useDispatch()
 
   const onMarkAsDelivered = async () => {
-    setAlert(null)
-
     try {
       await deliverOrder(orderId as string).unwrap()
-
-      setAlert({
-        variant: 'success',
-        message: 'mark as delivered successfully',
-      })
+      dispatch(setAlert({ message: 'mark as delivered successfully' }))
       if (refetch) refetch()
     } catch (error: any) {
-      setAlert({
-        variant: 'error',
-        message: error?.data?.message || 'something went wrong',
-      })
+      dispatch(
+        setAlert({
+          variant: 'error',
+          message: error?.data?.message || 'something went wrong',
+        })
+      )
     }
   }
 
   return (
     <>
-      <Alert
-        variant={alert?.variant ?? 'error'}
-        message={alert?.message ?? ''}
-      />
       {variant === 'order-details' && (
         <h1 className={styles.title}>Order {orderId}</h1>
       )}

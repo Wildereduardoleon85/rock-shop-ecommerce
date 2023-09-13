@@ -39,6 +39,7 @@ function Button({
         styles.root,
         className,
         color === 'black' && styles.black,
+        isLoading && styles.loading,
         large && styles.large,
       ])}
       disabled={disabled}

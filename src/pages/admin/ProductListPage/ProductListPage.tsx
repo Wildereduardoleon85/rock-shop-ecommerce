@@ -1,48 +1,42 @@
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Table } from '../../../components'
-import { Alert } from '../../../components/UI'
-import { useCreateProductMutation, useGetProductsQuery } from '../../../slices'
+import {
+  setAlert,
+  useCreateProductMutation,
+  useGetProductsQuery,
+} from '../../../slices'
 
 function ProductListPage() {
+  const dispatch = useDispatch()
   const { data, error, isLoading, refetch } = useGetProductsQuery()
   const [createProduct, { isLoading: createProductLoading }] =
     useCreateProductMutation()
-  const [alert, setAlert] = useState<{
-    message: string
-    variant: 'success' | 'error'
-  } | null>(null)
 
   const onCreateProduct = async () => {
-    setAlert(null)
-
     try {
       await createProduct().unwrap()
       refetch()
-      setAlert({ message: 'Product added successfuly', variant: 'success' })
+      dispatch(setAlert({ message: 'Product added successfuly' }))
     } catch (err: any) {
-      setAlert({
-        message: err?.data?.message || 'something went wrong',
-        variant: 'error',
-      })
+      dispatch(
+        setAlert({
+          message: err?.data?.message || 'something went wrong',
+          variant: 'error',
+        })
+      )
     }
   }
 
   return (
-    <>
-      <Alert
-        variant={alert?.variant ?? 'error'}
-        message={alert?.message ?? ''}
-      />
-      <Table
-        variant='products'
-        data={data}
-        isLoading={isLoading}
-        error={error}
-        refetch={refetch}
-        onCreateProduct={onCreateProduct}
-        createProductLoading={createProductLoading}
-      />
-    </>
+    <Table
+      variant='products'
+      data={data}
+      isLoading={isLoading}
+      error={error}
+      refetch={refetch}
+      onCreateProduct={onCreateProduct}
+      createProductLoading={createProductLoading}
+    />
   )
 }
 

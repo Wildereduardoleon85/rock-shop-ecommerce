@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { apiSlice, cartSlice, qtySlice, authSlice } from './slices'
+import { apiSlice, cartSlice, qtySlice, authSlice, alertSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
@@ -7,6 +7,7 @@ export const store = configureStore({
     cart: cartSlice.reducer,
     qty: qtySlice.reducer,
     auth: authSlice.reducer,
+    alert: alertSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
