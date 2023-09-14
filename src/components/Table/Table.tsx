@@ -8,10 +8,10 @@ import styles from './Table.module.scss'
 import { ROUTES } from '../../constants'
 import { getClassNames, parseDate } from '../../utils'
 import { ErrorPage } from '../../pages'
-import { OrderResponse, Product } from '../../types'
-import { ProductsTable } from '..'
+import { OrderResponse, Product, UserInfo } from '../../types'
+import { ProductsTable, UsersTable } from '..'
 
-type Variants = 'orders' | 'adminOrders' | 'products'
+type Variants = 'orders' | 'adminOrders' | 'products' | 'users'
 
 type OrderProps = {
   orders: OrderResponse[]
@@ -20,7 +20,7 @@ type OrderProps = {
 
 type TableProps = {
   variant: Variants
-  data: OrderResponse[] | Product[] | undefined
+  data: OrderResponse[] | Product[] | undefined | UserInfo[]
   error: any
   isLoading: boolean
   className?: string
@@ -56,10 +56,19 @@ const VARIANTS = {
       h5: 'BRAND',
     },
   },
+  users: {
+    title: 'Users',
+    headers: {
+      h1: 'ID',
+      h2: 'NAME',
+      h3: 'EMAIL',
+      h4: 'ADMIN',
+    },
+  },
 }
 
 function OrdersTable({ orders, variant }: OrderProps) {
-  return orders.map((order: any) => {
+  return orders.map((order) => {
     const adminOrder = order.user as { _id: string; name: string }
 
     return (
@@ -113,6 +122,31 @@ function Table({
     return <ErrorPage className={styles.errorPage} />
   }
 
+  function renderTable() {
+    switch (variant) {
+      case 'products':
+        return (
+          <ProductsTable
+            products={data as Product[]}
+            refetch={refetch as () => void}
+          />
+        )
+
+      case 'users':
+        return (
+          <UsersTable
+            users={data as UserInfo[]}
+            refetch={refetch as () => void}
+          />
+        )
+
+      default:
+        return (
+          <OrdersTable orders={data as OrderResponse[]} variant={variant} />
+        )
+    }
+  }
+
   return (
     <div className={getClassNames([styles.orders, className])}>
       <div className={styles.titleContainer}>
@@ -137,17 +171,11 @@ function Table({
               <th>{VARIANTS[variant].headers.h2}</th>
               <th>{VARIANTS[variant].headers.h3}</th>
               <th>{VARIANTS[variant].headers.h4}</th>
-              <th>{VARIANTS[variant].headers.h5}</th>
+              {variant !== 'users' && <th>{VARIANTS[variant].headers.h5}</th>}
               <th />
             </tr>
           </thead>
-          <tbody>
-            {variant === 'products' ? (
-              <ProductsTable products={data as Product[]} refetch={refetch} />
-            ) : (
-              <OrdersTable orders={data as OrderResponse[]} variant={variant} />
-            )}
-          </tbody>
+          <tbody>{renderTable()}</tbody>
         </table>
       ) : (
         <div className={styles.noOrders}>

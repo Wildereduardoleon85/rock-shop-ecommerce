@@ -11,7 +11,7 @@ import { SmallLoader } from '../UI'
 
 type ProductsTableProps = {
   products: Product[]
-  refetch?: () => void
+  refetch: () => void
 }
 
 function ProductsTable({ products, refetch }: ProductsTableProps) {
@@ -24,7 +24,7 @@ function ProductsTable({ products, refetch }: ProductsTableProps) {
       setActiveIndex(index)
       await deleteProduct(productId).unwrap()
       dispatch(setAlert({ message: 'product deleted successfully!' }))
-      if (refetch) refetch()
+      refetch()
     } catch (error: any) {
       dispatch(
         setAlert({

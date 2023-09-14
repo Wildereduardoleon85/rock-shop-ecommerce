@@ -1,13 +1,14 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
 
-td {
-  padding: 0.8rem 0.5rem;
-  text-align: center;
+.timesIcon {
+  fill: $red;
+  font-size: 1.3rem;
 }
 
-tr:nth-child(even) {
-  background-color: rgb(240, 240, 240);
+.checkIcon {
+  fill: green;
+  font-size: 1.3rem;
 }
 
 .iconButtonsContainer {
@@ -15,6 +16,7 @@ tr:nth-child(even) {
   padding-left: 2rem;
   padding-right: 2rem;
   align-items: center;
+  justify-content: center;
 
   .editIconButton,
   .trashIconButton {

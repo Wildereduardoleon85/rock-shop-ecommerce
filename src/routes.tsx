@@ -12,6 +12,7 @@ import {
   OrderListPage,
   ProductListPage,
   ProductEditPage,
+  UserListPage,
 } from './pages'
 import { ROUTES } from './constants'
 
@@ -85,6 +86,11 @@ export const routes = {
       name: 'productEdit',
       path: ROUTES.productEdit,
       page: <ProductEditPage />,
+    },
+    {
+      name: 'userList',
+      path: ROUTES.userList,
+      page: <UserListPage />,
     },
   ],
 }
