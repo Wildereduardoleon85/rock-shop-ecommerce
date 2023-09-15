@@ -1,0 +1,63 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+
+  .modal {
+    padding: 2rem;
+    background-color: white;
+    min-width: 400px;
+    max-width: 600px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+
+    h2 {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .confirmButton {
+      margin-top: 2rem;
+    }
+
+    .closeButton {
+      display: flex;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.2rem;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+
+      &:hover .closeIcon {
+        fill: $dark-red;
+      }
+
+      .closeIcon {
+        fill: $light-gray;
+        @include transition(fill);
+      }
+    }
+  }
+}

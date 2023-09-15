@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import { formatCurrency, subString } from '../../utils'
 import { ROUTES } from '../../constants'
-import { setAlert, useDeleteProductMutation } from '../../slices'
+import {
+  openModal,
+  setAlert,
+  setModalConfirm,
+  useDeleteProductMutation,
+} from '../../slices'
 import styles from './ProductsTable.module.scss'
 import { Product } from '../../types'
 import { SmallLoader } from '../UI'
+import { RootState } from '../../store'
 
 type ProductsTableProps = {
   products: Product[]
@@ -17,12 +23,19 @@ type ProductsTableProps = {
 function ProductsTable({ products, refetch }: ProductsTableProps) {
   const [deleteProduct, { isLoading }] = useDeleteProductMutation()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [idToDelete, setIdToDelete] = useState<string>('')
   const dispatch = useDispatch()
+  const { isConfirmed } = useSelector((state: RootState) => state.modal)
 
-  const onDeleteProduct = async (productId: string, index: number) => {
+  const onDeleteButtonClick = (productId: string, index: number) => {
+    dispatch(openModal('do you really want to delete this product?'))
+    setActiveIndex(index)
+    setIdToDelete(productId)
+  }
+
+  async function removeProduct() {
     try {
-      setActiveIndex(index)
-      await deleteProduct(productId).unwrap()
+      await deleteProduct(idToDelete).unwrap()
       dispatch(setAlert({ message: 'product deleted successfully!' }))
       refetch()
     } catch (error: any) {
@@ -34,6 +47,13 @@ function ProductsTable({ products, refetch }: ProductsTableProps) {
       )
     }
   }
+
+  useEffect(() => {
+    if (isConfirmed) {
+      removeProduct()
+      dispatch(setModalConfirm(false))
+    }
+  }, [isConfirmed])
 
   return products.map((product: any, index) => (
     <tr key={product._id}>
@@ -54,7 +74,7 @@ function ProductsTable({ products, refetch }: ProductsTableProps) {
           type='button'
           aria-label='delete-product'
           className={styles.trashIconButton}
-          onClick={() => onDeleteProduct(product._id, index)}
+          onClick={() => onDeleteButtonClick(product._id, index)}
           disabled={isLoading && index === activeIndex}
         >
           <div>

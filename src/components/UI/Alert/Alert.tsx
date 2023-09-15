@@ -60,7 +60,7 @@ function Alert() {
             className={styles.closeButton}
             type='button'
             aria-label='close-alert'
-            // onClick={() => setShow(false)}
+            onClick={() => setShow(false)}
           >
             <FaTimes className={styles.closeIcon} />
           </button>
