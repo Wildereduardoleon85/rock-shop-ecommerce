@@ -37,6 +37,7 @@ export const ROUTES: Routes = {
   productList: '/admin/product-list',
   userList: '/admin/user-list',
   productEdit: '/admin/product-edit/:id',
+  userEdit: '/admin/user-edit/:id',
 }
 
 export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [

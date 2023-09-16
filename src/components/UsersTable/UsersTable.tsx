@@ -13,6 +13,7 @@ import {
 } from '../../slices'
 import { SmallLoader } from '../UI'
 import { RootState } from '../../store'
+import { ROUTES } from '../../constants'
 
 type UsersTableProps = {
   users: UserInfo[]
@@ -69,7 +70,7 @@ function UsersTable({ users, refetch }: UsersTableProps) {
       </td>
       <td className={styles.iconButtonsContainer}>
         <Link
-          to='/users/edit'
+          to={ROUTES.userEdit.replace(':id', user._id)}
           aria-label='edit-user'
           className={styles.editIconButton}
         >

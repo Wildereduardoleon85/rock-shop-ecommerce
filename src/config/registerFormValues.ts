@@ -37,7 +37,7 @@ export const registerFormValues: InputConfig = [
     name: 'password',
     label: 'Password',
     placeholder: 'Enter password',
-    type: 'text',
+    type: 'password',
     validation: {
       validateFunction: validateString,
       opts: {

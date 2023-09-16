@@ -5,6 +5,7 @@ import {
   UserInfo,
   RegisterCredentials,
   UpdateProfileCredentials,
+  UpdateUserCredentials,
 } from '../types'
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -50,6 +51,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    getUserDetails: builder.query<UserInfo, string>({
+      query: (userId) => ({
+        url: `${USERS_URL}/admin/${userId}`,
+        method: 'GET',
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    updateUser: builder.mutation<UserInfo, UpdateUserCredentials>({
+      query: (data) => ({
+        url: `${USERS_URL}/admin/${data.userId}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 })
 
@@ -60,4 +76,6 @@ export const {
   useUpdateProfileMutation,
   useGetUsersQuery,
   useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
 } = usersApiSlice

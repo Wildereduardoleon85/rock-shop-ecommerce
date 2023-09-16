@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='checkbox']:checked + .checkbox {
+    background-color: $red;
+    border-color: transparent;
+  }
+
+  .checkbox {
+    border-radius: $border-radius;
+    border: 1px solid $very-light-gray;
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    margin-right: 0.5rem;
+    @include transition(all);
+
+    &:focus-visible {
+      outline: 1px solid $black;
+    }
+
+    > svg {
+      font-size: 0.9rem;
+      fill: white;
+    }
+  }
+}

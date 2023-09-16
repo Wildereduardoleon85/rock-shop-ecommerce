@@ -62,6 +62,7 @@ export type RouteEnums =
   | 'productList'
   | 'userList'
   | 'productEdit'
+  | 'userEdit'
 
 export type Routes = {
   [key in RouteEnums]: string
@@ -219,6 +220,11 @@ export type UpdateProfileCredentials = {
   email: string
   password?: string
   confirmPassword?: string
+}
+
+export interface UpdateUserCredentials extends UpdateProfileCredentials {
+  isAdmin?: boolean
+  userId: string
 }
 
 export type VariantEnums = 'success' | 'error' | 'productAddedToCart'

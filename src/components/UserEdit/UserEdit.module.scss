@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  max-width: fit-content;
+  margin: 3rem auto 0 auto;
+
+  > h1 {
+    font-size: 3rem;
+  }
+
+  .form {
+    margin-top: 3rem;
+  }
+}

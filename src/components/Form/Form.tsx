@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './Form.module.scss'
 import { getClassNames } from '../../utils'
 import { Button, Input } from '../UI'
@@ -23,6 +24,7 @@ type FormProps = {
   className?: string
   isLoading?: boolean
   buttonLabel: string
+  aditionalformElement?: React.ReactNode
 }
 
 function Form({
@@ -31,6 +33,7 @@ function Form({
   className = '',
   isLoading,
   buttonLabel,
+  aditionalformElement,
 }: FormProps) {
   return (
     <form
@@ -41,6 +44,7 @@ function Form({
         {formInputs.map((formInputProps) => (
           <Input key={formInputProps.name} inputProps={formInputProps} />
         ))}
+        {aditionalformElement}
       </div>
       <Button
         type='submit'
