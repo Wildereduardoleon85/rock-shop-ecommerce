@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
 import { QtyButton } from '../../components'
@@ -12,7 +11,7 @@ import {
   setQty,
   useGetProductDetailsQuery,
 } from '../../slices'
-import { Button, Loader } from '../../components/UI'
+import { Button, GobackButton, Loader } from '../../components/UI'
 import { Product } from '../../types'
 import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
 import { RootState } from '../../store'
@@ -59,11 +58,7 @@ function ProductPage() {
   return (
     product && (
       <div className={styles.root}>
-        <Link to={ROUTES.home}>
-          <IoMdArrowRoundBack />
-          Go Back
-        </Link>
-
+        <GobackButton to={ROUTES.home} />
         <div className={styles.container}>
           <img
             width={636}

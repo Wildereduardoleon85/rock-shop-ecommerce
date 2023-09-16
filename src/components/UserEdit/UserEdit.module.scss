@@ -1,6 +1,10 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+.gobackButton {
+  margin-top: 3rem;
+}
+
 .root {
   max-width: fit-content;
   margin: 3rem auto 0 auto;

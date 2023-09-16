@@ -5,9 +5,10 @@ import { UserInfo } from '../../types'
 import { userEditFormValues } from '../../config/userEditformValues'
 import { useFormValues } from '../../hooks'
 import { Form } from '..'
-import { Checkbox } from '../UI'
+import { Checkbox, GobackButton } from '../UI'
 import { isFormValid } from '../../helpers'
 import { setAlert, useUpdateUserMutation } from '../../slices'
+import { ROUTES } from '../../constants'
 
 type UserEditProps = {
   userDetails: UserInfo
@@ -26,6 +27,10 @@ function UserEdit({ userDetails }: UserEditProps) {
   )
 
   const [nameInput, emailInput] = formValues
+  const isUserChanged =
+    nameInput.value !== userDetails.name ||
+    emailInput.value !== userDetails.email ||
+    isAdmin !== userDetails.isAdmin
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,38 +42,47 @@ function UserEdit({ userDetails }: UserEditProps) {
       return
     }
 
-    try {
-      await updateUser({
-        userId: userDetails._id,
-        name: nameInput.value,
-        email: emailInput.value,
-        isAdmin,
-      }).unwrap()
-      dispatch(setAlert({ message: 'user updated successfuly!' }))
-    } catch (error: any) {
-      dispatch(
-        setAlert({
-          variant: 'error',
-          message: error?.data?.message ?? 'something went wrong',
-        })
-      )
+    if (isUserChanged) {
+      try {
+        await updateUser({
+          userId: userDetails._id,
+          name: nameInput.value,
+          email: emailInput.value,
+          isAdmin,
+        }).unwrap()
+        dispatch(setAlert({ message: 'user updated successfuly!' }))
+      } catch (error: any) {
+        dispatch(
+          setAlert({
+            variant: 'error',
+            message: error?.data?.message ?? 'something went wrong',
+          })
+        )
+      }
     }
   }
 
   return (
-    <div className={styles.root}>
-      <h1>Edit User</h1>
-      <Form
-        className={styles.form}
-        formInputs={formValues}
-        buttonLabel='UPDATE'
-        onFormSubmit={onSubmit}
-        isLoading={isLoading}
-        aditionalformElement={
-          <Checkbox label='isAdmin' checked={isAdmin} setChecked={setIsAdmin} />
-        }
-      />
-    </div>
+    <>
+      <GobackButton className={styles.gobackButton} to={ROUTES.userList} />
+      <div className={styles.root}>
+        <h1>Edit User</h1>
+        <Form
+          className={styles.form}
+          formInputs={formValues}
+          buttonLabel='UPDATE'
+          onFormSubmit={onSubmit}
+          isLoading={isLoading}
+          aditionalformElement={
+            <Checkbox
+              label='isAdmin'
+              checked={isAdmin}
+              setChecked={setIsAdmin}
+            />
+          }
+        />
+      </div>
+    </>
   )
 }
 

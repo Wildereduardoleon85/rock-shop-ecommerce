@@ -5,10 +5,6 @@
   margin-top: 3rem;
   position: relative;
 
-  > a:first-of-type {
-    @include gobackButtonStyles();
-  }
-
   .container {
     margin-top: 3rem;
     display: flex;

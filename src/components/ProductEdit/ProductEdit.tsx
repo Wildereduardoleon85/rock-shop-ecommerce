@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './ProductEdit.module.scss'
 import { ROUTES } from '../../constants'
 import { Product } from '../../types'
-import { Button, Input } from '../UI'
+import { Button, GobackButton, Input } from '../UI'
 import { FileInput } from '..'
 import { useFormValues } from '../../hooks'
 import { productEditFormValues } from '../../config'
@@ -111,10 +110,7 @@ function ProductEdit({ product }: ProductEditProps) {
 
   return (
     <div className={styles.root}>
-      <Link className={styles.goBackButton} to={ROUTES.productList}>
-        <IoMdArrowRoundBack />
-        Go Back
-      </Link>
+      <GobackButton className={styles.gobackButton} to={ROUTES.productList} />
       <form onSubmit={onSubmit} className={styles.formContainer}>
         <h1>Product Edit</h1>
         <div className={styles.form}>

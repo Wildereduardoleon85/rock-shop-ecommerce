@@ -1,0 +1,30 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.root {
+  text-decoration: none;
+  border-radius: $border-radius;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  max-width: fit-content;
+  cursor: pointer;
+  box-shadow: $box-shadow-light;
+  @include transition(all);
+
+  &:hover {
+    color: $dark-red;
+    box-shadow: $box-shadow;
+  }
+
+  &:hover > svg {
+    transform: translateX(-0.125rem);
+    fill: $dark-red;
+  }
+
+  > svg {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    @include transition(all);
+  }
+}

@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaTrashAlt } from 'react-icons/fa'
-import { IoMdArrowRoundBack } from 'react-icons/io'
 import styles from './CartPage.module.scss'
 import {
   BASE_URL,
@@ -16,7 +15,7 @@ import { QtyButton } from '../../components'
 import { isNotCartInfo } from '../../helpers'
 import { ShoppingBagIcon } from '../../components/Icons'
 import { removeItem } from '../../slices'
-import { Button } from '../../components/UI'
+import { Button, GobackButton } from '../../components/UI'
 
 const IMAGE_WIDTH = 150
 
@@ -33,10 +32,7 @@ function CartPage() {
 
   return (
     <div className={styles.root}>
-      <Link to={ROUTES.home} className={styles.goBackButton}>
-        <IoMdArrowRoundBack />
-        Go Back
-      </Link>
+      <GobackButton to={ROUTES.home} />
       <h1 className={styles.title}>Shopping Cart</h1>
       <div className={styles.container}>
         <div>

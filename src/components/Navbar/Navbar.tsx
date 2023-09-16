@@ -42,9 +42,9 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <div className={styles.iconContainer}>
+        <Link to={ROUTES.home} className={styles.iconContainer}>
           <img src={logo} alt='logo' />
-        </div>
+        </Link>
         <div>
           <Search />
           <Link to={ROUTES.cart} className={styles.iconButton}>

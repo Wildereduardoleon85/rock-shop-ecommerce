@@ -5,7 +5,7 @@ import { BsFillCheckCircleFill } from 'react-icons/bs'
 import styles from './Order.module.scss'
 import { capitalize, formatCurrency, subString } from '../../utils'
 import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
-import { Button } from '../UI'
+import { Button, GobackButton } from '../UI'
 import { ShippingAddress, CartItem } from '../../types'
 import { setAlert, useDeliverOrderMutation } from '../../slices'
 import { RootState } from '../../store'
@@ -115,7 +115,10 @@ function Order({
   return (
     <>
       {variant === 'order-details' && (
-        <h1 className={styles.title}>Order {orderId}</h1>
+        <>
+          <GobackButton className={styles.gobackButton} to={ROUTES.orderList} />
+          <h1 className={styles.title}>Order {orderId}</h1>
+        </>
       )}
       <div className={styles.root}>
         <div className={styles.leftContainer}>

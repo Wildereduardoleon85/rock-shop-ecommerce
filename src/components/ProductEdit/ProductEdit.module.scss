@@ -2,6 +2,10 @@
 @import '../../styles/variables';
 
 .root {
+  .gobackButton {
+    margin-top: 3rem;
+  }
+
   .formContainer {
     width: 480px;
     margin: 3rem auto 0 auto;
@@ -31,10 +35,5 @@
       margin-top: 2rem;
       width: 100%;
     }
-  }
-
-  .goBackButton {
-    @include gobackButtonStyles();
-    margin-top: 3rem;
   }
 }
