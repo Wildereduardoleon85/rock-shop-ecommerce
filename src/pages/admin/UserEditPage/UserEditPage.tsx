@@ -10,6 +10,7 @@ function UserEditPage() {
     data: userDetails,
     isLoading,
     error,
+    refetch,
   } = useGetUserDetailsQuery(userId as string)
 
   if (isLoading) {
@@ -24,7 +25,7 @@ function UserEditPage() {
     return <ErrorPage />
   }
 
-  return userDetails && <UserEdit userDetails={userDetails} />
+  return userDetails && <UserEdit refetch={refetch} userDetails={userDetails} />
 }
 
 export default UserEditPage

@@ -10,6 +10,7 @@ function ProductEditPage() {
     data: product,
     isLoading,
     error,
+    refetch,
   } = useGetProductDetailsQuery(productId as string)
 
   if (isLoading) {
@@ -24,7 +25,7 @@ function ProductEditPage() {
     return <ErrorPage />
   }
 
-  return product && <ProductEdit product={product} />
+  return product && <ProductEdit product={product} refetch={refetch} />
 }
 
 export default ProductEditPage

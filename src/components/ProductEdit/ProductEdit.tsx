@@ -19,9 +19,10 @@ const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
 
 type ProductEditProps = {
   product: Product
+  refetch: () => void
 }
 
-function ProductEdit({ product }: ProductEditProps) {
+function ProductEdit({ product, refetch }: ProductEditProps) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -91,7 +92,8 @@ function ProductEdit({ product }: ProductEditProps) {
           name: nameInput.value,
           price: Number(priceInput.value),
         }).unwrap()
-
+        dispatch(setAlert({ message: 'product updated successfully!' }))
+        refetch()
         navigate(ROUTES.productList)
       } catch (error: any) {
         dispatch(

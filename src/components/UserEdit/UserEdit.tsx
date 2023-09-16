@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styles from './UserEdit.module.scss'
 import { UserInfo } from '../../types'
 import { userEditFormValues } from '../../config/userEditformValues'
@@ -12,9 +13,11 @@ import { ROUTES } from '../../constants'
 
 type UserEditProps = {
   userDetails: UserInfo
+  refetch: () => void
 }
 
-function UserEdit({ userDetails }: UserEditProps) {
+function UserEdit({ userDetails, refetch }: UserEditProps) {
+  const navigate = useNavigate()
   const [isAdmin, setIsAdmin] = useState<boolean>(userDetails.isAdmin)
   const [updateUser, { isLoading }] = useUpdateUserMutation()
   const dispatch = useDispatch()
@@ -50,7 +53,9 @@ function UserEdit({ userDetails }: UserEditProps) {
           email: emailInput.value,
           isAdmin,
         }).unwrap()
+        refetch()
         dispatch(setAlert({ message: 'user updated successfuly!' }))
+        navigate(ROUTES.userList)
       } catch (error: any) {
         dispatch(
           setAlert({
