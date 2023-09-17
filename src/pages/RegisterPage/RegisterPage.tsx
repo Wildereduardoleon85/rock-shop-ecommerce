@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFormValues, useInput } from '../../hooks'
@@ -19,7 +19,6 @@ function RegisterPage() {
   const searchParams = new URLSearchParams(search)
   const redirect = searchParams.get('redirect') ?? '/'
   const [register, { isLoading }] = useRegisterMutation()
-  const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
     if (userInfo) {
@@ -59,8 +58,6 @@ function RegisterPage() {
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    if (errorMessage) setErrorMessage('')
 
     if (!isFormValid(formValues)) {
       formValues.forEach((formValue) => {

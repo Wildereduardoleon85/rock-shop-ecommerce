@@ -24,10 +24,12 @@ export type Response<T> = {
 }
 
 export type Review = {
-  user: User
+  _id: string
+  user: string
   name: string
   rating: number
   comment: string
+  createdAt: Date
 }
 
 export type User = {

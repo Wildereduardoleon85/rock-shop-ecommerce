@@ -9,9 +9,11 @@
     margin-top: 3rem;
     display: flex;
 
-    > img:first-of-type {
-      display: block;
-      flex-shrink: 0;
+    .imageContainer {
+      > img:first-of-type {
+        display: block;
+        flex-shrink: 0;
+      }
     }
 
     .details {

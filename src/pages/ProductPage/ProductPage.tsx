@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
-import { QtyButton } from '../../components'
+import { QtyButton, Reviews } from '../../components'
 import {
   addToCart,
   setAlert,
@@ -12,7 +12,7 @@ import {
   useGetProductDetailsQuery,
 } from '../../slices'
 import { Button, GobackButton, Loader } from '../../components/UI'
-import { Product } from '../../types'
+import { Product, Review } from '../../types'
 import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
 import { RootState } from '../../store'
 import { ErrorPage } from '..'
@@ -25,6 +25,7 @@ function ProductPage() {
     data: product,
     error,
     isLoading,
+    refetch,
   } = useGetProductDetailsQuery(productId as string)
   const fetchBaseQueryError = error as FetchBaseQueryError
   const { qty } = useSelector((state: RootState) => state.qty)
@@ -60,12 +61,20 @@ function ProductPage() {
       <div className={styles.root}>
         <GobackButton to={ROUTES.home} />
         <div className={styles.container}>
-          <img
-            width={636}
-            height={506}
-            src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
-            alt={product.name}
-          />
+          <div className={styles.imageContainer}>
+            <img
+              width={636}
+              height={506}
+              src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+              alt={product.name}
+            />
+            <Reviews
+              refetch={refetch}
+              productId={product._id}
+              reviews={product.reviews as Review[]}
+            />
+          </div>
+
           <div className={styles.details}>
             <h1>{product.name}</h1>
             <p className={styles.price}>${product.price}</p>

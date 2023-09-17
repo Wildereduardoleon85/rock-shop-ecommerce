@@ -1,0 +1,97 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  > h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+  }
+
+  .loginLink {
+    margin-top: 5rem;
+    display: block;
+    font-size: 1.3rem;
+
+    > a:first-of-type {
+      font-weight: 700;
+      text-decoration: none;
+      @include transition(color);
+
+      &:hover {
+        color: $dark-red;
+      }
+    }
+  }
+
+  .reviewContainer {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid $very-light-gray;
+
+    .starsContainer {
+      display: flex;
+      margin-top: 1rem;
+      align-items: center;
+
+      .stars {
+        max-width: fit-content;
+        margin-top: 0;
+        margin-right: 1rem;
+      }
+    }
+
+    .comment {
+      margin-top: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .name {
+      font-weight: 700;
+    }
+  }
+
+  .noReviews {
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+
+    > svg {
+      fill: rgb(155, 139, 0);
+      font-size: 1.5rem;
+    }
+
+    > h2 {
+      margin-left: 1rem;
+    }
+  }
+
+  .reviewEditor {
+    margin-top: 1rem;
+    display: flex;
+
+    .starButton {
+      display: flex;
+      border-radius: 50%;
+      padding: 0.2rem;
+      align-items: center;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: 0.4rem;
+      background: none;
+      @include transition(background-color);
+
+      &:hover {
+        background-color: rgb(228, 228, 228);
+      }
+
+      > svg {
+        fill: rgb(155, 139, 0);
+        transform: translateY(-0.08rem);
+      }
+    }
+  }
+
+  .textareaInput {
+    margin-top: 2rem;
+  }
+}
