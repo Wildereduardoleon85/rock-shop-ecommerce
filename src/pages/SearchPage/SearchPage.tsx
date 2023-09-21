@@ -9,7 +9,6 @@ import { capitalize } from '../../utils'
 function SearchPage() {
   const [searchParams] = useSearchParams()
   const keywords = searchParams.get('keywords')
-  const redirect = searchParams.get('redirect')
 
   const {
     data: products,
@@ -29,9 +28,11 @@ function SearchPage() {
     return <ErrorPage />
   }
 
+  console.log(products)
+
   return products && products.length > 0 ? (
     <>
-      <GobackButton className={styles.backButton} to={redirect as string} />
+      <GobackButton className={styles.backButton} />
       <Showcase
         title={capitalize(keywords as string)}
         className={styles.root}

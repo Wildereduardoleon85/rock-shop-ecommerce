@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import styles from './Search.module.scss'
 import { Button } from '../UI'
 import { ROUTES } from '../../constants'
 
 function Search() {
-  const { pathname } = useLocation()
   const [searchValue, setSearchValue] = useState<string>('')
   const navigate = useNavigate()
 
@@ -16,7 +15,7 @@ function Search() {
 
   const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate(`${ROUTES.search}?keywords=${searchValue}&redirect=${pathname}`)
+    navigate(`${ROUTES.search}?keywords=${searchValue}`)
     setSearchValue('')
   }
 
