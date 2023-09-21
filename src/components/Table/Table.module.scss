@@ -7,7 +7,7 @@
 
 .orders {
   .titleContainer {
-    margin-top: 3rem;
+    margin-top: calc(3rem + $navbar-height);
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -9,8 +9,9 @@
   display: flex;
   align-items: center;
   box-shadow: $box-shadow;
-  position: relative;
   z-index: 2;
+  position: fixed;
+  top: 0;
 
   .container {
     width: $xl-break-point;

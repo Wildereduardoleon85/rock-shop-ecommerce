@@ -28,9 +28,12 @@ type CreateReviewBody = {
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], void>({
-      query: () => ({
+    getProducts: builder.query<Product[], { keywords?: string }>({
+      query: ({ keywords }) => ({
         url: PRODUCTS_URL,
+        params: {
+          keywords,
+        },
       }),
       providesTags: ['Products'],
       keepUnusedDataFor: 5,

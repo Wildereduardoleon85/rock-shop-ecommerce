@@ -4,7 +4,7 @@
 .root {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: calc(3rem + $navbar-height);
   align-items: center;
 
   a {

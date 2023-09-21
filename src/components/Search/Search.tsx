@@ -1,16 +1,34 @@
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import styles from './Search.module.scss'
 import { Button } from '../UI'
+import { ROUTES } from '../../constants'
 
 function Search() {
+  const [searchValue, setSearchValue] = useState<string>('')
+  const navigate = useNavigate()
+
+  const onSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value)
+  }
+
+  const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    navigate(`${ROUTES.home}?keywords=${searchValue}`)
+    setSearchValue('')
+  }
+
   return (
-    <div className={styles.root}>
-      <input type='text' />
-      <Button className={styles.searchButton} type='button'>
-        <AiOutlineSearch className={styles.searchIcon} />
-        SEARCH
-      </Button>
-    </div>
+    <form onSubmit={onSearchSubmit}>
+      <div className={styles.root}>
+        <input value={searchValue} onChange={onSearchInputChange} type='text' />
+        <Button className={styles.searchButton} type='submit'>
+          <AiOutlineSearch className={styles.searchIcon} />
+          SEARCH
+        </Button>
+      </div>
+    </form>
   )
 }
 

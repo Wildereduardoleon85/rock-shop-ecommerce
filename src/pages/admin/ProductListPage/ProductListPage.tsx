@@ -8,7 +8,7 @@ import {
 
 function ProductListPage() {
   const dispatch = useDispatch()
-  const { data, error, isLoading, refetch } = useGetProductsQuery()
+  const { data, error, isLoading, refetch } = useGetProductsQuery({})
   const [createProduct, { isLoading: createProductLoading }] =
     useCreateProductMutation()
 
