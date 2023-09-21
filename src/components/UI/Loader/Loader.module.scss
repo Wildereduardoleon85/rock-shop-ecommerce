@@ -5,7 +5,7 @@
   width: 100px;
   height: 100px;
   display: block;
-  margin: 6rem auto 0 auto;
+  margin: calc(6rem + $navbar-height) auto 0 auto;
 }
 
 .loader:before,

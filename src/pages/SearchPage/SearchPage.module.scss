@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.backButton {
+  margin-top: calc(3rem + $navbar-height);
+}
+
+.title {
+  margin-top: calc(3rem + $navbar-height);
+  font-size: 3rem;
+}

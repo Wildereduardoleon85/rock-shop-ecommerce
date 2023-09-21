@@ -65,6 +65,7 @@ export type RouteEnums =
   | 'userList'
   | 'productEdit'
   | 'userEdit'
+  | 'search'
 
 export type Routes = {
   [key in RouteEnums]: string

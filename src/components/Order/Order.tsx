@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { IoIosWarning } from 'react-icons/io'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
@@ -92,6 +92,7 @@ function Order({
   user,
   refetch,
 }: OrderProps) {
+  const { pathname } = useLocation()
   const { userInfo } = useSelector((state: RootState) => state.auth)
   const [deliverOrder, { isLoading: isDeliverLoading }] =
     useDeliverOrderMutation()
@@ -164,7 +165,12 @@ function Order({
                     alt={item.name}
                     width={50}
                   />
-                  <Link to={ROUTES.product.replace(':id', orderItem.product)}>
+                  <Link
+                    to={`${ROUTES.product.replace(
+                      ':id',
+                      orderItem.product
+                    )}?redirect=${pathname}`}
+                  >
                     {subString(item.name, 100)}
                   </Link>
                   <p>

@@ -59,7 +59,7 @@ function ProductPage() {
   return (
     product && (
       <div className={styles.root}>
-        <GobackButton to={ROUTES.home} />
+        <GobackButton />
         <div className={styles.container}>
           <div className={styles.imageContainer}>
             <img

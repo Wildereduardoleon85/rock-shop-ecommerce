@@ -10,6 +10,9 @@
   max-width: fit-content;
   cursor: pointer;
   box-shadow: $box-shadow-light;
+  border: none;
+  background: none;
+  font-size: 1rem;
   @include transition(all);
 
   &:hover {
