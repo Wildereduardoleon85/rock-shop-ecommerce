@@ -10,17 +10,16 @@ const IMAGE_HEIGHT = IMAGE_WIDTH * 0.7954545454545455
 const GUTTER = 40
 
 type CarouselProps = {
-  images: {
+  products: {
     id: string
     images: string
-    alt: string
     name: string
     price: number
   }[]
 }
 
-function Carousel({ images }: CarouselProps) {
-  const lastSlide = images.length - 1
+function Carousel({ products }: CarouselProps) {
+  const lastSlide = products.length - 1
   const [positions, setPositions] = useState<{
     active: number
     prev: number
@@ -89,9 +88,9 @@ function Carousel({ images }: CarouselProps) {
         <FaChevronRight />
       </button>
       <div className={styles.sliderButtons}>
-        {images.map((image, index) => (
+        {products.map((product, index) => (
           <button
-            key={image.id}
+            key={product.id}
             type='button'
             onClick={() => onSliderButtonClick(index)}
           >
@@ -106,10 +105,10 @@ function Carousel({ images }: CarouselProps) {
         }}
         className={styles.root}
       >
-        {images.map((image, index) => (
+        {products.map((product, index) => (
           <Link
-            to={ROUTES.product.replace(':id', image.id)}
-            key={image.id}
+            to={ROUTES.product.replace(':id', product.id)}
+            key={product.id}
             className={styles.slideContainer}
           >
             <div
@@ -122,8 +121,8 @@ function Carousel({ images }: CarouselProps) {
               ])}
             >
               <img
-                src={`${BASE_URL}${IMAGES_URL}/${image.images}`}
-                alt={image.alt}
+                src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
+                alt={product.name}
                 width={IMAGE_WIDTH}
                 height={IMAGE_HEIGHT}
               />
@@ -132,8 +131,8 @@ function Carousel({ images }: CarouselProps) {
                 className={styles.description}
               >
                 <div>
-                  <h2>{image.name}</h2>
-                  <span>{`$${formatCurrency(image.price)}`}</span>
+                  <h2>{product.name}</h2>
+                  <span>{`$${formatCurrency(product.price)}`}</span>
                 </div>
               </div>
             </div>

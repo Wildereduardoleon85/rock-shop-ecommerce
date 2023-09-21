@@ -22,13 +22,14 @@ function HomePage() {
     products && (
       <>
         <Carousel
-          images={products.map((product) => ({
-            name: product.name,
-            id: product._id,
-            images: product.image,
-            alt: product.name,
-            price: product.price,
-          }))}
+          products={products
+            .map((product) => ({
+              name: product.name,
+              id: product._id,
+              images: product.image,
+              price: product.price,
+            }))
+            .slice(0, 6)}
         />
         <Showcase title='Latest Products' products={products} />
       </>
