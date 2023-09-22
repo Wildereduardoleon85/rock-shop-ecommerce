@@ -1,24 +1,28 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
-.carousel {
+.root {
   position: relative;
-  margin: calc(3rem + $navbar-height) auto 0 auto;
+  width: 1168px;
+  margin-top: calc(3rem + $navbar-height);
+  margin-right: auto;
+  margin-left: auto;
 
   .prevButton,
   .nextButton {
+    position: absolute;
     width: 40px;
     height: 40px;
-    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    background: none;
     border: none;
-    font-size: 1.8rem;
-    z-index: 2;
+    background: none;
     cursor: pointer;
+    top: calc(50% - 20px);
 
     &:hover > svg {
       fill: $dark-red;
@@ -26,118 +30,185 @@
 
     > svg {
       fill: $red;
-      display: block;
       @include transition(fill);
     }
   }
-  .nextButton {
-    right: -3rem;
-  }
 
   .prevButton {
-    left: -3rem;
+    left: -2rem;
   }
 
-  .sliderButtons {
+  .nextButton {
+    right: -2rem;
+  }
+
+  .bullets {
+    position: absolute;
+    bottom: -15px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    bottom: -1.5rem;
-    position: absolute;
-    width: 100%;
 
     > button {
+      width: 10px;
+      height: 10px;
+      margin: 0 0.2rem;
       border: none;
-      background: none;
+      border-radius: 50%;
+      background-color: $super-very-light-gray;
+      cursor: pointer;
+      @include transition(background-color);
 
-      &:hover > div {
-        background-color: $light-gray;
-      }
-
-      &:hover .active {
-        background-color: $dark-red;
-      }
-
-      > div {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: $super-very-light-gray;
-        margin: 0 0.3rem;
-        cursor: pointer;
-        @include transition(background-color);
-      }
-
-      .active {
+      &:hover {
         background-color: $red;
+      }
+    }
+
+    .active {
+      background-color: $red;
+
+      &:hover {
+        background-color: $dark-red;
       }
     }
   }
 
-  .root {
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    align-items: center;
+  .carousel {
+    width: 100%;
     overflow: hidden;
 
-    .slideContainer {
-      position: absolute;
+    .sliderStripe {
       display: flex;
-      justify-content: center;
-      width: 100%;
+      transition: 0.3s ease-out transform;
 
-      .slide {
-        display: flex;
-        z-index: -1;
-        opacity: 0;
-        border-radius: $border-radius;
-        box-shadow: -10px 10px 8px 5px rgba(0, 0, 0, 0.3);
-        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      .slideContainer {
+        padding: 24px;
 
-        > img {
-          display: block;
-          border-right: none;
-          border-top-left-radius: $border-radius;
-          border-bottom-left-radius: $border-radius;
-        }
-
-        .description {
-          background-color: $black;
-          width: 100%;
+        .slide {
           display: flex;
-          align-items: center;
-          padding: 1.5rem;
-          border-top-right-radius: $border-radius;
-          border-bottom-right-radius: $border-radius;
+          width: 1120px;
+          border-radius: $border-radius;
+          box-shadow: -10px 10px 8px 5px rgba(0, 0, 0, 0.3);
+          transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+          overflow: hidden;
 
-          > div:first-child {
-            > h2 {
-              color: white;
-            }
-            > span {
-              display: block;
-              margin-top: 2rem;
-              color: $light-green;
-              font-size: 3rem;
-              font-weight: 700;
+          > img {
+            display: block;
+          }
+
+          .description {
+            background-color: $black;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+
+            > div:first-child {
+              > h2 {
+                color: white;
+              }
+
+              > span {
+                display: block;
+                margin-top: 2rem;
+                color: $light-green;
+                font-size: 3rem;
+                font-weight: 700;
+              }
             }
           }
         }
       }
+    }
+  }
+}
 
-      .active {
-        opacity: 1;
-        z-index: 1;
+@media (max-width: 1280px) {
+  .root {
+    width: 900px;
+    .carousel {
+      .sliderStripe {
+        .slideContainer {
+          .slide {
+            width: calc(900px - 48px);
+          }
+        }
       }
+    }
+  }
+}
 
-      .prev {
-        transform: translateX(-105%);
-        opacity: 0;
+@media (max-width: 990px) {
+  .root {
+    width: 750px;
+    .carousel {
+      .sliderStripe {
+        .slideContainer {
+          .slide {
+            width: calc(750px - 48px);
+            .description {
+              > div:first-child {
+                h2 {
+                  font-size: 18px;
+                }
+
+                > span {
+                  font-size: 30px;
+                }
+              }
+            }
+          }
+        }
       }
+    }
+  }
+}
 
-      .next {
-        transform: translateX(105%);
-        opacity: 0;
+@media (max-width: 840px) {
+  .root {
+    width: 600px;
+    .prevButton {
+      left: 20px;
+    }
+    .nextButton {
+      right: 20px;
+    }
+    .carousel {
+      .sliderStripe {
+        .slideContainer {
+          .slide {
+            width: calc(600px - 48px);
+            > img {
+              width: 100%;
+            }
+            .description {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .root {
+    width: 100%;
+    .carousel {
+      .sliderStripe {
+        .slideContainer {
+          padding: 0;
+          width: 100vw;
+          .slide {
+            box-shadow: none;
+            width: 100vw;
+            > img {
+              width: 100%;
+            }
+          }
+        }
       }
     }
   }

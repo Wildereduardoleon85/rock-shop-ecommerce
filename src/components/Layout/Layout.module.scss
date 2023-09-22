@@ -1,8 +1,14 @@
 @import '../../styles/variables';
 
 main {
-  max-width: $xl-break-point;
+  max-width: $xxl-break-point;
   margin: 0 auto;
   padding: 0 1rem;
   min-height: 70vh;
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 0;
+  }
 }

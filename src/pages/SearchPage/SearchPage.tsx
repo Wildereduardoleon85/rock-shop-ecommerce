@@ -28,8 +28,6 @@ function SearchPage() {
     return <ErrorPage />
   }
 
-  console.log(products)
-
   return products && products.length > 0 ? (
     <>
       <GobackButton className={styles.backButton} />

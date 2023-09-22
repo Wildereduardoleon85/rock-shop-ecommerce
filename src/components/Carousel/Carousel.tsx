@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
-import { formatCurrency, getClassNames } from '../../utils'
+import { formatCurrency } from '../../utils'
 import styles from './Carousel.module.scss'
+import { useMediaQuery } from '../../hooks'
 
-const IMAGE_WIDTH = 560
-const IMAGE_HEIGHT = IMAGE_WIDTH * 0.7954545454545455
-const GUTTER = 40
+type Positions = { [key: number]: number }
 
 type CarouselProps = {
   products: {
@@ -18,126 +17,92 @@ type CarouselProps = {
   }[]
 }
 
+function generatePositions(numberOfSlides: number, slideWidth: number) {
+  const positions: Positions = {}
+  const slides = [...Array(numberOfSlides).keys()]
+
+  slides.forEach((slide) => {
+    positions[slide] = slideWidth * slide * -1
+  })
+
+  return positions
+}
+
 function Carousel({ products }: CarouselProps) {
-  const lastSlide = products.length - 1
-  const [positions, setPositions] = useState<{
-    active: number
-    prev: number
-    next: number
-  }>({ active: 0, prev: lastSlide, next: 1 })
+  const slideRef = useRef<HTMLDivElement>(null)
+  const [positions, setPositions] = useState<Positions | null>(null)
+  const [activeSlide, setActiveSlide] = useState<number>(0)
+  const screenSize = useMediaQuery()
 
-  function onNextSlideClick() {
-    setPositions({
-      active: positions.active === lastSlide ? 0 : positions.active + 1,
-      prev: positions.prev === lastSlide ? 0 : positions.prev + 1,
-      next: positions.next === lastSlide ? 0 : positions.next + 1,
-    })
-  }
-
-  function onPrevSlideClick() {
-    setPositions({
-      active: positions.active === 0 ? lastSlide : positions.active - 1,
-      prev: positions.prev === 0 ? lastSlide : positions.prev - 1,
-      next: positions.next === 0 ? lastSlide : positions.next - 1,
-    })
-  }
-
-  function onSliderButtonClick(index: number) {
-    if (index !== positions.active) {
-      setPositions({
-        active: index,
-        prev: index - 1 < 0 ? lastSlide : index - 1,
-        next: index + 1 > lastSlide ? 0 : index + 1,
-      })
+  useLayoutEffect(() => {
+    if (slideRef.current) {
+      setPositions(
+        generatePositions(products.length, slideRef.current.offsetWidth)
+      )
     }
+  }, [slideRef, screenSize])
+
+  const onNextSlide = () => {
+    setActiveSlide(activeSlide === products.length - 1 ? 0 : activeSlide + 1)
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      onNextSlideClick()
-    }, 4000)
-
-    return () => clearInterval(interval)
-  }, [positions])
+  const onPrevSlide = () => {
+    setActiveSlide(activeSlide === 0 ? products.length - 1 : activeSlide - 1)
+  }
 
   return (
-    <div
-      style={{ width: IMAGE_WIDTH * 2 + GUTTER }}
-      className={styles.carousel}
-    >
-      <button
-        style={{
-          top: (IMAGE_HEIGHT + GUTTER) / 2 - 20,
-        }}
-        className={styles.prevButton}
-        type='button'
-        onClick={onPrevSlideClick}
-        aria-label='previous slide'
-      >
+    <div className={styles.root}>
+      <button className={styles.prevButton} type='button' onClick={onPrevSlide}>
         <FaChevronLeft />
       </button>
-      <button
-        style={{
-          top: (IMAGE_HEIGHT + GUTTER) / 2 - 20,
-        }}
-        className={styles.nextButton}
-        type='button'
-        onClick={onNextSlideClick}
-        aria-label='next slide'
-      >
+      <button className={styles.nextButton} type='button' onClick={onNextSlide}>
         <FaChevronRight />
       </button>
-      <div className={styles.sliderButtons}>
-        {products.map((product, index) => (
+      <div className={styles.bullets}>
+        {[...Array(products.length).keys()].map((slide) => (
           <button
-            key={product.id}
+            className={slide === activeSlide ? styles.active : ''}
             type='button'
-            onClick={() => onSliderButtonClick(index)}
-          >
-            <div className={index === positions.active ? styles.active : ''} />
-          </button>
+            key={slide}
+            aria-label={`slide ${slide + 1}`}
+            onClick={() => setActiveSlide(slide)}
+          />
         ))}
       </div>
-      <div
-        style={{
-          width: IMAGE_WIDTH * 2 + GUTTER,
-          height: IMAGE_HEIGHT + GUTTER,
-        }}
-        className={styles.root}
-      >
-        {products.map((product, index) => (
-          <Link
-            to={ROUTES.product.replace(':id', product.id)}
-            key={product.id}
-            className={styles.slideContainer}
-          >
+      <div className={styles.carousel}>
+        <div
+          style={{
+            transform: positions
+              ? `translateX(${positions[activeSlide]}px)`
+              : 'translateX(0)',
+          }}
+          className={styles.sliderStripe}
+        >
+          {products.map((product) => (
             <div
-              style={{ width: IMAGE_WIDTH * 2 }}
-              className={getClassNames([
-                styles.slide,
-                positions.active === index && styles.active,
-                positions.prev === index && styles.prev,
-                positions.next === index && styles.next,
-              ])}
+              ref={slideRef}
+              key={product.id}
+              className={styles.slideContainer}
             >
-              <img
-                src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
-                alt={product.name}
-                width={IMAGE_WIDTH}
-                height={IMAGE_HEIGHT}
-              />
-              <div
-                style={{ width: IMAGE_WIDTH }}
-                className={styles.description}
+              <Link
+                to={ROUTES.product.replace(':id', product.id)}
+                className={styles.slide}
               >
-                <div>
-                  <h2>{product.name}</h2>
-                  <span>{`$${formatCurrency(product.price)}`}</span>
+                <img
+                  src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
+                  alt={product.name}
+                  width='50%'
+                />
+                <div className={styles.description}>
+                  <div>
+                    <h2>{product.name}</h2>
+                    <span>{`$${formatCurrency(product.price)}`}</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
-          </Link>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )
