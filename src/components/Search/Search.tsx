@@ -5,7 +5,11 @@ import styles from './Search.module.scss'
 import { Button } from '../UI'
 import { ROUTES } from '../../constants'
 
-function Search() {
+type SearchProps = {
+  className?: string
+}
+
+function Search({ className = '' }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>('')
   const navigate = useNavigate()
 
@@ -20,12 +24,12 @@ function Search() {
   }
 
   return (
-    <form onSubmit={onSearchSubmit}>
+    <form className={className} onSubmit={onSearchSubmit}>
       <div className={styles.root}>
         <input value={searchValue} onChange={onSearchInputChange} type='text' />
         <Button className={styles.searchButton} type='submit'>
           <AiOutlineSearch className={styles.searchIcon} />
-          SEARCH
+          <span className={styles.text}>SEARCH</span>
         </Button>
       </div>
     </form>

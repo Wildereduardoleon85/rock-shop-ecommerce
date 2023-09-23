@@ -3,7 +3,7 @@
 
 .root {
   margin-right: 2rem;
-  height: 40px;
+  height: 2.5rem;
   border-radius: $border-radius;
   border: none;
   background-color: $black;
@@ -24,6 +24,7 @@
   .searchButton {
     display: flex;
     height: 100%;
+    align-items: center;
 
     &:focus-visible {
       outline: 1px solid white;
@@ -32,6 +33,28 @@
     .searchIcon {
       margin-right: 0.5rem;
       fill: white;
+      font-size: 1.5rem;
+    }
+
+    .text {
+      position: static;
+      color: white;
+    }
+  }
+}
+
+@media (max-width: $xxs-break-point) {
+  .root {
+    .searchButton {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+
+      .text {
+        display: none;
+      }
+      .searchIcon {
+        margin-right: 0;
+      }
     }
   }
 }

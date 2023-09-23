@@ -7,3 +7,15 @@
   font-family: 'Roboto Condensed', sans-serif;
   color: $black;
 }
+
+@media (max-width: $sm-break-point) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $xs-break-point) {
+  html {
+    font-size: 12px;
+  }
+}

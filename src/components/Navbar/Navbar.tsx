@@ -12,6 +12,7 @@ import { getClassNames } from '../../utils'
 import { ROUTES } from '../../constants'
 import { ClickAwayWrapper, SmallLoader } from '../UI'
 import { useLogoutMutation, clearUserInfo } from '../../slices'
+import { useMediaQuery } from '../../hooks'
 
 function Navbar() {
   const [isActive, setIsActive] = useState<boolean>(false)
@@ -21,6 +22,7 @@ function Navbar() {
   const navigate = useNavigate()
   const [logout, { isLoading }] = useLogoutMutation()
   const dispatch = useDispatch()
+  const screenSize = useMediaQuery()
 
   const itemsInTheCart = cartItems.reduce(
     (acc: number, curr: CartItem) => acc + curr.qty,
@@ -43,10 +45,10 @@ function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <Link to={ROUTES.home} className={styles.iconContainer}>
-          <img src={logo} alt='logo' />
+          <img width={260} src={logo} alt='logo' />
         </Link>
         <div>
-          <Search />
+          {screenSize > 945 && <Search />}
           <Link to={ROUTES.cart} className={styles.iconButton}>
             {itemsInTheCart > 0 && (
               <div className={styles.cartItems}>{itemsInTheCart}</div>

@@ -34,7 +34,7 @@
       .iconButton {
         display: flex;
         align-items: center;
-        margin-right: 3rem;
+        margin-right: 2rem;
         background: none;
         border: none;
         cursor: pointer;
@@ -153,6 +153,30 @@
               background: white;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $sm-break-point) {
+  .navbar {
+    .container {
+      .iconContainer {
+        > img {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $xs-break-point) {
+  .navbar {
+    .container {
+      .iconContainer {
+        > img {
+          width: 160px;
         }
       }
     }

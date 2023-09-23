@@ -3,12 +3,42 @@
 main {
   max-width: $xxl-break-point;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: $navbar-height 1rem 0 1rem;
   min-height: 70vh;
 }
 
-@media (max-width: 640px) {
+.search {
+  margin-top: 1.5rem;
+  width: 480px;
+  padding: 0;
+
+  > div:first-of-type {
+    background-color: white;
+    box-shadow: inset 6px 6px 12px 0px rgba(0, 0, 0, 0.15);
+    margin-right: 0;
+    input {
+      width: 100%;
+      color: $black;
+    }
+  }
+}
+
+@media (max-width: $md-break-point) {
   main {
-    padding: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 945px) {
+  .search {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 512px) {
+  .search {
+    width: 95%;
   }
 }

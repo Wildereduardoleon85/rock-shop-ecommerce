@@ -4,7 +4,7 @@
 .root {
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
-  width: 313px;
+  width: 330px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
   }
 }
 
-@media (max-width: $lg-break-point) {
+@media (max-width: 1070px) {
   .root {
     width: 440px;
     > a:first-of-type {
@@ -46,8 +46,14 @@
   }
 }
 
-@media (max-width: $md-break-point) {
+@media (max-width: 945px) {
   .root {
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .root {
+    width: 90%;
   }
 }

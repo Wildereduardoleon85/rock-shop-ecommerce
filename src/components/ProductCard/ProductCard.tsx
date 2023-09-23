@@ -31,8 +31,7 @@ function ProductCard({ product }: ProductCardProps) {
       to={ROUTES.product.replace(':id', product._id)}
     >
       <img
-        width={265}
-        height={211}
+        width='100%'
         src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
         alt={product.name}
       />

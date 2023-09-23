@@ -1,12 +1,13 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
+$aspect-ratio: 0.7973538011695906;
+
 .root {
   position: relative;
-  width: 1168px;
-  margin-top: calc(3rem + $navbar-height);
-  margin-right: auto;
-  margin-left: auto;
+  width: $xxl-break-point;
+  margin-top: 3rem;
+  height: calc(($xxl-break-point / 2) * $aspect-ratio);
 
   .prevButton,
   .nextButton {
@@ -14,7 +15,6 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    z-index: 1;
     font-size: 1.6rem;
     display: flex;
     align-items: center;
@@ -23,6 +23,7 @@
     background: none;
     cursor: pointer;
     top: calc(50% - 20px);
+    z-index: 2;
 
     &:hover > svg {
       fill: $dark-red;
@@ -35,19 +36,20 @@
   }
 
   .prevButton {
-    left: -2rem;
+    left: 1rem;
   }
 
   .nextButton {
-    right: -2rem;
+    right: 1rem;
   }
 
   .bullets {
     position: absolute;
-    bottom: -15px;
+    bottom: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
+    z-index: 2;
 
     > button {
       width: 10px;
@@ -73,51 +75,80 @@
     }
   }
 
-  .carousel {
+  .slide {
+    display: flex;
     width: 100%;
-    overflow: hidden;
+    position: absolute;
+    opacity: 0;
+    transition: ease-in-out 0.6s opacity;
 
-    .sliderStripe {
+    > img {
+      display: block;
+      border: 1px solid rgb(187, 187, 187);
+      border-right: none;
+      border-radius: $border-radius;
+    }
+
+    .description {
+      background-color: $black;
+      width: 50%;
       display: flex;
-      transition: 0.3s ease-out transform;
+      align-items: center;
+      padding: 1.5rem;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
 
-      .slideContainer {
-        padding: 24px;
+      > div:first-child {
+        > h2 {
+          color: white;
+        }
 
-        .slide {
-          display: flex;
-          width: 1120px;
-          border-radius: $border-radius;
-          box-shadow: -10px 10px 8px 5px rgba(0, 0, 0, 0.3);
-          transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-          overflow: hidden;
+        > span {
+          display: block;
+          margin-top: 2rem;
+          color: $light-green;
+          font-size: 3rem;
+          font-weight: 700;
+        }
+      }
+    }
+  }
 
-          > img {
-            display: block;
+  .active {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 1440px) {
+  .root {
+    $width: calc(100vw - 2rem);
+    width: $width;
+    height: calc(($width / 2) * $aspect-ratio);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: $md-break-point) {
+  .root {
+    $width: 100vw;
+    width: $width;
+    height: calc(($width / 2) * $aspect-ratio);
+    .slide {
+      > img {
+        border-radius: 0;
+      }
+
+      .description {
+        border-radius: 0;
+        > div:first-child {
+          > h2 {
+            font-size: 20px;
           }
 
-          .description {
-            background-color: $black;
-            width: 50%;
-            display: flex;
-            align-items: center;
-            padding: 1.5rem;
-            border-top-right-radius: $border-radius;
-            border-bottom-right-radius: $border-radius;
-
-            > div:first-child {
-              > h2 {
-                color: white;
-              }
-
-              > span {
-                display: block;
-                margin-top: 2rem;
-                color: $light-green;
-                font-size: 3rem;
-                font-weight: 700;
-              }
-            }
+          > span {
+            font-size: 30px;
           }
         }
       }
@@ -125,90 +156,16 @@
   }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 700px) {
   .root {
-    width: 900px;
-    .carousel {
-      .sliderStripe {
-        .slideContainer {
-          .slide {
-            width: calc(900px - 48px);
-          }
-        }
+    height: calc(100vw * $aspect-ratio);
+    .slide {
+      > img {
+        width: 100%;
       }
-    }
-  }
-}
 
-@media (max-width: 990px) {
-  .root {
-    width: 750px;
-    .carousel {
-      .sliderStripe {
-        .slideContainer {
-          .slide {
-            width: calc(750px - 48px);
-            .description {
-              > div:first-child {
-                h2 {
-                  font-size: 18px;
-                }
-
-                > span {
-                  font-size: 30px;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 840px) {
-  .root {
-    width: 600px;
-    .prevButton {
-      left: 20px;
-    }
-    .nextButton {
-      right: 20px;
-    }
-    .carousel {
-      .sliderStripe {
-        .slideContainer {
-          .slide {
-            width: calc(600px - 48px);
-            > img {
-              width: 100%;
-            }
-            .description {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 650px) {
-  .root {
-    width: 100%;
-    .carousel {
-      .sliderStripe {
-        .slideContainer {
-          padding: 0;
-          width: 100vw;
-          .slide {
-            box-shadow: none;
-            width: 100vw;
-            > img {
-              width: 100%;
-            }
-          }
-        }
+      .description {
+        display: none;
       }
     }
   }
