@@ -30,6 +30,12 @@ main {
   }
 }
 
+@media (max-width: $sm-break-point) {
+  main {
+    padding-top: calc($navbar-height - $ribbon-height);
+  }
+}
+
 @media (max-width: 945px) {
   .search {
     margin-right: auto;

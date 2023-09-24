@@ -1,0 +1,38 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+
+  &:hover > svg {
+    fill: $red;
+  }
+
+  .cartIcon {
+    margin-left: 1rem;
+    fill: $light-gray;
+    font-size: 1.8rem;
+    @include transition(fill);
+  }
+
+  .cartItems {
+    background-color: $red;
+    border-radius: 50%;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    top: -8px;
+    right: -10px;
+    font-size: 12px;
+  }
+}

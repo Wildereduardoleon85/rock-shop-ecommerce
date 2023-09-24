@@ -6,6 +6,7 @@ import {
   authSlice,
   alertSlice,
   modalSlice,
+  ribbonSlice,
 } from './slices'
 
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
     auth: authSlice.reducer,
     alert: alertSlice.reducer,
     modal: modalSlice.reducer,
+    ribbon: ribbonSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

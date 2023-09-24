@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Navbar, Footer, Search } from '..'
+import { Navbar, Footer, Search, Ribbon } from '..'
 import styles from './Layout.module.scss'
 import { Alert, ConfirmModal } from '../UI'
 import { RootState } from '../../store'
@@ -16,6 +16,7 @@ function Layout() {
       {isModalOpen && <ConfirmModal />}
       <header>
         <Navbar />
+        <Ribbon />
       </header>
       <main>
         {screenSize <= 945 && <Search className={styles.search} />}

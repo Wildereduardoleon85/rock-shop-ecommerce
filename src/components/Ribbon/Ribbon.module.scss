@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.root {
+  margin-top: 0;
+  background-color: $black;
+  color: white;
+  height: $ribbon-height;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0 1rem;
+  @include transition(margin-top);
+}
+
+.active {
+  margin-top: $navbar-height;
+}
