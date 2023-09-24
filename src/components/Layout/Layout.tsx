@@ -5,9 +5,11 @@ import styles from './Layout.module.scss'
 import { Alert, ConfirmModal } from '../UI'
 import { RootState } from '../../store'
 import { useMediaQuery } from '../../hooks'
+import { LG_BREAKPOINT } from '../../constants'
 
 function Layout() {
   const { isModalOpen } = useSelector((state: RootState) => state.modal)
+  const { isRibbonOpen } = useSelector((state: RootState) => state.ribbon)
   const screenSize = useMediaQuery()
 
   return (
@@ -18,8 +20,8 @@ function Layout() {
         <Navbar />
         <Ribbon />
       </header>
-      <main>
-        {screenSize <= 945 && <Search className={styles.search} />}
+      <main className={isRibbonOpen ? styles.ribbonActive : ''}>
+        {screenSize <= LG_BREAKPOINT && <Search />}
         <Outlet />
       </main>
       <Footer />

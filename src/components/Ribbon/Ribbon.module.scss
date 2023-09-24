@@ -10,6 +10,9 @@
   align-items: center;
   justify-content: end;
   padding: 0 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 899;
   @include transition(margin-top);
 }
 

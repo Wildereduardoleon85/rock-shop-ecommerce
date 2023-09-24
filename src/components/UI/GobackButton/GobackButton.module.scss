@@ -31,3 +31,9 @@
     @include transition(all);
   }
 }
+
+@media (max-width: $md-break-point) {
+  .root {
+    margin-left: 0.5rem;
+  }
+}

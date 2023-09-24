@@ -6,6 +6,7 @@
   box-shadow: $box-shadow-light;
   width: 330px;
   padding: 1.5rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,14 +47,20 @@
   }
 }
 
-@media (max-width: 945px) {
+@media (max-width: $lg-break-point) {
   .root {
-    margin: 0 auto;
+    width: 330px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 720px) {
   .root {
-    width: 90%;
+    width: 480px;
+  }
+}
+
+@media (max-width: 530px) {
+  .root {
+    width: 95%;
   }
 }

@@ -13,9 +13,10 @@ import {
 } from '../../slices'
 import { Button, GobackButton, Loader } from '../../components/UI'
 import { Product, Review } from '../../types'
-import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
+import { BASE_URL, IMAGES_URL, LG_BREAKPOINT, ROUTES } from '../../constants'
 import { RootState } from '../../store'
 import { ErrorPage } from '..'
+import { useMediaQuery } from '../../hooks'
 
 function ProductPage() {
   const { id: productId } = useParams()
@@ -29,6 +30,7 @@ function ProductPage() {
   } = useGetProductDetailsQuery(productId as string)
   const fetchBaseQueryError = error as FetchBaseQueryError
   const { qty } = useSelector((state: RootState) => state.qty)
+  const screenSize = useMediaQuery()
 
   useEffect(() => {
     dispatch(setQty(1))
@@ -63,16 +65,17 @@ function ProductPage() {
         <div className={styles.container}>
           <div className={styles.imageContainer}>
             <img
-              width={636}
-              height={506}
+              width='100%'
               src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
               alt={product.name}
             />
-            <Reviews
-              refetch={refetch}
-              productId={product._id}
-              reviews={product.reviews as Review[]}
-            />
+            {screenSize > LG_BREAKPOINT && (
+              <Reviews
+                refetch={refetch}
+                productId={product._id}
+                reviews={product.reviews as Review[]}
+              />
+            )}
           </div>
 
           <div className={styles.details}>
@@ -101,6 +104,13 @@ function ProductPage() {
             <h3>Description</h3>
             <p className={styles.description}>{product.description}</p>
           </div>
+          {screenSize <= LG_BREAKPOINT && (
+            <Reviews
+              refetch={refetch}
+              productId={product._id}
+              reviews={product.reviews as Review[]}
+            />
+          )}
         </div>
       </div>
     )

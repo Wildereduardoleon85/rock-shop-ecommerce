@@ -55,3 +55,6 @@ export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [
     label: 'Email Address',
   },
 ]
+
+export const LG_BREAKPOINT: number = 945
+export const SM_BREAKPOINT: number = 650

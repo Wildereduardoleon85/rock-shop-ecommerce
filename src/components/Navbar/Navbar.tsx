@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import styles from './Navbar.module.scss'
 import logo from '../../assets/img/logo.png'
 import { Search } from '../Search'
-import { ROUTES } from '../../constants'
+import { LG_BREAKPOINT, ROUTES, SM_BREAKPOINT } from '../../constants'
 import { useMediaQuery } from '../../hooks'
 import { CartButton, SignInButton } from '..'
 import { toggleRibbon } from '../../slices'
@@ -20,8 +20,8 @@ function Navbar() {
           <img width={260} src={logo} alt='logo' />
         </Link>
         <div>
-          {screenSize > 945 && <Search />}
-          {screenSize <= 650 ? (
+          {screenSize > LG_BREAKPOINT && <Search />}
+          {screenSize <= SM_BREAKPOINT ? (
             <button
               className={styles.hamburguerMenu}
               type='button'

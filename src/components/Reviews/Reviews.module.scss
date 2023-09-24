@@ -95,3 +95,10 @@
     margin-top: 2rem;
   }
 }
+
+@media (max-width: $lg-break-point) {
+  .root {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

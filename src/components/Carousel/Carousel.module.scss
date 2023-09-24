@@ -87,6 +87,8 @@ $aspect-ratio: 0.7973538011695906;
       border: 1px solid rgb(187, 187, 187);
       border-right: none;
       border-radius: $border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     .description {
@@ -132,16 +134,11 @@ $aspect-ratio: 0.7973538011695906;
 
 @media (max-width: $md-break-point) {
   .root {
-    $width: 100vw;
+    $width: calc(100vw - 1rem);
     width: $width;
     height: calc(($width / 2) * $aspect-ratio);
     .slide {
-      > img {
-        border-radius: 0;
-      }
-
       .description {
-        border-radius: 0;
         > div:first-child {
           > h2 {
             font-size: 20px;
@@ -162,6 +159,9 @@ $aspect-ratio: 0.7973538011695906;
     .slide {
       > img {
         width: 100%;
+        border-right: 1px solid rgb(187, 187, 187);
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
       }
 
       .description {

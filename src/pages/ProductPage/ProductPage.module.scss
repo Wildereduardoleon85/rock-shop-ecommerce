@@ -10,6 +10,7 @@
     display: flex;
 
     .imageContainer {
+      width: 46%;
       > img:first-of-type {
         display: block;
         flex-shrink: 0;
@@ -18,7 +19,7 @@
 
     .details {
       $button-width: 150px;
-      width: 100%;
+      width: 54%;
       padding-left: 2rem;
 
       > h1 {
@@ -56,6 +57,27 @@
 
       .qtyButton {
         margin-top: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: $lg-break-point) {
+  .root {
+    .container {
+      display: block;
+
+      .imageContainer {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .details {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
       }
     }
   }
