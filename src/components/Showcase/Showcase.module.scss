@@ -26,12 +26,6 @@
   }
 }
 
-@media (max-width: $md-break-point) {
-  .title {
-    margin-left: 0.5rem;
-  }
-}
-
 @media (max-width: 720px) {
   .container {
     grid-template-columns: repeat(1, 1fr);

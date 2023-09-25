@@ -8,14 +8,33 @@
   height: $ribbon-height;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   padding: 0 1rem;
   position: fixed;
   width: 100%;
   z-index: 899;
   @include transition(margin-top);
+
+  .signInButtonContainer {
+    display: flex;
+    height: $ribbon-height;
+    align-items: center;
+  }
+
+  .searchContainer {
+    height: $ribbon-height;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .active {
   margin-top: $navbar-height;
+}
+
+@media (max-width: $sm-break-point) {
+  .root {
+    display: block;
+    height: calc($ribbon-height * 2);
+  }
 }

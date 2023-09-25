@@ -58,3 +58,4 @@ export const SIGN_IN_FORM: FormInputDefaultAttrs[] = [
 
 export const LG_BREAKPOINT: number = 945
 export const SM_BREAKPOINT: number = 650
+export const MD_BREAKPOINT: number = 840

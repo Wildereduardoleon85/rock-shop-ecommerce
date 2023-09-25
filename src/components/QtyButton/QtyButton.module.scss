@@ -3,6 +3,7 @@
 
 .root {
   position: relative;
+  flex-shrink: 0;
 
   .qty {
     border: none;

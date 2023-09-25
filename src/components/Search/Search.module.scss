@@ -45,51 +45,45 @@
   }
 }
 
-@media (max-width: $lg-break-point) {
-  .root {
-    margin-top: 1.5rem;
-    padding: 0;
-    width: 380px;
-    @include transition(all);
+// @media (max-width: $lg-break-point) {
+//   .root {
+//     margin-top: 1.5rem;
+//     padding: 0;
+//     width: 380px;
+//     @include transition(all);
 
-    > div:first-of-type {
-      background-color: white;
-      box-shadow: inset 6px 6px 12px 0px rgba(0, 0, 0, 0.15);
-      margin-right: 0;
-      input {
-        width: 100%;
-        color: $black;
-      }
-    }
-  }
-}
+//     > div:first-of-type {
+//       background-color: white;
+//       box-shadow: inset 6px 6px 12px 0px rgba(0, 0, 0, 0.15);
+//       margin-right: 0;
+//       input {
+//         width: 100%;
+//         color: $black;
+//       }
+//     }
+//   }
+// }
 
-@media (max-width: $md-break-point) {
-  .root {
-    margin-left: 0.5rem;
-  }
-}
+// @media (max-width: $xs-break-point) {
+//   .root {
+//     width: 100%;
+//   }
+// }
 
-@media (max-width: $xs-break-point) {
-  .root {
-    width: 95%;
-  }
-}
+// @media (max-width: $xxs-break-point) {
+//   .root {
+//     .container {
+//       .searchButton {
+//         padding-left: 0.5rem;
+//         padding-right: 0.5rem;
 
-@media (max-width: $xxs-break-point) {
-  .root {
-    .container {
-      .searchButton {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-
-        .text {
-          display: none;
-        }
-        .searchIcon {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-}
+//         .text {
+//           display: none;
+//         }
+//         .searchIcon {
+//           margin-right: 0;
+//         }
+//       }
+//     }
+//   }
+// }

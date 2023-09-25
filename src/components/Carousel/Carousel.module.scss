@@ -6,7 +6,7 @@ $aspect-ratio: 0.7973538011695906;
 .root {
   position: relative;
   width: $xxl-break-point;
-  margin-top: 3rem;
+  margin: 3rem auto 0 auto;
   height: calc(($xxl-break-point / 2) * $aspect-ratio);
 
   .prevButton,

@@ -4,7 +4,7 @@
 main {
   max-width: $xxl-break-point;
   margin: 0 auto;
-  padding: $navbar-height 1rem 0 1rem;
+  padding-top: $navbar-height;
   min-height: 70vh;
   @include transition(padding-top);
 }
@@ -13,9 +13,22 @@ main {
   padding-top: calc($navbar-height + $ribbon-height);
 }
 
+@media (max-width: 1440px) {
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (max-width: $md-break-point) {
   main {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: $sm-break-point) {
+  .ribbonActive {
+    padding-top: calc($navbar-height + ($ribbon-height * 2));
   }
 }
