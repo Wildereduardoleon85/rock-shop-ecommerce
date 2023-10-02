@@ -124,3 +124,19 @@
     }
   }
 }
+
+@media (max-width: $lg-break-point) {
+  .root {
+    display: block;
+
+    .leftContainer {
+      width: 100%;
+    }
+
+    .rightContainer {
+      width: 100%;
+      margin-top: 1.5rem;
+      margin-left: 0;
+    }
+  }
+}
