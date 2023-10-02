@@ -129,3 +129,19 @@
     color: $dark-gray;
   }
 }
+
+@media (max-width: $sm-break-point) {
+  .root {
+    margin-top: 1rem;
+
+    .qty {
+      display: flex;
+      align-items: center;
+
+      .countInStock {
+        margin-top: 0;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

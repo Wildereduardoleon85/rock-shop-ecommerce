@@ -2,7 +2,6 @@
 @import '../../styles/mixins';
 
 .root {
-  margin-top: 0;
   background-color: $black;
   color: white;
   height: $ribbon-height;
@@ -13,7 +12,8 @@
   position: fixed;
   width: 100%;
   z-index: 899;
-  @include transition(margin-top);
+  transform: translateY(-50%);
+  @include transition(transform);
 
   .signInButtonContainer {
     display: flex;
@@ -29,7 +29,7 @@
 }
 
 .active {
-  margin-top: $navbar-height;
+  transform: translateY($navbar-height);
 }
 
 @media (max-width: $sm-break-point) {

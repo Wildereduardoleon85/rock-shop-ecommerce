@@ -5,6 +5,7 @@ import styles from './CartPage.module.scss'
 import {
   BASE_URL,
   IMAGES_URL,
+  PRODUCT_CARD_STRING_LIMIT,
   PRODUCT_IMAGE_ASPECT_RATIO,
   ROUTES,
 } from '../../constants'
@@ -16,6 +17,7 @@ import { isNotCartInfo } from '../../helpers'
 import { ShoppingBagIcon } from '../../components/Icons'
 import { removeItem } from '../../slices'
 import { Button, GobackButton } from '../../components/UI'
+import { useMediaQuery } from '../../hooks'
 
 const IMAGE_WIDTH = 150
 
@@ -25,6 +27,7 @@ function CartPage() {
   const { cartItems, itemsPrice } = cart
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const screenSize = useMediaQuery()
 
   const onCheckoutClick = () => {
     navigate(userInfo ? ROUTES.shipping : `${ROUTES.login}?redirect=/shipping`)
@@ -54,7 +57,10 @@ function CartPage() {
                 />
                 <div className={styles.descriptionContainer}>
                   <Link to={ROUTES.product.replace(':id', product._id)}>
-                    {subString(product.name, 40)}
+                    {subString(
+                      product.name,
+                      screenSize <= 650 ? PRODUCT_CARD_STRING_LIMIT : 40
+                    )}
                   </Link>
                   <QtyButton
                     className={styles.qtyButton}
@@ -69,6 +75,7 @@ function CartPage() {
                     className={styles.deleteButton}
                     type='button'
                   >
+                    <span>REMOVE</span>
                     <FaTrashAlt />
                   </button>
                 </div>
