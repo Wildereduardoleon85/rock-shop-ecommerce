@@ -140,3 +140,11 @@
     }
   }
 }
+
+@media (max-width: $sm-break-point) {
+  .title {
+    > span {
+      font-size: 1.7rem;
+    }
+  }
+}
