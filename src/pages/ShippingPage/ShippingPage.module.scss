@@ -11,3 +11,9 @@
     margin-top: 3rem;
   }
 }
+
+@media (max-width: 530px) {
+  .container {
+    width: 100%;
+  }
+}

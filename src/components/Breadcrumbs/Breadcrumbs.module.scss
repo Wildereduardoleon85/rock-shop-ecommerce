@@ -43,3 +43,11 @@
     color: $red;
   }
 }
+
+@media (max-width: $xxs-break-point) {
+  .root {
+    .icon {
+      margin: 0 0.5rem;
+    }
+  }
+}
