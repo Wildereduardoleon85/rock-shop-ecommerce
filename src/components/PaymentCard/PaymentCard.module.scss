@@ -1,8 +1,9 @@
 @import '../../styles/variables';
 
 .root {
+  $aspect-ratio: 0.6007751937984496;
   $card-width: 258px;
-  $card-height: 155px;
+  $card-height: calc($card-width * $aspect-ratio);
   $card-box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
   position: relative;
   width: $card-width;
@@ -12,10 +13,10 @@
   .creditCardBack {
     backface-visibility: hidden;
     transition: ease-in-out 0.3s;
-    width: $card-width;
-    height: $card-height;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(to right, #a5a5a5, #e6e6e6);
-    border-radius: 10px;
+    border-radius: 0.625rem;
     box-shadow: $card-box-shadow;
     position: absolute;
   }
@@ -25,14 +26,15 @@
 
     > img:first-of-type {
       position: absolute;
-      top: 38px;
-      left: 20px;
+      top: 25%;
+      left: 8%;
+      width: 13.56%;
     }
 
     > p:first-of-type {
       position: absolute;
-      left: 16px;
-      top: 83px;
+      left: 6.2%;
+      top: 54%;
       font-size: 25px;
       color: $dark-gray;
     }
@@ -40,8 +42,8 @@
     > div:first-of-type {
       width: calc($card-width - 32px);
       position: absolute;
-      top: 118px;
-      left: 16px;
+      top: 76.2%;
+      left: 6.2%;
       display: flex;
 
       > p {
@@ -49,7 +51,7 @@
       }
 
       > p:nth-child(2) {
-        margin-left: 30px;
+        margin-left: 1.875rem;
       }
     }
   }
@@ -58,30 +60,30 @@
     transform: perspective(500px) rotateY(180deg);
 
     > div:first-of-type {
-      height: 35px;
+      height: 22.5806%;
       width: 100%;
       background-color: rgb(56, 56, 56);
       position: absolute;
-      top: 12px;
+      top: 7.8%;
     }
 
     > div:nth-child(2) {
-      height: 25px;
-      width: calc($card-width - 32px);
+      height: 16.129%;
+      width: 87.5%;
       background-color: white;
       position: absolute;
-      top: 58px;
-      left: 16px;
+      top: 37.5%;
+      left: 6.2%;
     }
 
     > div:nth-child(3) {
-      width: 75px;
-      height: 75px;
+      width: 29.0697%;
+      height: 48.387%;
       border-radius: 50%;
       background-color: white;
       position: absolute;
-      top: 35px;
-      right: 5px;
+      top: 22.58%;
+      right: 1.9379%;
       border: 2px solid #a5a5a5;
       display: flex;
       justify-content: center;
@@ -99,5 +101,30 @@
 
   .creditCardBack {
     transform: perspective(500px) rotateY(360deg);
+  }
+}
+
+@media (max-width: $xxs-break-point) {
+  .root {
+    width: 230px;
+    height: calc(230px * 0.6007751937984496);
+
+    .creditCardFront {
+      > p:first-of-type {
+        font-size: 20px;
+      }
+
+      > div:first-of-type {
+        > p {
+          font-size: 10px;
+        }
+      }
+    }
+
+    .creditCardBack {
+      > div:nth-child(3) {
+        font-size: 20px;
+      }
+    }
   }
 }
