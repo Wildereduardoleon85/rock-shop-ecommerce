@@ -75,10 +75,13 @@ function RegisterPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      setAlert({
-        variant: 'error',
-        message: err?.data?.message || 'internal server error',
-      })
+      console.log(err)
+      dispatch(
+        setAlert({
+          variant: 'error',
+          message: err?.data?.message || 'internal server error',
+        })
+      )
     }
   }
 

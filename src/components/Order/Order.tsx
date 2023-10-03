@@ -117,7 +117,7 @@ function Order({
     <>
       {variant === 'order-details' && (
         <>
-          <GobackButton className={styles.gobackButton} to={ROUTES.orderList} />
+          <GobackButton className={styles.gobackButton} />
           <h1 className={styles.title}>
             Order <span>{orderId}</span>
           </h1>

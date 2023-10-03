@@ -6,7 +6,7 @@
 }
 
 .root {
-  max-width: fit-content;
+  width: 480px;
   margin: 3rem auto 0 auto;
 
   > h1 {
@@ -15,5 +15,11 @@
 
   .form {
     margin-top: 3rem;
+  }
+}
+
+@media (max-width: 530px) {
+  .root {
+    width: 100%;
   }
 }
