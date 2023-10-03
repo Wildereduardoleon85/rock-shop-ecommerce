@@ -73,11 +73,11 @@ function OrdersTable({ orders, variant }: OrderProps) {
 
     return (
       <tr key={order._id}>
-        <td>{order._id}</td>
+        <td className={styles.id}>{order._id}</td>
         {variant === 'adminOrders' && <td>{adminOrder.name}</td>}
-        <td>{parseDate(order.createdAt)}</td>
-        <td>{order.itemsPrice}</td>
-        <td>
+        <td className={styles.date}>{parseDate(order.createdAt)}</td>
+        <td className={styles.price}>{order.itemsPrice}</td>
+        <td className={styles.date}>
           {order.isPaid ? (
             parseDate(order.paidAt)
           ) : (
@@ -163,20 +163,22 @@ function Table({
         )}
       </div>
       {data && data.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>{VARIANTS[variant].headers.h1}</th>
-              {variant === 'adminOrders' && <th>USER</th>}
-              <th>{VARIANTS[variant].headers.h2}</th>
-              <th>{VARIANTS[variant].headers.h3}</th>
-              <th>{VARIANTS[variant].headers.h4}</th>
-              {variant !== 'users' && <th>{VARIANTS[variant].headers.h5}</th>}
-              <th />
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table>
+        <div className={styles.tableContainer}>
+          <table>
+            <thead>
+              <tr>
+                <th>{VARIANTS[variant].headers.h1}</th>
+                {variant === 'adminOrders' && <th>USER</th>}
+                <th>{VARIANTS[variant].headers.h2}</th>
+                <th>{VARIANTS[variant].headers.h3}</th>
+                <th>{VARIANTS[variant].headers.h4}</th>
+                {variant !== 'users' && <th>{VARIANTS[variant].headers.h5}</th>}
+                <th />
+              </tr>
+            </thead>
+            <tbody>{renderTable()}</tbody>
+          </table>
+        </div>
       ) : (
         <div className={styles.noOrders}>
           <div>
