@@ -35,24 +35,6 @@ function Carousel({ products }: CarouselProps) {
 
   return (
     <div className={styles.root}>
-      <button className={styles.prevButton} type='button' onClick={onPrevSlide}>
-        <FaChevronLeft />
-      </button>
-      <button className={styles.nextButton} type='button' onClick={onNextSlide}>
-        <FaChevronRight />
-      </button>
-      <div className={styles.bullets}>
-        {[...Array(products.length).keys()].map((slide) => (
-          <button
-            className={slide === activeSlide ? styles.active : ''}
-            type='button'
-            key={slide}
-            aria-label={`slide ${slide + 1}`}
-            onClick={() => setActiveSlide(slide)}
-          />
-        ))}
-      </div>
-
       {products.map((product, index) => (
         <Link
           key={product.id}
@@ -75,6 +57,33 @@ function Carousel({ products }: CarouselProps) {
           </div>
         </Link>
       ))}
+      <button
+        aria-label='previous slide'
+        className={styles.prevButton}
+        type='button'
+        onClick={onPrevSlide}
+      >
+        <FaChevronLeft />
+      </button>
+      <button
+        aria-label='next slide'
+        className={styles.nextButton}
+        type='button'
+        onClick={onNextSlide}
+      >
+        <FaChevronRight />
+      </button>
+      <div className={styles.bullets}>
+        {[...Array(products.length).keys()].map((slide) => (
+          <button
+            className={slide === activeSlide ? styles.active : ''}
+            type='button'
+            key={slide}
+            aria-label={`slide ${slide + 1}`}
+            onClick={() => setActiveSlide(slide)}
+          />
+        ))}
+      </div>
     </div>
   )
 }

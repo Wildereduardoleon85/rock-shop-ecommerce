@@ -155,7 +155,7 @@ $aspect-ratio: 0.7973538011695906;
 
 @media (max-width: 700px) {
   .root {
-    height: calc(100vw * $aspect-ratio);
+    height: calc((100vw - 1rem) * $aspect-ratio);
     .slide {
       > img {
         width: 100%;

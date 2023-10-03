@@ -22,7 +22,12 @@ function Search() {
   return (
     <form className={styles.root} onSubmit={onSearchSubmit}>
       <div className={styles.container}>
-        <input value={searchValue} onChange={onSearchInputChange} type='text' />
+        <input
+          value={searchValue}
+          onChange={onSearchInputChange}
+          type='text'
+          aria-label='search'
+        />
         <Button className={styles.searchButton} type='submit'>
           <AiOutlineSearch className={styles.searchIcon} />
           <span className={styles.text}>SEARCH</span>

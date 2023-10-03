@@ -17,7 +17,11 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <Link to={ROUTES.home} className={styles.iconContainer}>
+        <Link
+          to={ROUTES.home}
+          className={styles.iconContainer}
+          aria-label='home page'
+        >
           <img width={260} src={logo} alt='logo' />
         </Link>
         <div>
