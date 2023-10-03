@@ -5,6 +5,7 @@ import {
   useCreateProductMutation,
   useGetProductsQuery,
 } from '../../../slices'
+import styles from './ProductListPage.module.scss'
 
 function ProductListPage() {
   const dispatch = useDispatch()
@@ -29,6 +30,7 @@ function ProductListPage() {
 
   return (
     <Table
+      className={styles.productList}
       variant='products'
       data={data}
       isLoading={isLoading}
