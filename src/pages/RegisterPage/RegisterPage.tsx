@@ -75,7 +75,6 @@ function RegisterPage() {
       dispatch(setCredentials(credentials))
       navigate(redirect)
     } catch (err: any) {
-      console.log(err)
       dispatch(
         setAlert({
           variant: 'error',

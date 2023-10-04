@@ -31,7 +31,7 @@ function Carousel({ products }: CarouselProps) {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [activeSlide])
+  })
 
   return (
     <div className={styles.root}>
@@ -47,7 +47,8 @@ function Carousel({ products }: CarouselProps) {
           <img
             src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
             alt={product.name}
-            width='50%'
+            width={698}
+            height={555.312}
           />
           <div className={styles.description}>
             <div>
@@ -75,12 +76,9 @@ function Carousel({ products }: CarouselProps) {
       </button>
       <div className={styles.bullets}>
         {[...Array(products.length).keys()].map((slide) => (
-          <button
+          <div
             className={slide === activeSlide ? styles.active : ''}
-            type='button'
             key={slide}
-            aria-label={`slide ${slide + 1}`}
-            onClick={() => setActiveSlide(slide)}
           />
         ))}
       </div>

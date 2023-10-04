@@ -22,6 +22,7 @@
   .productName {
     width: 100%;
     margin-top: 2rem;
+    font-size: 1.17rem;
     @include transition(color);
   }
 
@@ -31,18 +32,16 @@
     margin-top: 2rem;
     font-size: 1.6rem;
     font-weight: 600;
-    color: $light-gray;
+    color: $dark-green;
   }
 }
 
 @media (max-width: 1070px) {
   .root {
     width: 440px;
-    > a:first-of-type {
-      > img:first-of-type {
-        width: 100%;
-        height: auto;
-      }
+    > img {
+      width: 100%;
+      height: auto;
     }
   }
 }

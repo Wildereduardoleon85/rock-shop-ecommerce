@@ -51,27 +51,18 @@ $aspect-ratio: 0.7973538011695906;
     justify-content: center;
     z-index: 2;
 
-    > button {
+    > div {
       width: 10px;
       height: 10px;
-      margin: 0 0.2rem;
+      margin: 0 0.3rem;
       border: none;
       border-radius: 50%;
       background-color: $super-very-light-gray;
-      cursor: pointer;
       @include transition(background-color);
-
-      &:hover {
-        background-color: $red;
-      }
     }
 
     .active {
       background-color: $red;
-
-      &:hover {
-        background-color: $dark-red;
-      }
     }
   }
 
@@ -129,6 +120,12 @@ $aspect-ratio: 0.7973538011695906;
     height: calc(($width / 2) * $aspect-ratio);
     margin-left: auto;
     margin-right: auto;
+    .slide {
+      > img {
+        width: 50%;
+        height: auto;
+      }
+    }
   }
 }
 

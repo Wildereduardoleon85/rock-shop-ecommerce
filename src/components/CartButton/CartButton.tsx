@@ -14,7 +14,11 @@ function CartButton() {
   )
 
   return (
-    <Link to={ROUTES.cart} className={styles.iconButton}>
+    <Link
+      to={ROUTES.cart}
+      className={styles.iconButton}
+      aria-label='to cart page'
+    >
       {itemsInTheCart > 0 && (
         <div className={styles.cartItems}>{itemsInTheCart}</div>
       )}

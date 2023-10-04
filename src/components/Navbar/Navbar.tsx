@@ -22,7 +22,7 @@ function Navbar() {
           className={styles.iconContainer}
           aria-label='home page'
         >
-          <img width={260} src={logo} alt='logo' />
+          <img width={260} height={68} src={logo} alt='logo' />
         </Link>
         <div>
           {isMobile ? (

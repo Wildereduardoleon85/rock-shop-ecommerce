@@ -31,16 +31,17 @@ function ProductCard({ product }: ProductCardProps) {
       to={ROUTES.product.replace(':id', product._id)}
     >
       <img
-        width='100%'
+        width={282}
+        height={224.34}
         src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
         alt={product.name}
       />
 
-      <h3 className={styles.productName}>
+      <h2 className={styles.productName}>
         {product.name.length > PRODUCT_CARD_STRING_LIMIT
           ? subString(product.name, PRODUCT_CARD_STRING_LIMIT)
           : product.name}
-      </h3>
+      </h2>
 
       <Rating value={product.rating} text={`${product.numReviews} reviews`} />
       <p className={styles.price}>${product.price}</p>
