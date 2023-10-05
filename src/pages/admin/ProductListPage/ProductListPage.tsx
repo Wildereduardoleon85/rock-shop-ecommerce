@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { Table } from '../../../components'
+import { Meta, Table } from '../../../components'
 import {
   setAlert,
   useCreateProductMutation,
@@ -29,16 +29,19 @@ function ProductListPage() {
   }
 
   return (
-    <Table
-      className={styles.productList}
-      variant='products'
-      data={data}
-      isLoading={isLoading}
-      error={error}
-      refetch={refetch}
-      onCreateProduct={onCreateProduct}
-      createProductLoading={createProductLoading}
-    />
+    <>
+      <Meta />
+      <Table
+        className={styles.productList}
+        variant='products'
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        refetch={refetch}
+        onCreateProduct={onCreateProduct}
+        createProductLoading={createProductLoading}
+      />
+    </>
   )
 }
 

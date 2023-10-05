@@ -3,6 +3,7 @@ import styles from './ErrorPage.module.scss'
 import { ERROR_PAGE_CONFIG, ROUTES } from '../../constants'
 import { ErrorPageEnums } from '../../types'
 import { getClassNames } from '../../utils'
+import { Meta } from '../../components'
 
 type ErrorPageProps = {
   variant?: ErrorPageEnums
@@ -16,16 +17,19 @@ function ErrorPage({
   message,
 }: ErrorPageProps) {
   return (
-    <div className={getClassNames([styles.root, className])}>
-      <p className={styles.code}>{ERROR_PAGE_CONFIG[variant].code}</p>
-      <h2 className={styles.title}>{ERROR_PAGE_CONFIG[variant].title}</h2>
-      <p className={styles.message}>
-        {message ?? ERROR_PAGE_CONFIG[variant].message}
-      </p>
-      {variant !== 'internal-server-error' && (
-        <Link to={ROUTES.home}>GO TO HOME PAGE</Link>
-      )}
-    </div>
+    <>
+      <Meta />
+      <div className={getClassNames([styles.root, className])}>
+        <p className={styles.code}>{ERROR_PAGE_CONFIG[variant].code}</p>
+        <h2 className={styles.title}>{ERROR_PAGE_CONFIG[variant].title}</h2>
+        <p className={styles.message}>
+          {message ?? ERROR_PAGE_CONFIG[variant].message}
+        </p>
+        {variant !== 'internal-server-error' && (
+          <Link to={ROUTES.home}>GO TO HOME PAGE</Link>
+        )}
+      </div>
+    </>
   )
 }
 

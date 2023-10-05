@@ -3,7 +3,7 @@ import { isFormValid, validateString } from '../../helpers'
 import { useFormValues, useInput } from '../../hooks'
 import styles from './ProfilePage.module.scss'
 import { RootState } from '../../store'
-import { Form, Table } from '../../components'
+import { Form, Meta, Table } from '../../components'
 import {
   setAlert,
   setCredentials,
@@ -98,24 +98,27 @@ function ProfilePage() {
   }
 
   return (
-    <div className={styles.root}>
-      <div className={styles.userProfile}>
-        <h1>Profile</h1>
-        <Form
-          onFormSubmit={onFormSubmit}
-          formInputs={formValues}
-          isLoading={isLoading}
-          buttonLabel='UPDATE'
+    <>
+      <Meta />
+      <div className={styles.root}>
+        <div className={styles.userProfile}>
+          <h1>Profile</h1>
+          <Form
+            onFormSubmit={onFormSubmit}
+            formInputs={formValues}
+            isLoading={isLoading}
+            buttonLabel='UPDATE'
+          />
+        </div>
+        <Table
+          className={styles.table}
+          variant='orders'
+          data={orders}
+          error={error}
+          isLoading={isOrdersLoading}
         />
       </div>
-      <Table
-        className={styles.table}
-        variant='orders'
-        data={orders}
-        error={error}
-        isLoading={isOrdersLoading}
-      />
-    </div>
+    </>
   )
 }
 

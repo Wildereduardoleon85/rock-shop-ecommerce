@@ -1,5 +1,5 @@
 import { ErrorPage } from '..'
-import { Carousel, Showcase } from '../../components'
+import { Carousel, Meta, Showcase } from '../../components'
 import { Loader } from '../../components/UI'
 import { useGetProductsQuery } from '../../slices'
 
@@ -21,6 +21,7 @@ function HomePage() {
   return (
     products && (
       <>
+        <Meta />
         <Carousel
           products={products
             .map((product) => ({

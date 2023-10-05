@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useFormValues } from '../../hooks'
 import { saveShippingAddress } from '../../slices'
-import { Breadcrumbs, Form } from '../../components'
+import { Breadcrumbs, Form, Meta } from '../../components'
 import { RootState } from '../../store'
 import styles from './ShippingPage.module.scss'
 import { ROUTES } from '../../constants'
@@ -56,6 +56,7 @@ function ShippingPage() {
 
   return (
     <>
+      <Meta />
       <Breadcrumbs step1 />
       <div className={styles.container}>
         <h1>Shipping</h1>

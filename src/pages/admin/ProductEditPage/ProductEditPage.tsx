@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { ProductEdit } from '../../../components'
+import { Meta, ProductEdit } from '../../../components'
 import { useGetProductDetailsQuery } from '../../../slices'
 import { Loader } from '../../../components/UI'
 import { ErrorPage } from '../..'
@@ -25,7 +25,14 @@ function ProductEditPage() {
     return <ErrorPage />
   }
 
-  return product && <ProductEdit product={product} refetch={refetch} />
+  return (
+    product && (
+      <>
+        <Meta />
+        <ProductEdit product={product} refetch={refetch} />
+      </>
+    )
+  )
 }
 
 export default ProductEditPage

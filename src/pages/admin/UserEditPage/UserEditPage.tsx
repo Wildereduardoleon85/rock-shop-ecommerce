@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useGetUserDetailsQuery } from '../../../slices'
 import { Loader } from '../../../components/UI'
 import { ErrorPage } from '../..'
-import { UserEdit } from '../../../components'
+import { Meta, UserEdit } from '../../../components'
 
 function UserEditPage() {
   const { id: userId } = useParams()
@@ -25,7 +25,14 @@ function UserEditPage() {
     return <ErrorPage />
   }
 
-  return userDetails && <UserEdit refetch={refetch} userDetails={userDetails} />
+  return (
+    userDetails && (
+      <>
+        <Meta />
+        <UserEdit refetch={refetch} userDetails={userDetails} />
+      </>
+    )
+  )
 }
 
 export default UserEditPage

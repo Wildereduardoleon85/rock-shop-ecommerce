@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { Order } from '../../components'
+import { Meta, Order } from '../../components'
 import { useGetOrderDetailsQuery } from '../../slices'
 import { Loader } from '../../components/UI'
 import { ErrorPage } from '..'
@@ -26,21 +26,24 @@ function OrderDetailsPage() {
 
   return (
     data && (
-      <Order
-        variant='order-details'
-        orderId={orderId}
-        cartItems={data.orderItems}
-        shippingAddress={data.shippingAddress}
-        paymentMethod={data.paymentMethod}
-        itemsPrice={data.itemsPrice}
-        shippingPrice={data.shippingPrice}
-        taxPrice={data.taxPrice}
-        totalPrice={data.totalPrice}
-        isPaid={data.isPaid}
-        isDelivered={data.isDelivered}
-        user={data.user}
-        refetch={refetch}
-      />
+      <>
+        <Meta />
+        <Order
+          variant='order-details'
+          orderId={orderId}
+          cartItems={data.orderItems}
+          shippingAddress={data.shippingAddress}
+          paymentMethod={data.paymentMethod}
+          itemsPrice={data.itemsPrice}
+          shippingPrice={data.shippingPrice}
+          taxPrice={data.taxPrice}
+          totalPrice={data.totalPrice}
+          isPaid={data.isPaid}
+          isDelivered={data.isDelivered}
+          user={data.user}
+          refetch={refetch}
+        />
+      </>
     )
   )
 }

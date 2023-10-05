@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import styles from './ProductPage.module.scss'
 import { Rating } from '../../components/Rating'
-import { QtyButton, Reviews } from '../../components'
+import { Meta, QtyButton, Reviews } from '../../components'
 import {
   addToCart,
   setAlert,
@@ -60,16 +60,53 @@ function ProductPage() {
 
   return (
     product && (
-      <div className={styles.root}>
-        <GobackButton />
-        <div className={styles.container}>
-          <div className={styles.imageContainer}>
-            <img
-              width='100%'
-              src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
-              alt={product.name}
-            />
-            {screenSize > LG_BREAKPOINT && (
+      <>
+        <Meta title={product.name} description={product.description} />
+        <div className={styles.root}>
+          <GobackButton />
+          <div className={styles.container}>
+            <div className={styles.imageContainer}>
+              <img
+                width='100%'
+                src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+                alt={product.name}
+              />
+              {screenSize > LG_BREAKPOINT && (
+                <Reviews
+                  refetch={refetch}
+                  productId={product._id}
+                  reviews={product.reviews as Review[]}
+                />
+              )}
+            </div>
+
+            <div className={styles.details}>
+              <h1>{product.name}</h1>
+              <p className={styles.price}>${product.price}</p>
+              <QtyButton className={styles.qtyButton} product={product} />
+              <Button
+                disabled={product.countInStock === 0}
+                className={styles.addToCartButton}
+                onClick={onAddToCart}
+              >
+                ADD TO CART
+              </Button>
+              <Button
+                color='black'
+                disabled={product.countInStock === 0}
+                className={styles.buyNowButton}
+                onClick={onByuNow}
+              >
+                BUY NOW
+              </Button>
+              <Rating
+                value={product.rating}
+                text={`${product.numReviews} reviews`}
+              />
+              <h2>Description</h2>
+              <p className={styles.description}>{product.description}</p>
+            </div>
+            {screenSize <= LG_BREAKPOINT && (
               <Reviews
                 refetch={refetch}
                 productId={product._id}
@@ -77,42 +114,8 @@ function ProductPage() {
               />
             )}
           </div>
-
-          <div className={styles.details}>
-            <h1>{product.name}</h1>
-            <p className={styles.price}>${product.price}</p>
-            <QtyButton className={styles.qtyButton} product={product} />
-            <Button
-              disabled={product.countInStock === 0}
-              className={styles.addToCartButton}
-              onClick={onAddToCart}
-            >
-              ADD TO CART
-            </Button>
-            <Button
-              color='black'
-              disabled={product.countInStock === 0}
-              className={styles.buyNowButton}
-              onClick={onByuNow}
-            >
-              BUY NOW
-            </Button>
-            <Rating
-              value={product.rating}
-              text={`${product.numReviews} reviews`}
-            />
-            <h2>Description</h2>
-            <p className={styles.description}>{product.description}</p>
-          </div>
-          {screenSize <= LG_BREAKPOINT && (
-            <Reviews
-              refetch={refetch}
-              productId={product._id}
-              reviews={product.reviews as Review[]}
-            />
-          )}
         </div>
-      </div>
+      </>
     )
   )
 }

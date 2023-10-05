@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { BsCreditCard } from 'react-icons/bs'
-import { Breadcrumbs, PaymentForm } from '../../components'
+import { Breadcrumbs, Meta, PaymentForm } from '../../components'
 import styles from './PaymentPage.module.scss'
 import { ROUTES } from '../../constants'
 import { RootState } from '../../store'
@@ -27,6 +27,7 @@ function PaymentPage() {
 
   return (
     <>
+      <Meta />
       <Breadcrumbs step1 step2 />
       <div className={styles.root}>
         <h1>Payment Method</h1>

@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../../slices'
 import { GobackButton, Loader } from '../../components/UI'
 import { ErrorPage } from '..'
-import { Showcase } from '../../components'
+import { Meta, Showcase } from '../../components'
 import styles from './SearchPage.module.scss'
 import { capitalize } from '../../utils'
 
@@ -30,6 +30,7 @@ function SearchPage() {
 
   return products && products.length > 0 ? (
     <>
+      <Meta />
       <GobackButton className={styles.backButton} />
       <Showcase
         title={capitalize(keywords as string)}

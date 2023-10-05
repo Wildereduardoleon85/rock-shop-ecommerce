@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Breadcrumbs, Order } from '../../components'
+import { Breadcrumbs, Meta, Order } from '../../components'
 import { RootState } from '../../store'
 import { ROUTES } from '../../constants'
 import { clearCartItems, setAlert, useCreateOrderMutation } from '../../slices'
@@ -67,6 +67,7 @@ function PlaceOrderPage() {
 
   return (
     <>
+      <Meta />
       <Breadcrumbs step1 step2 step3 />
       <Order
         cartItems={cartItems}
