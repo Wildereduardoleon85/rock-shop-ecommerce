@@ -75,7 +75,7 @@ function CartPage() {
                     className={styles.deleteButton}
                     type='button'
                   >
-                    <span>REMOVE</span>
+                    REMOVE
                     <FaTrashAlt />
                   </button>
                 </div>

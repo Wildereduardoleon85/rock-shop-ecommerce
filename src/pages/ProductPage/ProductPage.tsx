@@ -101,7 +101,7 @@ function ProductPage() {
               value={product.rating}
               text={`${product.numReviews} reviews`}
             />
-            <h3>Description</h3>
+            <h2>Description</h2>
             <p className={styles.description}>{product.description}</p>
           </div>
           {screenSize <= LG_BREAKPOINT && (

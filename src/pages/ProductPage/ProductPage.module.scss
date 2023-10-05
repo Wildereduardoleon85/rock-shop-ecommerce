@@ -27,14 +27,15 @@
       }
 
       .price {
-        color: $light-gray;
+        color: $dark-red;
         font-size: 2.5rem;
         font-weight: 600;
         margin-top: 2rem;
       }
 
-      > h3 {
+      > h2 {
         margin-top: 2rem;
+        font-size: 1.17rem;
       }
 
       .description {

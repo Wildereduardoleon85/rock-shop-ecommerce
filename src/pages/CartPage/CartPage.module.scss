@@ -80,12 +80,15 @@
                 > span:nth-child(2) {
                   font-size: 1.2rem;
                 }
+                > p:nth-child(4) {
+                  color: $black;
+                }
               }
             }
           }
 
           .price {
-            color: $light-gray;
+            color: $dark-red;
             font-size: 1.5rem;
             font-weight: 600;
             margin-left: 1rem;
@@ -131,7 +134,7 @@
       right: 0;
 
       .subtotalPrice {
-        color: $light-gray;
+        color: $dark-red;
         font-weight: 600;
         margin-top: 1rem;
         font-size: 2rem;
@@ -207,22 +210,18 @@
             .deleteButton {
               margin-left: 0;
               margin-top: 1rem;
-              @include buttonStyles();
+              @include buttonStyles('black');
               display: flex;
 
               &:hover > svg {
                 fill: white;
-              }
-
-              > span {
-                color: white;
                 display: block;
-                font-size: 1rem;
               }
 
               > svg {
                 fill: white;
                 margin-left: 0.5rem;
+                display: block;
               }
             }
           }
