@@ -166,6 +166,7 @@ function Order({
                     src={`${BASE_URL}${IMAGES_URL}/${item.image}`}
                     alt={item.name}
                     width={50}
+                    height={39.77}
                   />
                   <Link
                     to={`${ROUTES.product.replace(

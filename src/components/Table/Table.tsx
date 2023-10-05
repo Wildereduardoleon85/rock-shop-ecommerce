@@ -73,7 +73,9 @@ function OrdersTable({ orders, variant }: OrderProps) {
 
     return (
       <tr key={order._id}>
-        <td className={styles.id}>{order._id}</td>
+        <th scope='row' className={styles.id}>
+          {order._id}
+        </th>
         {variant === 'adminOrders' && <td>{adminOrder.name}</td>}
         <td className={styles.date}>{parseDate(order.createdAt)}</td>
         <td className={styles.price}>{order.itemsPrice}</td>
@@ -167,13 +169,15 @@ function Table({
           <table>
             <thead>
               <tr>
-                <th>{VARIANTS[variant].headers.h1}</th>
-                {variant === 'adminOrders' && <th>USER</th>}
-                <th>{VARIANTS[variant].headers.h2}</th>
-                <th>{VARIANTS[variant].headers.h3}</th>
-                <th>{VARIANTS[variant].headers.h4}</th>
-                {variant !== 'users' && <th>{VARIANTS[variant].headers.h5}</th>}
-                <th />
+                <th scope='col'>{VARIANTS[variant].headers.h1}</th>
+                {variant === 'adminOrders' && <th scope='col'>USER</th>}
+                <th scope='col'>{VARIANTS[variant].headers.h2}</th>
+                <th scope='col'>{VARIANTS[variant].headers.h3}</th>
+                <th scope='col'>{VARIANTS[variant].headers.h4}</th>
+                {variant !== 'users' && (
+                  <th scope='col'>{VARIANTS[variant].headers.h5}</th>
+                )}
+                <th scope='col' />
               </tr>
             </thead>
             <tbody>{renderTable()}</tbody>

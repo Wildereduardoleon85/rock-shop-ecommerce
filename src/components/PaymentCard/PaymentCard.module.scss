@@ -28,7 +28,6 @@
       position: absolute;
       top: 25%;
       left: 8%;
-      width: 13.56%;
     }
 
     > p:first-of-type {
@@ -110,6 +109,11 @@
     height: calc(230px * 0.6007751937984496);
 
     .creditCardFront {
+      > img:first-of-type {
+        width: 13.56%;
+        height: auto;
+      }
+
       > p:first-of-type {
         font-size: 20px;
       }

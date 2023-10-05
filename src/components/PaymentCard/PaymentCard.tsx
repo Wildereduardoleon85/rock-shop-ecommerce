@@ -1,5 +1,5 @@
 import styles from './PaymentCard.module.scss'
-import chipImage from '../../assets/img/chip.png'
+import chip from '../../assets/img/chip.png'
 import { getClassNames } from '../../utils'
 
 type PaymentCardProps = {
@@ -10,7 +10,7 @@ function PaymentCard({ flipCard }: PaymentCardProps) {
   return (
     <div className={getClassNames([styles.root, flipCard && styles.flip])}>
       <div className={styles.creditCardFront}>
-        <img src={chipImage} alt='chip' />
+        <img src={chip} width={35} height={35} alt='chip-card' />
         <p>****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;****</p>
         <div>
           <p>NAME&nbsp;&nbsp;SURNAME</p>

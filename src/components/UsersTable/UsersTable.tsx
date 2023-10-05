@@ -58,7 +58,7 @@ function UsersTable({ users, refetch }: UsersTableProps) {
 
   return users.map((user, index) => (
     <tr key={user._id}>
-      <td>{user._id}</td>
+      <th scope='row'>{user._id}</th>
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>

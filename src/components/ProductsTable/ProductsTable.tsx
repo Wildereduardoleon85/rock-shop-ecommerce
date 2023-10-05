@@ -57,7 +57,7 @@ function ProductsTable({ products, refetch }: ProductsTableProps) {
 
   return products.map((product: any, index) => (
     <tr key={product._id}>
-      <td>{product._id}</td>
+      <th scope='row'>{product._id}</th>
       <td>{subString(product.name, 100)}</td>
       <td>{formatCurrency(product.price)}</td>
       <td>{product.category}</td>

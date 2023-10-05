@@ -51,6 +51,7 @@ function Checkbox({
         role='checkbox'
         tabIndex={0}
         aria-checked={checked}
+        aria-label='is admin'
         onKeyDown={onCheckboxKeyDown}
         className={styles.checkbox}
       >

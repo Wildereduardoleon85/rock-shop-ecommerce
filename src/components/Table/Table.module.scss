@@ -92,9 +92,21 @@
       background-color: rgb(240, 240, 240);
     }
 
-    th {
-      background-color: $light-gray;
-      color: white;
+    thead {
+      tr {
+        th {
+          background-color: $black;
+          color: white;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        th {
+          font-weight: 400;
+        }
+      }
     }
   }
 }

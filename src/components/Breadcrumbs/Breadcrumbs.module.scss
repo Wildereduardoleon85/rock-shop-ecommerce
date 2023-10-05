@@ -23,11 +23,11 @@
   }
 
   .iconActive {
-    fill: $dark-red;
+    fill: $red;
   }
 
   .active {
-    color: $dark-red;
+    color: $red;
     @include transition(color);
 
     &:hover {
@@ -35,7 +35,7 @@
     }
 
     &:hover ~ .iconActive {
-      fill: $dark-red;
+      fill: $red;
     }
   }
 
