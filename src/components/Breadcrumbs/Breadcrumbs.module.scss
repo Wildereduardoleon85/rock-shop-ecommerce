@@ -13,25 +13,25 @@
 
   .link,
   p {
-    color: $very-light-gray;
+    color: $dark-gray;
   }
 
   .icon {
-    fill: $very-light-gray;
+    fill: $light-gray;
     margin: 0 1rem;
     @include transition(fill);
   }
 
   .iconActive {
-    fill: $red;
+    fill: $dark-red;
   }
 
   .active {
-    color: $red;
+    color: $dark-red;
     @include transition(color);
 
     &:hover {
-      color: $dark-red;
+      text-decoration: underline;
     }
 
     &:hover ~ .iconActive {
