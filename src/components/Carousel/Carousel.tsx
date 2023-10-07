@@ -48,7 +48,7 @@ function Carousel({ products }: CarouselProps) {
             src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
             alt={product.name}
             width={698}
-            height={555.312}
+            height={555}
           />
           <div className={styles.description}>
             <div>
