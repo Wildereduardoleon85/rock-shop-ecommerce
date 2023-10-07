@@ -67,7 +67,8 @@ function ProductPage() {
           <div className={styles.container}>
             <div className={styles.imageContainer}>
               <img
-                width='100%'
+                width={644}
+                height={512}
                 src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
                 alt={product.name}
               />
