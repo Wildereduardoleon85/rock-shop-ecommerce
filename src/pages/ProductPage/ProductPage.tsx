@@ -18,6 +18,13 @@ import { RootState } from '../../store'
 import { ErrorPage } from '..'
 import { useMediaQuery } from '../../hooks'
 
+function getPreloadedImageUrl(screenSize: number, product: Product) {
+  if (screenSize <= 495) {
+    return `${BASE_URL}${IMAGES_URL}/${product.images.md}`
+  }
+  return `${BASE_URL}${IMAGES_URL}/${product.images.default}`
+}
+
 function ProductPage() {
   const { id: productId } = useParams()
   const navigate = useNavigate()
@@ -64,7 +71,7 @@ function ProductPage() {
         <Meta
           title={product.name}
           description={product.description}
-          preloadedImageUrl={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
+          preloadedImageUrl={getPreloadedImageUrl(screenSize, product)}
         />
         <div className={styles.root}>
           <GobackButton />
