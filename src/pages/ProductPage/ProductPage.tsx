@@ -61,7 +61,11 @@ function ProductPage() {
   return (
     product && (
       <>
-        <Meta title={product.name} description={product.description} />
+        <Meta
+          title={product.name}
+          description={product.description}
+          preloadedImageUrl={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
+        />
         <div className={styles.root}>
           <GobackButton />
           <div className={styles.container}>

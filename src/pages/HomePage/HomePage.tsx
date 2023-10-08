@@ -1,6 +1,7 @@
 import { ErrorPage } from '..'
 import { Carousel, Meta, Showcase } from '../../components'
 import { Loader } from '../../components/UI'
+import { BASE_URL, IMAGES_URL } from '../../constants'
 import { useGetProductsQuery } from '../../slices'
 
 function HomePage() {
@@ -21,7 +22,9 @@ function HomePage() {
   return (
     products && (
       <>
-        <Meta />
+        <Meta
+          preloadedImageUrl={`${BASE_URL}${IMAGES_URL}/${products[0].images.default}`}
+        />
         <Carousel
           products={products
             .map((product) => ({
