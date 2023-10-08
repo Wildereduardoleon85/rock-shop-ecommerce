@@ -48,6 +48,8 @@ function Carousel({ products }: CarouselProps) {
           ])}
         >
           <img
+            srcSet={`${BASE_URL}${IMAGES_URL}/${product.images.default} 698w, ${BASE_URL}${IMAGES_URL}/${product.images.md} 457w`}
+            sizes='(max-width: 940px) 454px, 698px'
             src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
             alt={product.name}
             width={698}

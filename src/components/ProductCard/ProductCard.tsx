@@ -35,8 +35,8 @@ function ProductCard({ product }: ProductCardProps) {
     >
       <img
         width={282}
-        height={224.34}
-        src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
+        height={224}
+        src={`${BASE_URL}${IMAGES_URL}/${product.images.md}`}
         alt={product.name}
       />
 
