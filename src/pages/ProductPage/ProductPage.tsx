@@ -13,7 +13,7 @@ import {
 } from '../../slices'
 import { Button, GobackButton, Loader } from '../../components/UI'
 import { Product, Review } from '../../types'
-import { BASE_URL, IMAGES_URL, LG_BREAKPOINT, ROUTES } from '../../constants'
+import { BASE_URL, IMAGES_URL, ROUTES } from '../../constants'
 import { RootState } from '../../store'
 import { ErrorPage } from '..'
 import { useMediaQuery } from '../../hooks'
@@ -67,12 +67,14 @@ function ProductPage() {
           <div className={styles.container}>
             <div className={styles.imageContainer}>
               <img
+                srcSet={`${BASE_URL}${IMAGES_URL}/${product.images.default} 644w, ${BASE_URL}${IMAGES_URL}/${product.images.md} 457w`}
+                sizes='(max-width: 495px) 457px, 644px'
                 width={644}
                 height={512}
                 src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
                 alt={product.name}
               />
-              {screenSize > LG_BREAKPOINT && (
+              {screenSize > 750 && (
                 <Reviews
                   refetch={refetch}
                   productId={product._id}
@@ -107,7 +109,7 @@ function ProductPage() {
               <h2>Description</h2>
               <p className={styles.description}>{product.description}</p>
             </div>
-            {screenSize <= LG_BREAKPOINT && (
+            {screenSize <= 750 && (
               <Reviews
                 refetch={refetch}
                 productId={product._id}
