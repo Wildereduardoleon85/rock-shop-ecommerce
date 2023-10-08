@@ -13,7 +13,10 @@ import { RootState } from '../../store'
 type OrderItem = {
   name: string
   qty: number
-  image: string
+  images: {
+    default: string
+    md?: string
+  }
   price: number
   product: string
   _id: string
@@ -163,7 +166,7 @@ function Order({
               return (
                 <div key={item._id} className={styles.items}>
                   <img
-                    src={`${BASE_URL}${IMAGES_URL}/${item.image}`}
+                    src={`${BASE_URL}${IMAGES_URL}/${item.images.default}`}
                     alt={item.name}
                     width={50}
                     height={39.77}

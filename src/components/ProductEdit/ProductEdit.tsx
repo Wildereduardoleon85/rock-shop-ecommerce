@@ -36,7 +36,7 @@ function ProductEdit({ product, refetch }: ProductEditProps) {
       categoryValue: product.category,
       countInStockValue: String(product.countInStock),
       descriptionValue: product.description,
-      currentImageValue: product.image,
+      currentImageValue: product.images.default,
       priceValue: String(product.price),
       brandValue: product.brand,
     })
@@ -88,7 +88,9 @@ function ProductEdit({ product, refetch }: ProductEditProps) {
           category: categoryInput.value,
           countInStock: Number(countInStockInput.value),
           description: descriptionInput.value,
-          image: imageFile?.name ?? currentImageInput.value,
+          images: {
+            default: imageFile?.name ?? currentImageInput.value,
+          },
           name: nameInput.value,
           price: Number(priceInput.value),
         }).unwrap()

@@ -8,7 +8,10 @@ import styles from './Carousel.module.scss'
 type CarouselProps = {
   products: {
     id: string
-    images: string
+    images: {
+      default: string
+      md?: string
+    }
     name: string
     price: number
   }[]
@@ -45,7 +48,7 @@ function Carousel({ products }: CarouselProps) {
           ])}
         >
           <img
-            src={`${BASE_URL}${IMAGES_URL}/${product.images}`}
+            src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
             alt={product.name}
             width={698}
             height={555}

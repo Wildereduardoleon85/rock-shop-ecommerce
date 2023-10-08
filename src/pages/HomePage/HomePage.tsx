@@ -27,7 +27,7 @@ function HomePage() {
             .map((product) => ({
               name: product.name,
               id: product._id,
-              images: product.image,
+              images: product.images,
               price: product.price,
             }))
             .slice(0, 6)}

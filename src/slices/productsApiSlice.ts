@@ -7,7 +7,10 @@ type UpdateProductSchema = {
   name?: string
   price?: number
   description?: string
-  image?: string
+  images?: {
+    default?: string
+    md?: string
+  }
   brand?: string
   category?: string
   countInStock?: number

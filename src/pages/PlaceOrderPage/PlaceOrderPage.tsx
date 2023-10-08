@@ -40,7 +40,7 @@ function PlaceOrderPage() {
         orderItems: cartItems.map((item) => ({
           name: item.name,
           qty: item.qty,
-          image: item.image,
+          images: item.images,
           price: item.price,
           product: item._id,
         })),

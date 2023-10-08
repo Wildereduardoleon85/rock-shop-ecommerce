@@ -54,7 +54,7 @@ function CartPage() {
                   <img
                     width={IMAGE_WIDTH}
                     height={IMAGE_WIDTH * PRODUCT_IMAGE_ASPECT_RATIO}
-                    src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+                    src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
                     alt={product.name}
                   />
                   <div className={styles.descriptionContainer}>

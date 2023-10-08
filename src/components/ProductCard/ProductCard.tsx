@@ -13,7 +13,10 @@ type ProductCardProps = {
   product: {
     _id: string
     name: string
-    image: string
+    images: {
+      default: string
+      md?: string
+    }
     description: string
     brand: string
     category: string
@@ -33,7 +36,7 @@ function ProductCard({ product }: ProductCardProps) {
       <img
         width={282}
         height={224.34}
-        src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+        src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
         alt={product.name}
       />
 

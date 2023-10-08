@@ -69,7 +69,7 @@ function ProductPage() {
               <img
                 width={644}
                 height={512}
-                src={`${BASE_URL}${IMAGES_URL}/${product.image}`}
+                src={`${BASE_URL}${IMAGES_URL}/${product.images.default}`}
                 alt={product.name}
               />
               {screenSize > LG_BREAKPOINT && (

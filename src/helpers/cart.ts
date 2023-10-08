@@ -13,7 +13,7 @@ export function buildCartItemObject(product: Product, qty: number): CartItem {
     _id: product._id,
     user: product.user,
     name: product.name,
-    image: product.image,
+    images: product.images,
     description: product.description,
     brand: product.brand,
     category: product.category,
