@@ -54,6 +54,7 @@ function Carousel({ products }: CarouselProps) {
             alt={product.name}
             width={698}
             height={555}
+            loading={index === 0 ? 'eager' : 'lazy'}
           />
           <div className={styles.description}>
             <div>

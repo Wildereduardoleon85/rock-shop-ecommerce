@@ -13,8 +13,8 @@ function Showcase({ products, className = '', title }: ShowcaseProps) {
     <section className={className}>
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.container}>
-        {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
+        {products.map((product, index) => (
+          <ProductCard key={product._id} product={product} index={index} />
         ))}
       </div>
     </section>

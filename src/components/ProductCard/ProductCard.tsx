@@ -8,6 +8,7 @@ import {
   PRODUCT_CARD_STRING_LIMIT,
   ROUTES,
 } from '../../constants'
+import { useMediaQuery } from '../../hooks'
 
 type ProductCardProps = {
   product: {
@@ -25,9 +26,12 @@ type ProductCardProps = {
     rating: number
     numReviews: number
   }
+  index: number
 }
 
-function ProductCard({ product }: ProductCardProps) {
+function ProductCard({ product, index }: ProductCardProps) {
+  const screenSize = useMediaQuery()
+
   return (
     <Link
       className={styles.root}
@@ -38,6 +42,7 @@ function ProductCard({ product }: ProductCardProps) {
         height={224}
         src={`${BASE_URL}${IMAGES_URL}/${product.images.md}`}
         alt={product.name}
+        loading={screenSize <= 720 && index === 0 ? 'eager' : 'lazy'}
       />
 
       <h2 className={styles.productName}>
