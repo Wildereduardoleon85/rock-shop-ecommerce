@@ -1,27 +1,15 @@
-# React + TypeScript + Vite
+# Rockshop eCommerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend of my [Web App Rockshop](https://rockshop.onrender.com/). It simulates an eCommerce web site of music instruments, when navigating through the web site, you can check products, search for them, add them to the cart and simulate an entire buying process until yo get the order id. If you log in as an admin (username: admin@email.com, password: Admin123\*), you can do CRUD operations like create, update and delete products, orders and users. Just keep in mind that some default products and users can not be deleted.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application was builded in react with typescript using Vite, so you can install it dependencies by running the following command:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Usage
+
+This application needs the backend server in order to work [here](https://github.com/Wildereduardoleon85/rock-shop-ecommerce-backend) you can find the repository and it's instructions for setting up the api, once that is done you need to add the environment variables [here]() is an env.example file that can help with that, and then simply run the `npm run dev` command for start the frontend development server
