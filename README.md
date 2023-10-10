@@ -12,4 +12,4 @@ npm install
 
 ## Usage
 
-This application needs the backend server in order to work [here](https://github.com/Wildereduardoleon85/rock-shop-ecommerce-backend) you can find the repository and it's instructions for setting up the api, once that is done you need to add the environment variables [here]() is an env.example file that can help with that, and then simply run the `npm run dev` command for start the frontend development server
+This application needs the backend server in order to work [here](https://github.com/Wildereduardoleon85/rock-shop-ecommerce-backend) you can find the repository and it's instructions for setting up the api, once that is done you need to add the environment variables [here](https://github.com/Wildereduardoleon85/rock-shop-ecommerce-frontend/blob/main/.env.example) is an env.example file that can help with that, and then simply run the `npm run dev` command for start the frontend development server
